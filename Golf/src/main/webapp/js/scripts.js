@@ -23,3 +23,37 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
+
+window.addEventListener('load', () => {
+    const forms = document.getElementsByClassName('signup-form');
+
+    Array.prototype.filter.call(forms, (form) => {
+        form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
+            form.classList.add('was-validated');
+        }, false);
+    });
+}, false);
+
+function findAddr(){
+	new daum.Postcode({
+        oncomplete: function(data) {
+        	
+        	console.log(data);
+        	
+            var roadAddr = data.roadAddress;
+            var jibunAddr = data.jibunAddress;
+
+            if(roadAddr !== ''){
+                document.getElementById("inputAddress").value = roadAddr;
+            } 
+            else if(jibunAddr !== ''){
+                document.getElementById("inputAddress").value = jibunAddr;
+            }
+        }
+    }).open();
+}
