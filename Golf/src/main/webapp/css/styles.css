@@ -11704,6 +11704,27 @@ body {
   object-fit: cover;
 }
 
+.profile-pic50 {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+
+  object-fit: cover;
+}
+
+.bg-section {
+  position: relative;
+  width: 100%;
+  min-height: 35rem;
+  padding: 10rem 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, #000 75%, #000 100%), url("../assets/img/bg-masthead.jpg");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
 .login-form {
   background: #fff;
   padding: 30px;
@@ -11712,7 +11733,32 @@ body {
   box-shadow: 0px 0px 10px 0px #000;
 }
 
-.img35 {
-  width: 35px;
-  height: 35px;
+.search-result-list {
+  position: inherit;
+  width: 60%;
+  background: #fff;
+  padding: 30px;
+  top: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px #000;
+}
+
+.search-result-list-item {
+  position: inherit;
+  display: block;
+  margin: auto;
+}
+
+.signup-form {
+  position: inherit;
+  width: 50%;
+  background: #fff;
+  padding: 30px;
+  top: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px #000;
 }

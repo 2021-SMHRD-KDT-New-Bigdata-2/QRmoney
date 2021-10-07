@@ -3,14 +3,14 @@
 <%@ include file= "head.html" %>
 <body>
 	<%@ include file= "navbar_non_member.jsp" %>
-	<section class="container-fluid projects-section bg-light">
-            <div class="row justify-content-center">
+	<section class="container-fluid bg-section">
+            <div class="row justify-content-center signup-form">
                 
-                <div class="col-sm-4">
+                <div>
                     <div class="text-center my-5">
                         <h3>회원가입</h3>
                     </div>
-                    <form role="form" class="signup-form" action="SignUpService" novalidate enctype="multipart/form-data" method="POST">
+                    <form role="form" action="SignUpService" novalidate enctype="multipart/form-data" method="POST">
                         <div>
                             <div>
                                 <label for="inputEmail">이메일 주소</label>
