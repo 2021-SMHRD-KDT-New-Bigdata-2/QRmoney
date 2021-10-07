@@ -7,7 +7,7 @@
 		MemberVO member = (MemberVO)session.getAttribute("member");
 	%>
 	<% if(member == null) { %>
-		<%@ include file= "navbar_non_member.jsp" %>
+		<%@ include file= "navbar_member.jsp" %>
 	<% } else { %>
 		<%@ include file= "navbar_member.jsp" %>
 	<% } %>
@@ -17,12 +17,13 @@
               <div class="d-flex justify-content-center">
                   <div class="text-center">
                       <h1 class="mx-auto my-0 text-uppercase">Swing Mate</h1>
-                      <h2 class="text-white-50 mx-auto mt-2 mb-5">아니 왜 깨지는데 시바</h2>
+                      <h2 class="text-white-50 mx-auto mt-2 mb-5"></h2>
                       <div class="dropdown">
-                          <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Find Golfmate</button>
+                          <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Find GolfMate</button>
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                              <li><a class="dropdown-item" href="#">Join others group</a></li>
-                              <li><a class="dropdown-item" href="#">Make your own group</a></li>
+                              <li><a class="dropdown-item" href="#search" data-bs-toggle="modal">Join Others Group</a></li>
+                              <li><a class="dropdown-item" href="#field-form" data-bs-toggle="modal">Find Field Mate</a></li>
+                              <li><a class="dropdown-item" href="#screen-form" data-bs-toggle="modal">Find Screen Mate</a></li>
                           </ul>
                       </div>
                   </div>
