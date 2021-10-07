@@ -1,4 +1,4 @@
-/* 회원 테이블 */
+
 
 create table MEMBERS(
     MEMBER_ID number(6,0) constraint MEMBERS_PK primary key,
@@ -17,7 +17,7 @@ create table MEMBERS(
     RATINGS_TOTAL number(7,0) default 0
 );
 
-/* 그룹 테이블 */
+
 
 create table GROUPS(
 	GROUP_ID number(6,0) constraint GROUPS_PK primary key,
@@ -25,7 +25,7 @@ create table GROUPS(
 	MEMBER_ID number(6,0) constraint MEMBER_ID_FK foreign key(MEMBER_ID) references MEMBERS(MEMBER_ID) on delete cascade
 );
 
-/* 게임 정보 테이블 */
+
 
 create table GAMES(
 	GAME_ID number(6,0) constraint GAMES_PK primary key,
@@ -38,7 +38,7 @@ create table GAMES(
 	TOTAL_MEMBER number(1,0) constraint TOTAL_MEMBER_NN not null constraint TOTAL_MEMBER_CK check(TOTAL_MEMBER between 1 and 4)
 );
 
-/* 메세지 테이블 */
+
 
 create table MESSAGES(
 	MESSAGE_ID number(6,0) constraint MESSAGE_PK primary key,
@@ -50,7 +50,7 @@ create table MESSAGES(
 	MESSAFGE_DATE date
 );
 
-/* 팔로우 테이블 */
+
 
 create table FOLLOW(
 	FOLLOW_ID number(6,0) constraint FOLLOW_PK primary key,
@@ -60,7 +60,7 @@ create table FOLLOW(
 	constraint FOLLOWING_ID_FK foreign key(FOLLOWING_ID) references MEMBERS(MEMBER_ID) on delete cascade
 );
 
-/* 필드 테이블 */
+
 
 create table FIELD(
 	FIELD_ID number(6,0) constraint FIELD_PK primary key,
@@ -76,7 +76,7 @@ create table FIELD(
 	SITELINK varchar2(30)
 );
 
-/* 스크린 테이블 */
+
 
 create table SCREEN(
 	SCREEN_ID number(6,0) constraint SCREEN_PK primary key,
@@ -86,7 +86,6 @@ create table SCREEN(
 	COMPANY varchar2(30)
 );
 
-/* 시퀀스 */
 
 create sequence MEMBERS_SEQ
 increment by 1
@@ -117,3 +116,5 @@ increment by 1
 start with 1
 minvalue 1
 maxvalue 999999;
+
+select * from Field;
