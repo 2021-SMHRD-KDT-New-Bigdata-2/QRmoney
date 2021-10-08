@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.model.MemberDAO;
+import com.model.MemberVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -43,11 +45,20 @@ public class SignUpService extends HttpServlet {
 		String contact = multi.getParameter("contact");
 		String age = multi.getParameter("age");
 		String gameType = multi.getParameter("gameType");
-		String fieldScore = multi.getParameter("fieldScore");
-		String screenScore = multi.getParameter("screenScore");
+		String Field_Scoree = multi.getParameter("fieldScore");
+		String Screen_Score = multi.getParameter("screenScore");
 		String address = multi.getParameter("address");
 		
-		System.out.println(email+"/"+password+"/"+nickname+"/"+profilePic+"/"+gender+"/"+contact+"/"+age+"/"+gameType+"/"+fieldScore+"/"+screenScore+"/"+address);
+		System.out.println(email+"/"+password+"/"+nickname+"/"+profilePic+"/"+gender+"/"+contact+"/"+age+"/"+gameType+"/"+Field_Scoree+"/"+Screen_Score+"/"+address);
+		MemberVO vo = new MemberVO(email, password, nickname, gender, contact, age, gameType, Screen_Score, Field_Scoree, address, profilePic);
+		MemberDAO dao = new MemberDAO();
+		int result = dao.SignUp(vo);
+		if(result>0) {
+			System.out.println("입력성공");
+		}else {
+			System.err.println("입력실패");
+		}
+		
 	}
 
 }
