@@ -7,7 +7,7 @@
 		MemberVO member = (MemberVO)session.getAttribute("member");
 	%>
 	<% if(member == null) { %>
-		<%@ include file= "navbar_member.jsp" %>
+		<%@ include file= "navbar_non_member.jsp" %>
 	<% } else { %>
 		<%@ include file= "navbar_member.jsp" %>
 	<% } %>
@@ -16,9 +16,19 @@
           <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
               <div class="d-flex justify-content-center">
                   <div class="text-center">
-                      <h1 class="mx-auto my-0 text-uppercase">Swing Mate</h1>
+                      <h1 class="mx-auto mb-5 text-uppercase">Swing Mate</h1>
+                    <div>
+	                    <% if(member == null) { %>
+							<a href="#LoginModal" data-bs-toggle="modal"><img class="btn-main" src="assets/img/search.png"></a>
+		                    <a href="#LoginModal" data-bs-toggle="modal"><img class="btn-main" src="assets/img/field.png"></a>
+		                    <a href="#LoginModal" data-bs-toggle="modal"><img class="btn-main" src="assets/img/screen.png"></a>
+						<% } else { %>
+							<a href="#search" data-bs-toggle="modal"><img class="btn-main" src="assets/img/search.png"></a>
+		                    <a href="#field-form" data-bs-toggle="modal"><img class="btn-main" src="assets/img/field.png"></a>
+		                    <a href="#screen-form" data-bs-toggle="modal"><img class="btn-main" src="assets/img/screen.png"></a>
+						<% } %>
                       
-                     
+                    </div>
                   </div>
               </div>
           </div>
