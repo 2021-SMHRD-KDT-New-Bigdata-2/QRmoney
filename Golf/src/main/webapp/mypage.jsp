@@ -11,7 +11,7 @@
 	                <h1 class="mx-auto my-0 text-uppercase">Swing Mate</h1>
 	                <h2 class="text-white-50 mx-auto mt-2 mb-5"></h2>
 	                <div class="dropdown">
-	                    <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Find GolfMate</button>
+	                    <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Find Mate</button>
 	                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 	                        <li><a class="dropdown-item" href="#search" data-bs-toggle="modal">Join Others Group</a></li>
 	                        <li><a class="dropdown-item" href="#field-form" data-bs-toggle="modal">Find Field Mate</a></li>
@@ -21,7 +21,7 @@
 	            </div>
 	        </div>
 	    </div>
-	</header>
+	</header>   
 	<!-- My page-->
     <section class="projects-section bg-light" id="mypage">
         <div class="container-fluid">
