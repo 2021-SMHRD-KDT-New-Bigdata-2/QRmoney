@@ -11733,22 +11733,12 @@ body {
   box-shadow: 0px 0px 10px 0px #000;
 }
 
-.search-result-list {
+.search-result {
   position: inherit;
-  width: 60%;
   background: #fff;
-  padding: 30px;
-  top: 10vh;
-  margin-left: auto;
-  margin-right: auto;
+  width: 80%;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px #000;
-}
-
-.search-result-list-item {
-  position: inherit;
-  display: block;
-  margin: auto;
 }
 
 .signup-form {
