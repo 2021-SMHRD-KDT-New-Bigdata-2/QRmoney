@@ -5,11 +5,11 @@ public class MemberVO {
 	private String Password;
 	private String Nickname;
 	private String Gender;
-	private String Tel;
+	private String contact;
 	private String Age;
 	private String Gametype;
-	private String Screen_Score;
-	private String Field_Score;
+	private String score_screen;
+	private String score_field;
 	private String Address;
 	private String profilePic;
 	public String getEmail() {
@@ -24,8 +24,8 @@ public class MemberVO {
 	public String getGender() {
 		return Gender;
 	}
-	public String getTel() {
-		return Tel;
+	public String getcontact() {
+		return contact;
 	}
 	public String getAge() {
 		return Age;
@@ -33,11 +33,11 @@ public class MemberVO {
 	public String getGametype() {
 		return Gametype;
 	}
-	public String getScreen_Score() {
-		return Screen_Score;
+	public String getscore_screen() {
+		return score_screen;
 	}
-	public String getField_Score() {
-		return Field_Score;
+	public String getscore_field() {
+		return score_field;
 	}
 	public String getAddress() {
 		return Address;
@@ -45,21 +45,36 @@ public class MemberVO {
 	public String getProfilePic() {
 		return profilePic;
 	}
-	public MemberVO(String email, String password, String nickname, String gender, String tel, String age,
-			String gametype, String screen_Score, String field_Score, String address, String profilePic) {
+	public MemberVO(String email, String password, String nickname, String gender, String contact, String age,
+			String gametype, String score_screen, String score_field, String address, String profilePic) {
 		super();
 		Email = email;
 		Password = password;
 		Nickname = nickname;
 		Gender = gender;
-		Tel = tel;
+		this.contact = contact;
 		Age = age;
 		Gametype = gametype;
-		Screen_Score = screen_Score;
-		Field_Score = field_Score;
+		this.score_screen = score_screen;
+		this.score_field = score_field;
 		Address = address;
 		this.profilePic = profilePic;
 	}
+	public MemberVO(String email, String nickname, String gender, String contact, String age, String gametype,
+			String score_screen, String score_field, String address, String profilePic) {
+		super();
+		Email = email;
+		Nickname = nickname;
+		Gender = gender;
+		this.contact = contact;
+		Age = age;
+		Gametype = gametype;
+		this.score_screen = score_screen;
+		this.score_field = score_field;
+		Address = address;
+		this.profilePic = profilePic;
+	}
+	
 	
 		
 
