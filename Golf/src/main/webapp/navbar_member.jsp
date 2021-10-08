@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
             	<li class="nav-item"><a class="nav-link" href="mypage.jsp#mypage">마이페이지</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">로그아웃</a></li>
+                <li class="nav-item"><a class="nav-link" href="LogoutService">로그아웃</a></li>
             </ul>
         </div>
     </div>
