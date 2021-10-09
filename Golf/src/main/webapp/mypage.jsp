@@ -2,41 +2,24 @@
     pageEncoding="EUC-KR"%>
 <%@ include file= "head.html" %>
 <%@ include file= "navbar_member.jsp" %>
-<body>
-	<!-- Masthead-->
-	<header class="masthead">
-	    <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-	        <div class="d-flex justify-content-center">
-	            <div class="text-center">
-	                <h1 class="mx-auto my-0 text-uppercase">Swing Mate</h1>
-	                <h2 class="text-white-50 mx-auto mt-2 mb-5"></h2>
-	                <div class="dropdown">
-	                    <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Find Mate</button>
-	                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-	                        <li><a class="dropdown-item" href="#search" data-bs-toggle="modal">Join Others Group</a></li>
-	                        <li><a class="dropdown-item" href="#field-form" data-bs-toggle="modal">Find Field Mate</a></li>
-	                        <li><a class="dropdown-item" href="#screen-form" data-bs-toggle="modal">Find Screen Mate</a></li>
-	                    </ul>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</header>   
+<body>  
 	<!-- My page-->
-    <section class="projects-section bg-light" id="mypage">
-        <div class="container-fluid">
+    <section class="bg-section" id="mypage">
+        <div class="container-sm search-result mx-auto">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="text-center">
-                        <a href=#><img class="profile-pic250" src="assets/profile_pic/sample.jpg"></a>
-                        <!--프로필 사진 변경-->
-                  
-                        <h2>Sample Trump</h2>
-
-                        <hr>
-
-                        <p class="lead">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                    </div>
+                    <div class="profile-wrapper my-5 mx-auto">      
+						<div class="profile">
+					      <div class="profile-image">
+					        <img src="https://i.pinimg.com/564x/7e/97/30/7e973039c0d1ed0dec6c83051642daac.jpg" alt="profile one">
+					      </div>
+					      <div class="profile-details">
+					        <p>닉네임</p>
+					        <br>
+					        <span class="location-title"> 평점 </span>        
+					      </div>
+					    </div>
+					</div>
                 </div>
                 <div class="col-md-8">
                     <div class="accordion" id="accordionMypage">

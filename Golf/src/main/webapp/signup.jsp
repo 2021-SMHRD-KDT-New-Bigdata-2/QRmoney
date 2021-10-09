@@ -4,7 +4,7 @@
 <body>
 	<%@ include file= "navbar_non_member.jsp" %>
 	<section class="container-fluid bg-section">
-            <div class="row justify-content-center signup-form">
+            <div class="row justify-content-center signup-form container-sm">
                 
                 <div>
                     <div class="text-center my-5">
