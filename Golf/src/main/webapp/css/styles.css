@@ -11768,7 +11768,7 @@ body {
 
 .profile-wrapper {
   width: 300px;
-  height: 500px;
+  height: 400px;
   position: relative;
 }
 
@@ -11777,7 +11777,7 @@ body {
   top: 50%;
   left: 50%;
   width: 300px;
-  height: 500px;
+  height: 400px;
   transform: translate(-50%, -50%);
   border-radius: 16px;
   overflow: hidden;
