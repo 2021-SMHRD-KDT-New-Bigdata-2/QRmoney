@@ -150,7 +150,7 @@
 	                            	<% ArrayList<FieldVO> field_list = fieldDAO.getFieldList(); %>
 	                            	<% 
 	                            		for(FieldVO field : field_list) {
-	                            			out.print("<option value="+field.getName()+">"+field.getAddress()+"</option>");
+	                            			out.print("<option value="+field.getAddress()+">"+field.getName()+"</option>");
 	                            		} 
 	                            	%>
 	                            </datalist>

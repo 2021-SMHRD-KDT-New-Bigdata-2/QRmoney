@@ -140,7 +140,7 @@
 					<div class="profile-wrapper my-3 mx-auto">      
 					    <div class="profile">
 					      <div class="profile-image">
-					        <img src="https://i.pinimg.com/564x/7e/97/30/7e973039c0d1ed0dec6c83051642daac.jpg" alt="profile one">
+					        <img src="assets/profile_pic/default.jpg" alt="profile one">
 					      </div>
 					      <div class="profile-details">
 					        <p>전주 상그릴라 CC</p>

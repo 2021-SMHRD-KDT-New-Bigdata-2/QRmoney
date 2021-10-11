@@ -25,7 +25,7 @@ public class SignUpService extends HttpServlet {
 		@SuppressWarnings("deprecation")
 		String profile_folder = request.getRealPath("assets/profile_pic");
 		
-		MultipartRequest multi = new MultipartRequest(request, profile_folder, 10*300*500, "euc-kr", new DefaultFileRenamePolicy());
+		MultipartRequest multi = new MultipartRequest(request, profile_folder, 10*300*600, "euc-kr", new DefaultFileRenamePolicy());
 		
 		String email = multi.getParameter("emailFront")+multi.getParameter("emailBack");
 		String password = multi.getParameter("password");
