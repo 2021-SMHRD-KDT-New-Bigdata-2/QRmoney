@@ -1,5 +1,10 @@
+<%@page import="com.model.FieldVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.model.FieldDAO"%>
+<%@page import="com.model.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<% MemberVO vo = (MemberVO)session.getAttribute("member"); %>
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="main.jsp">Swing Mate</a>
@@ -87,17 +92,36 @@
 	  </div>
 	</div>
 <!-- field -->
-  <div id="field-form" class="modal" tabindex="-1">
+  <div id="field-form" class="modal fade" tabindex="-1">
     <div class="modal-dialog" >
       <div class="modal-content">
         <div class="modal-header bg-light">
           <div class="row">
-            <div class="col-md-2">
-              <img class="profile-pic50" src="assets/profile_pic/sample.jpg">
+            <div class="col-2">
+              <img class="profile-pic50" src=<%= "assets/profile_pic/"+ vo.getProfilePic() %>>
             </div>
             <div class="col-10">
-              <h6 class="modal-title">  <b>트럼프</b>님! 함께 할 메이트를 직접 구해보세요</h6><!--여기에 본인 프사랑 함께 나왔으면 좋겠음-->
-              <span class="small">성별 : 남성, 스코어 : 444, 거주지역 : 백악관</span>
+              <h6 class="modal-title">  <b><%= vo.getNickname() %></b>님!<br>함께 할 메이트를 구해보세요</h6>
+              <span class="small">
+              	성별 : 
+              	<%
+              		if(vo.getGender() == null) {
+						out.print("설정 안됨");
+             		} else if(vo.getGender().equals("male")) {
+             			out.print("남성");
+             		} else {
+             			out.print("여성");
+             		}
+              	%>,
+              	스코어 : 
+              	<%
+	              	if(vo.getscore_field() == null) {
+						out.print("설정 안됨");
+	         		} else {
+	         			out.print(vo.getscore_field());
+	         		}
+              	%>
+              </span>
             </div>
           </div>
         </div>
@@ -120,8 +144,16 @@
                       <td>
                         <div class="col-sm-10" style="margin-left: auto;">
                           <div class="input-group">
-                            <input type="text" class="form-control">
-                            <button class="btn-sm btn-primary" type="button" id="button-addon2">검색</button>
+                          	<input list="field-select" class="form-select" placeholder="장소를 선택해주세요">
+	                            <datalist id="field-select">
+	                            	<% FieldDAO fieldDAO = new FieldDAO(); %>
+	                            	<% ArrayList<FieldVO> field_list = fieldDAO.getFieldList(); %>
+	                            	<% 
+	                            		for(FieldVO field : field_list) {
+	                            			out.print("<option value="+field.getName()+">"+field.getAddress()+"</option>");
+	                            		} 
+	                            	%>
+	                            </datalist>
                           </div>
                         </div>    
                       </td>
@@ -138,7 +170,7 @@
                     <th scope="row">지참금</th>
                     <td>
                       <div class="col-sm-10" style="margin-left: auto;">
-                        <input type="input" class="form-control">
+                        <input type="number" class="form-control">
                       </div>
                     </td>
                   </tr>
@@ -146,10 +178,10 @@
                     <th scope="row">게임길이</th>
                     <td>
                       <div class="col-sm-10" style="margin-left: auto;">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="9 holes" checked>
                         <label class="form-check-label" for="flexRadioDefault1"> 9홀 </label>
                           
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="18 holes">
                         <label class="form-check-label" for="flexRadioDefault2"> 18홀 </label>
                       </div>
                     </td>
@@ -175,7 +207,7 @@
   </div>
 
   <!-- screen -->
-  <div id="screen-form" class="modal" tabindex="-1">
+  <div id="screen-form" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-light">

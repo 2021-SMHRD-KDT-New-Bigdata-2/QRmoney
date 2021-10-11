@@ -11688,27 +11688,33 @@ body {
 
 .profile-pic250 {
   display: inline-block;
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
+  top: 0px;
+  left: 0px;
+  width: 150px;
+  height: 300px;
+  border-radius: 12px;
 
   object-fit: cover;
 }
 
 .profile-pic100 {
   display: inline-block;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  top: 0px;
+  left: 0px;
+  width: 60px;
+  height: 120px;
+  border-radius: 4px;
 
   object-fit: cover;
 }
 
 .profile-pic50 {
   display: inline-block;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+  top: 0px;
+  left: 0px;
+  width: 30px;
+  height: 60px;
+  border-radius: 2px;
 
   object-fit: cover;
 }
