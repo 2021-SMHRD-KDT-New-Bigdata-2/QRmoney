@@ -1,10 +1,8 @@
 package com.model;
 
-import java.sql.ResultSet;
-
 public class MemberDAO extends DAO{
 	int result =0;
-	MemberVO vo =null;
+	MemberVO vo = new MemberVO();
 	public int SignUp(MemberVO vo) {
 		getConn();
 		try {

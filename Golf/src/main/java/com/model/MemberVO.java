@@ -75,7 +75,9 @@ public class MemberVO {
 		this.profilePic = profilePic;
 	}
 	
-	
+	public MemberVO() {
+		super();
+	}
 		
 
 
