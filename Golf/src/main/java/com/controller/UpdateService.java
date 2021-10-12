@@ -50,7 +50,7 @@ public class UpdateService extends HttpServlet {
 		
 		System.out.println(password+"/"+profilePic+"/"+gender+"/"+contact+"/"+gameType+"/"+fieldScore+"/"+screenScore);
 		
-//		MemberVO vo1 = new MemberVO(email, password, gender, contact, age, gameType, screenScore, fieldScore, profilePic);
+//		MemberVO vo1 = new MemberVO(email, password, gender, contact, gameType, screenScore, fieldScore, profilePic);
 //		MemberDAO dao = new MemberDAO();
 //		int cnt = dao.update(vo1);
 //		
