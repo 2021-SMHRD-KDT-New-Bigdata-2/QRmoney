@@ -8,11 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/MakeGameService")
-public class MakeGameService extends HttpServlet {
+public class MakeGameScreen extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		
 		
 	}

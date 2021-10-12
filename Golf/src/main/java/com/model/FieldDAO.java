@@ -38,4 +38,27 @@ public class FieldDAO extends DAO {
 		
 		return fields;
 	}
+	
+	public int getFieldIDbyName(String name) {
+		int location = 0;
+		
+		getConn();
+		try {
+			String sql = "select * from field where name = ?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, name);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				location = rs.getInt("field_id");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return location;
+	}
 }

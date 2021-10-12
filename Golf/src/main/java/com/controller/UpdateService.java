@@ -32,15 +32,12 @@ public class UpdateService extends HttpServlet {
 		
 		MultipartRequest multi = new MultipartRequest(request, profile_folder, 10*300*600, "euc-kr", new DefaultFileRenamePolicy());
 		String password = multi.getParameter("password"); // 
-		String nickname = multi.getParameter("nickname");
 		String profilePic = multi.getFilesystemName("profilePic"); //
 		String gender = multi.getParameter("gender"); //
 		String contact = multi.getParameter("contact"); //
-		String address = multi.getParameter("address"); //
 		String gameType = multi.getParameter("gameType"); //
 		String fieldScore = multi.getParameter("fieldScore"); // 
 		String screenScore = multi.getParameter("screenScore"); //
-		String age = "0";
 		
 		if(profilePic != null){
 			File oldFile = new File(profile_folder+"/"+profilePic);
@@ -51,15 +48,17 @@ public class UpdateService extends HttpServlet {
 			profilePic = "default.jpg";
 		}
 		
-		MemberVO vo1 = new MemberVO(email, password, nickname, gender, contact, age, gameType, screenScore, fieldScore, address, profilePic);
-		MemberDAO dao = new MemberDAO();
-		int cnt = dao.update(vo1);
+		System.out.println(password+"/"+profilePic+"/"+gender+"/"+contact+"/"+gameType+"/"+fieldScore+"/"+screenScore);
 		
-		if(cnt>0) {
-			System.out.println("수정 성공");
-		}else {
-			System.out.println("수정 실패 ");
-		}
+//		MemberVO vo1 = new MemberVO(email, password, gender, contact, age, gameType, screenScore, fieldScore, profilePic);
+//		MemberDAO dao = new MemberDAO();
+//		int cnt = dao.update(vo1);
+//		
+//		if(cnt>0) {
+//			System.out.println("수정 성공");
+//		}else {
+//			System.out.println("수정 실패 ");
+//		}
 		
 	}
 		

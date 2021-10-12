@@ -128,4 +128,27 @@ public class MemberDAO extends DAO{
 		}
 		return cnt;
 	}
+	
+	public int getMemberIdbyEmail(String email) {
+		int member_id = 0;
+		
+		getConn();
+		try {
+			String sql = "select * from members where email = ?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, email);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				member_id = rs.getInt("member_id");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return member_id;
+	}
 }

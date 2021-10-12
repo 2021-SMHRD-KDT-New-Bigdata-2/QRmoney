@@ -55,8 +55,10 @@ public class SignUpService extends HttpServlet {
 		int result = dao.SignUp(vo);
 		if(result>0) {
 			System.out.println("입력성공");
+			response.sendRedirect("main.jsp");
 		}else {
 			System.err.println("입력실패");
+			response.sendRedirect("main.jsp");
 		}
 		
 	}
