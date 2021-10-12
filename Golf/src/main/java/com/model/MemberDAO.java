@@ -82,4 +82,50 @@ public class MemberDAO extends DAO{
 		}
 		return vo;
 	}
+	
+
+	public int update(MemberVO vo1) {
+		getConn();
+		
+		int cnt = 0;
+		try {
+			String sql = "update members set pw=?, gender=?, contact=?, gameType=?,"
+					+ " screenScore=?, fieldScore=?, address=?, profilepic=? where email=?";
+			
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, vo1.getPassword());
+			psmt.setString(2, vo1.getGender());
+			psmt.setString(3, vo1.getcontact());
+			psmt.setString(4, vo1.getGametype());
+			psmt.setString(5, vo1.getscore_screen());
+			psmt.setString(6, vo1.getscore_field());
+			psmt.setString(7, vo1.getAddress());
+			psmt.setString(8, vo1.getProfilePic());
+			psmt.setString(9, vo1.getEmail());
+			
+			try {
+				if(vo.getscore_field().equals("")) {
+					psmt.setNull(10,4);
+				}else {
+					psmt.setDouble(10, Integer.parseInt(vo.getscore_field()));
+				}
+				if(vo.getscore_screen().equals("")) {	
+					psmt.setNull(11,4);
+				}else {
+					psmt.setDouble(11, Integer.parseInt(vo.getscore_screen()));
+				}
+			}catch(NumberFormatException e) {
+				
+			}
+			
+			cnt = psmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return cnt;
+	}
 }

@@ -1,0 +1,72 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">개인정보수정</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="tmpSendFrm">
+                <div style="text-align: center;">
+                    <label for="inputNickname"><b>닉네임</b></label>
+                </div>
+                <div>
+                    <label for="inputPassword">비밀번호</label>
+                    <input type="password" class="form-control" id="inputPassword" name="password" size="15" required> 
+                    <div class="invalid-feedback">
+                        필수입력 항목입니다.
+                    </div>
+                </div>
+                <div>
+                    <label for="inputProfile">프로필 사진</label>
+                    <div class="input-group">
+                        <input type="file" class="form-control" id="inputProfile" name="profilePic" aria-describedby="inputProfile" aria-label="Upload">
+                    </div>
+                </div>
+                <div>
+                    <label for="inputGender">성별</label>
+                </div>
+                <div class="input-group">
+                    <select class="form-select" id="inputGender" name="gender" aria-label="Example select with button addon">
+                      <option selected disabled value="">성별을 선택해주세요</option>
+                      <option value="male">남성</option>
+                      <option value="female">여성</option>                   
+                    </select>
+                </div>
+                <div>
+                    <label for="inputTel">연락처</label>
+                    <input type="tel" class="form-control" id="inputTel" name="contact" placeholder="010-0000-0000" value="">
+                </div>     
+                <!-- <div>
+                    <label for="inputAddress">주소</label>
+                    <input id="inputAddress" name="address" class="form-control" type="text" placeholder="클릭해서 주소를 입력해주세요" readonly onclick="findAddr()" value="">
+                </div> -->
+                <div>
+                    <label for="inputGameType">선호 게임 타입</label>
+                </div>
+                <div class="input-group">
+                    <select class="form-select" id="inputGameType" name="gameType" aria-label="Example select with button addon">
+                      <option selected disabled value="">게임 타입을 선택해주세요</option>
+                      <option value="field">필드</option>
+                      <option value="screen">스크린</option>
+                    </select>
+                </div>
+                <div>
+                    <div>
+                        <label for="inputFieldScore">필드 스코어</label>
+                        <input type="number" min="0" max="999" class="form-control" id="inputFieldScore" name="fieldScore" value="">
+                    </div>
+                    <div>
+                        <label for="inputScreenScore">스크린 스코어</label>
+                        <input type="number" min="0" max="999" class="form-control" id="inputScreenScore" name="screenScore" value="">
+                    </div>
+                </div>           
+            </form>
+        </div>
+        <div class="modal-footer">
+        <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary">수정 완료</button>
+        </div>
+    </div>
+    </div>
+</div>

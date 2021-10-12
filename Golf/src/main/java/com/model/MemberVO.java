@@ -70,6 +70,7 @@ public class MemberVO {
 		Address = address;
 		this.profilePic = profilePic;
 	}
+	
 	public MemberVO(String email, String nickname, String gender, String contact, String age, String gametype,
 			String score_screen, String score_field, String address, String profilePic) {
 		super();
@@ -84,6 +85,7 @@ public class MemberVO {
 		Address = address;
 		this.profilePic = profilePic;
 	}
+	
 	public MemberVO(String email, String nickname, String gender, String contact, String age, String gametype,
 			String score_screen, String score_field, String address, String profilePic, String ratings_total,
 			String ragings_cnt) {
@@ -101,8 +103,9 @@ public class MemberVO {
 		Ratings_total = ratings_total;
 		Ragings_cnt = ragings_cnt;
 	}
+	
 	public MemberVO() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 
