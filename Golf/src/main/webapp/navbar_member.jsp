@@ -1,3 +1,5 @@
+<%@page import="com.model.ScreenVO"%>
+<%@page import="com.model.ScreenDAO"%>
 <%@page import="com.model.FieldVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.model.FieldDAO"%>
@@ -150,7 +152,7 @@
 	                            	<% ArrayList<FieldVO> field_list = fieldDAO.getFieldList(); %>
 	                            	<% 
 	                            		for(FieldVO field : field_list) {
-	                            			out.print("<option value="+field.getName()+">"+field.getAddress()+"</option>");
+	                            			out.print("<option value='"+field.getName()+"'>"+field.getAddress()+"</option>");
 	                            		} 
 	                            	%>
 	                            </datalist>
@@ -210,77 +212,103 @@
   <div id="screen-form" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header bg-light">
-          <div class="row">
-            <div class="col-md-2">
-              <img class="profile-pic50" src="assets/profile_pic/sample.jpg">
-            </div>
-            <div class="col-10">
-              <h6 class="modal-title">  <b>트럼프</b>님! 함께 할 메이트를 직접 구해보세요</h6>
-              <span class="small">성별 : 남성, 스코어 : 444, 거주지역 : 백악관</span>
-            </div>
-          </div>
-        </div>
-        <div class="modal-body">
-          <form action="">
-            <table class="table">
-                <tbody>
-                  <tr>
-                    <td colspan="2">
-                      <div class="col-12" style="margin-left: auto;">
-                        <div class="input-group">
-                          <input type="text" placeholder = "[스크린] 게시글 제목을 입력해주세요" class="form-control">
-                        </div>
-                      </div>    
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">장소</th>
-                      <td>
-                        <div class="col-sm-10" style="margin-left: auto;">
-                          <div class="input-group">
-                            <input type="text" class="form-control">
-                            <button class="btn-sm btn-outline-primary" type="button" id="button-addon2">검색</button>
-                          </div>
-                        </div>    
-                      </td>
-                    </tr>
-                  <tr>
-                    <th scope="row">날짜</th>
-                    <td>
-                      <div class="col-sm-10" style="margin-left: auto;">
-                        <input type="datetime-local" class="form-control">
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">게임길이</th>
-                    <td>
-                      <div class="col-sm-10" style="margin-left: auto;">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                        <label class="form-check-label" for="flexRadioDefault1"> 9홀 </label>
-                          
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                        <label class="form-check-label" for="flexRadioDefault2"> 18홀 </label>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">총인원</th>
-                    <td>
-                      <div class="col-sm-10" style="margin-left: auto;">
-                        <input type="number" class="form-control" min="2" max="4">
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-            </table>
-          </form>    
-        </div>
-        <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-          <button type="submit" class="btn btn-primary">작성완료</button>
-        </div>
+      	<form action="MakeGameScreen">
+	        <div class="modal-header bg-light">
+	          <div class="row">
+	            <div class="col-2">
+	              <img class="profile-pic50" src=<%= "assets/profile_pic/"+ vo.getProfilePic() %>>
+	            </div>
+	            <div class="col-10">
+	              <h6 class="modal-title">  <b><%= vo.getNickname() %></b>님!<br>함께 할 메이트를 구해보세요</h6>
+	              <span class="small">
+	              	성별 : 
+	              	<%
+	              		if(vo.getGender() == null) {
+							out.print("설정 안됨");
+	             		} else if(vo.getGender().equals("male")) {
+	             			out.print("남성");
+	             		} else {
+	             			out.print("여성");
+	             		}
+	              	%>,
+	              	스코어 : 
+	              	<%
+		              	if(vo.getscore_field() == null) {
+							out.print("설정 안됨");
+		         		} else {
+		         			out.print(vo.getscore_screen());
+		         		}
+	              	%>
+	              </span>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="modal-body">
+	            <table class="table">
+	                <tbody>
+	                  <tr>
+	                    <td colspan="2">
+	                      <div class="col-12" style="margin-left: auto;">
+	                        <div class="input-group">
+	                          <input type="text" placeholder = "[스크린] 게시글 제목을 입력해주세요" class="form-control" name="game-name">
+	                        </div>
+	                      </div>    
+	                    </td>
+	                  </tr>
+	                  <tr>
+	                    <th scope="row">장소</th>
+	                      <td>
+	                        <div class="col-sm-10" style="margin-left: auto;">
+	                          <div class="input-group">
+	                          	<input list="screen-select" class="form-select" placeholder="장소를 선택해주세요" name="location">
+		                            <datalist id="screen-select">
+		                            	<% ScreenDAO screenDAO = new ScreenDAO(); %>
+		                            	<% ArrayList<ScreenVO> screen_list = screenDAO.getScreenList(); %>
+		                            	<% 
+		                            		for(ScreenVO screen : screen_list) {
+		                            			out.print("<option value='"+screen.getName()+"'>"+screen.getAddress()+"</option>");
+		                            		} 
+		                            	%>
+		                            </datalist>
+	                          </div>
+	                        </div>    
+	                      </td>
+	                    </tr>
+	                  <tr>
+	                    <th scope="row">날짜</th>
+	                    <td>
+	                      <div class="col-sm-10" style="margin-left: auto;">
+	                        <input type="datetime-local" class="form-control" name="game-date">
+	                      </div>
+	                    </td>
+	                  </tr>
+	                  <tr>
+	                    <th scope="row">게임길이</th>
+	                    <td>
+	                      <div class="col-sm-10" style="margin-left: auto;">
+	                        <input class="form-check-input" type="radio" name="game-length" id="flexRadioDefault1" value="9 holes" checked>
+	                        <label class="form-check-label" for="flexRadioDefault1"> 9홀 </label>                          
+	                        <input class="form-check-input" type="radio" name="game-length" id="flexRadioDefault2" value="18 holes">
+	                        <label class="form-check-label" for="flexRadioDefault2"> 18홀 </label>
+	                      </div>
+	                    </td>
+	                  </tr>
+	                  <tr>
+	                    <th scope="row">총인원</th>
+	                    <td>
+	                      <div class="col-sm-10" style="margin-left: auto;">
+	                        <input type="number" class="form-control" min="2" max="4" name="total-member">
+	                      </div>
+	                    </td>
+	                  </tr>
+	                </tbody>
+	            </table>
+	        </div>
+	        <div class="modal-footer bg-light">
+	          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	          <button type="submit" class="btn btn-primary">작성완료</button>
+	        </div>
+        </form>
       </div>
     </div>
   </div>

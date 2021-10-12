@@ -1,6 +1,8 @@
 package com.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +22,7 @@ public class MakeGameField extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("euc-kr");
+		response.setCharacterEncoding("euc-kr");
 		
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO)session.getAttribute("member");
@@ -41,15 +44,23 @@ public class MakeGameField extends HttpServlet {
 		GameDAO gameDAO = new GameDAO();
 		int result = gameDAO.makeGame(game_name, game_type, location, game_date, game_fee, game_length, total_member);
 		
+		PrintWriter out = response.getWriter();
+		
 		if(result>0) {
 			int game_id = gameDAO.getGameIDbyName(game_name);
 			
 			GroupDAO groupDAO = new GroupDAO();
 			MemberDAO memberDAO = new MemberDAO();
 			groupDAO.joinGroup(game_id, memberDAO.getMemberIdbyEmail(member.getEmail()));
-			response.sendRedirect("main.jsp");
+			out.print("<script>"
+					+"alert('그룹이 등록되었습니다.');"
+					+"location.href = 'main.jsp';"
+					+"</script>");
 		} else {
-			response.sendRedirect("main.jsp");
+			out.print("<script>"
+					+"alert('그룹 등록에 실패했습니다.');"
+					+"location.href = 'main.jsp';"
+					+"</script>");
 		}
 	}
 

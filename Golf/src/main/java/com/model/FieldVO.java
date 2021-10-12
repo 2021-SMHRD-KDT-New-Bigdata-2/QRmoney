@@ -12,6 +12,7 @@ public class FieldVO {
 	private String weekfee;
 	private String weekendfee;
 	private String sitelink;
+	
 	public int getField_id() {
 		return field_id;
 	}
