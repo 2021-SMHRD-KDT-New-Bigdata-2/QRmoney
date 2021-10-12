@@ -2,6 +2,8 @@ package com.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,10 +56,20 @@ public class UpdateService extends HttpServlet {
 		MemberDAO dao = new MemberDAO();
 		int cnt = dao.update(vo1);
 		
+		PrintWriter out = response.getWriter();
+		
 		if(cnt>0) {
 			System.out.println("수정 성공");
+	         out.print("<script>"
+	               +"alert('회원정보가 수정되었습니다.');"
+	               +"location.href = 'main.jsp';"
+	               +"</script>");
 		}else {
 			System.out.println("수정 실패 ");
+			out.print("<script>"
+		               +"alert('회원정보 수정에 실패했습니다.');"
+		               +"location.href = 'main.jsp';"
+		               +"</script>");
 		}
 		
 	}

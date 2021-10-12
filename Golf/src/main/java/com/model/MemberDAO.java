@@ -86,12 +86,13 @@ public class MemberDAO extends DAO{
 
 	// 회원 정보 수정
 	public int update(MemberVO vo1) {
+		
 		getConn();
 		
 		int cnt = 0;
 		try {
-			String sql = "update members set pw=?, gender=?, contact=?, gameType=?,"
-					+ " screenScore=?, fieldScore=?, profilepic=? where email=?";
+			String sql = "update members set password=?, gender=?, contact=?, game_type=?,"
+					+ " score_screen=?, score_field=?, profile_pic=? where email=?";
 			
 			psmt = conn.prepareStatement(sql);
 
@@ -99,21 +100,19 @@ public class MemberDAO extends DAO{
 			psmt.setString(2, vo1.getGender());
 			psmt.setString(3, vo1.getcontact());
 			psmt.setString(4, vo1.getGametype());
-			psmt.setString(5, vo1.getscore_screen());
-			psmt.setString(6, vo1.getscore_field());
-			psmt.setString(8, vo1.getProfilePic());
-			psmt.setString(9, vo1.getEmail()); 
+			psmt.setString(7, vo1.getProfilePic());
+			psmt.setString(8, vo1.getEmail()); // 세션정보
 			
 			try {
-				if(vo.getscore_field().equals("")) {
-					psmt.setNull(10,4);
+				if(vo1.getscore_field().equals("")) {
+					psmt.setNull(6,4);
 				}else {
-					psmt.setDouble(10, Integer.parseInt(vo.getscore_field()));
+					psmt.setDouble(6, Integer.parseInt(vo1.getscore_field()));
 				}
-				if(vo.getscore_screen().equals("")) {	
-					psmt.setNull(11,4);
+				if(vo1.getscore_screen().equals("")) {	
+					psmt.setNull(5,4);
 				}else {
-					psmt.setDouble(11, Integer.parseInt(vo.getscore_screen()));
+					psmt.setDouble(5, Integer.parseInt(vo1.getscore_screen()));
 				}
 			}catch(NumberFormatException e) {
 				
