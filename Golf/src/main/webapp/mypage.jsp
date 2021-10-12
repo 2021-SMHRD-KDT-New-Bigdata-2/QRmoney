@@ -3,6 +3,20 @@
 <%@ include file= "head.html" %>
 <%@ include file= "navbar_member.jsp" %>
 <body>  
+	<%
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		double avg1=0;
+		if(member.getRatings_total().equals("0")){
+			avg1=0;
+		}else{
+			int total= Integer.parseInt(member.getRatings_total());
+			int cnt = Integer.parseInt(member.getRagings_cnt());
+			double avg=total/cnt;
+			avg1=(double)Math.round(avg*10/10);
+		}
+		
+		
+	%>
 	<!-- My page-->
     <section class="bg-section" id="mypage">
         <div class="container-sm search-result mx-auto">
@@ -11,12 +25,12 @@
                     <div class="profile-wrapper my-5 mx-auto">      
 						<div class="profile">
 					      <div class="profile-image">
-					        <img src="https://i.pinimg.com/564x/7e/97/30/7e973039c0d1ed0dec6c83051642daac.jpg" alt="profile one">
+					        <img src="<%= member.getProfilePic() %>" alt="profile one">
 					      </div>
 					      <div class="profile-details">
 					        <p>닉네임</p>
 					        <br>
-					        <span class="location-title"> 평점 </span>        
+					        <span class="location-title"> <%= avg1 %> </span>        
 					      </div>
 					    </div>
 					</div>
@@ -38,31 +52,42 @@
                                                 <th scope="row">
                                                     <img src="assets/icon/grade.png">
                                                 </th>
-                                                <td>4.4</td>
+                                                <td><%= avg1  %></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <img src="assets/icon/golf.png">
                                                 </th>
-                                                <td>99</td>
+                                                <td><%if(member.getGametype().equals("field")){
+                                                	%><%=member.getscore_field() %>
+                                                	<%}else if(member.getGametype().equals("screen")){%>                                             
+                                                	<%=member.getscore_screen()%>
+                                                	<%}else{%>
+                                                		0<%} %>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <img src="assets/icon/favorite.png">
                                                 </th>
-                                                <td>Field</td>
+                                                <td><%if(member.getGametype().equals("field")){
+                                                	%>Field
+                                                	<%}else if(member.getGametype().equals("screen")){%>                                             
+                                                		Screen
+                                                	<%}else{%>
+                                                		선호하는 게임이 없습니다.<%} %></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <img src="assets/icon/date_range.png">
                                                 </th>
-                                                <td>46/06/14</td>
+                                                <td><%=member.getAge() %></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <img src="assets/icon/room.png">
                                                 </th>
-                                                <td>Whitehouse</td>
+                                                <td><%=member.getAddress() %></td>
                                             </tr>
                                         </tbody>
                                     </table>

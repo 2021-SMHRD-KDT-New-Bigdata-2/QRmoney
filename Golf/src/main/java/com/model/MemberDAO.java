@@ -65,7 +65,10 @@ public class MemberDAO extends DAO{
 				String get_gametype=rs.getString("game_type");
 				String get_score_field=rs.getString("SCORE_FIELD");
 				String get_score_screen=rs.getString("SCORE_SCREEN");
-				vo = new MemberVO(get_email, get_nickname, get_gender, get_contact, get_age, get_gametype, get_score_screen, get_score_field, get_address, get_profile_pic);
+				String get_ratings_cnt=rs.getString("ratings_cnt");
+				String get_ratings_total=rs.getString("ratings_total");
+				
+				vo = new MemberVO(get_email, get_nickname, get_gender, get_contact, get_age, get_gametype, get_score_screen, get_score_field, get_address, get_profile_pic,get_ratings_total,get_ratings_cnt);
 				System.out.println("로긴성공");
 						
 			}else {

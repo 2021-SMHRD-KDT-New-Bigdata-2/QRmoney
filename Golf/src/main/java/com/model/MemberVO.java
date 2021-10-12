@@ -12,6 +12,9 @@ public class MemberVO {
 	private String score_field;
 	private String Address;
 	private String profilePic;
+	private String Ratings_total;
+	private String Ragings_cnt;
+	
 	public String getEmail() {
 		return Email;
 	}
@@ -26,6 +29,9 @@ public class MemberVO {
 	}
 	public String getcontact() {
 		return contact;
+	}
+	public String getRatings_total() {
+		return Ratings_total;
 	}
 	public String getAge() {
 		return Age;
@@ -42,9 +48,13 @@ public class MemberVO {
 	public String getAddress() {
 		return Address;
 	}
+	public String getRagings_cnt() {
+		return Ragings_cnt;
+	}
 	public String getProfilePic() {
 		return profilePic;
 	}
+	
 	public MemberVO(String email, String password, String nickname, String gender, String contact, String age,
 			String gametype, String score_screen, String score_field, String address, String profilePic) {
 		super();
@@ -74,10 +84,29 @@ public class MemberVO {
 		Address = address;
 		this.profilePic = profilePic;
 	}
-	
-	public MemberVO() {
+	public MemberVO(String email, String nickname, String gender, String contact, String age, String gametype,
+			String score_screen, String score_field, String address, String profilePic, String ratings_total,
+			String ragings_cnt) {
 		super();
+		Email = email;
+		Nickname = nickname;
+		Gender = gender;
+		this.contact = contact;
+		Age = age;
+		Gametype = gametype;
+		this.score_screen = score_screen;
+		this.score_field = score_field;
+		Address = address;
+		this.profilePic = profilePic;
+		Ratings_total = ratings_total;
+		Ragings_cnt = ragings_cnt;
 	}
+	public MemberVO() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	
 		
 
 
