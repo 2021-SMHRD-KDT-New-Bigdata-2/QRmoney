@@ -84,13 +84,14 @@ public class MemberDAO extends DAO{
 	}
 	
 
+	// 회원 정보 수정
 	public int update(MemberVO vo1) {
 		getConn();
 		
 		int cnt = 0;
 		try {
 			String sql = "update members set pw=?, gender=?, contact=?, gameType=?,"
-					+ " screenScore=?, fieldScore=?, address=?, profilepic=? where email=?";
+					+ " screenScore=?, fieldScore=?, profilepic=? where email=?";
 			
 			psmt = conn.prepareStatement(sql);
 
@@ -100,9 +101,8 @@ public class MemberDAO extends DAO{
 			psmt.setString(4, vo1.getGametype());
 			psmt.setString(5, vo1.getscore_screen());
 			psmt.setString(6, vo1.getscore_field());
-			psmt.setString(7, vo1.getAddress());
 			psmt.setString(8, vo1.getProfilePic());
-			psmt.setString(9, vo1.getEmail());
+			psmt.setString(9, vo1.getEmail()); 
 			
 			try {
 				if(vo.getscore_field().equals("")) {
@@ -126,6 +126,7 @@ public class MemberDAO extends DAO{
 		}finally {
 			close();
 		}
+		
 		return cnt;
 	}
 	

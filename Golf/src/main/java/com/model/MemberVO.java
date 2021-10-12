@@ -104,6 +104,19 @@ public class MemberVO {
 		Ragings_cnt = ragings_cnt;
 	}
 	
+	// UpdateService
+	public MemberVO(String email, String password, String gender, String contact, String gametype, String score_screen,
+			String score_field, String profilePic) {
+		this.Email = email;
+		this.Password = password;
+		this.Gender = gender;
+		this.contact = contact;
+		this.Gametype = gametype;
+		this.score_screen = score_screen;
+		this.score_field = score_field;
+		this.profilePic = profilePic;
+	}
+	
 	public MemberVO() {
 		super();
 	}
