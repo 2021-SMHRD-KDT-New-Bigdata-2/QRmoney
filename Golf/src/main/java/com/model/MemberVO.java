@@ -1,6 +1,7 @@
 package com.model;
 
 public class MemberVO {
+	private String member_id;
 	private String Email;
 	private String Password;
 	private String Nickname;
@@ -16,6 +17,9 @@ public class MemberVO {
 	private String Ratings_cnt;
 	private int Rating;
 	
+	public String getMember_id() {
+		return member_id;
+	}
 	
 	public int getRating() {
 		return Rating;
@@ -92,10 +96,12 @@ public class MemberVO {
 		this.profilePic = profilePic;
 	}
 	
-	public MemberVO(String email, String nickname, String gender, String contact, String age, String gametype,
+	// 로그인 - member_id 추가
+	public MemberVO(String member_id, String email, String nickname, String gender, String contact, String age, String gametype,
 			String score_screen, String score_field, String address, String profilePic, String ratings_total,
 			String ratings_cnt) {
 		super();
+		this.member_id = member_id;
 		Email = email;
 		Nickname = nickname;
 		Gender = gender;
