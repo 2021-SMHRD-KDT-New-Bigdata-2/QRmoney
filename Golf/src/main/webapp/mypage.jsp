@@ -10,8 +10,8 @@
 		if(member.getRatings_total().equals("0")){
 			avg1=0;
 		}else{
-			int total= Integer.parseInt(member.getRatings_total());
-			int cnt = Integer.parseInt(member.getRatings_cnt());
+			double total= Integer.parseInt(member.getRatings_total());
+			double cnt = Integer.parseInt(member.getRatings_cnt());
 			double avg=total/cnt;
 			avg1=(double)Math.round(avg*100/10);
 		}
@@ -33,7 +33,7 @@
 					      <div class="profile-details">
 					        <p>´Ð³×ÀÓ</p>
 					        <br>
-					        <span class="location-title"> <%= avg1 %> </span>        
+					        <span class="location-title"> <%= avg1/10 %> </span>        
 					      </div>
 					    </div>
 					</div>
@@ -55,7 +55,7 @@
                                                 <th scope="row">
                                                     <img src="assets/icon/grade.png">
                                                 </th>
-                                                <td><%= avg1  %></td>
+                                                <td><%= avg1/10  %></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
