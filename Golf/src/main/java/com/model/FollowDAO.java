@@ -100,7 +100,7 @@ public class FollowDAO extends DAO{
 				String nickname = rs.getString("nickname");
 				String gender = rs.getString("gender");
 				
-				FollowVO vo = new FollowVO(nickname, gender);
+				FollowVO vo = new FollowVO(result, nickname, gender);
 				followlist.add(vo);
 			}
 			
@@ -129,7 +129,7 @@ public class FollowDAO extends DAO{
 				System.out.println(nickname);
 				String gender = rs.getString("gender");
 				System.out.println(gender);
-				FollowVO vo = new FollowVO(nickname, gender);
+				FollowVO vo = new FollowVO(result, nickname, gender);
 				System.out.println(vo);
 				followlist.add(vo);
 			}

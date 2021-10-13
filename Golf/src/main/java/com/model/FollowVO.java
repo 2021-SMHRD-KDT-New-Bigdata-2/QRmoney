@@ -5,6 +5,7 @@ public class FollowVO {
 	private String FOLLOWING_ID;
 	private String nickname;
 	private String gender;
+	private int num;
 	
 	public String getFOLLOWER_ID() {
 		return FOLLOWER_ID;
@@ -22,6 +23,11 @@ public class FollowVO {
 		super();
 		FOLLOWER_ID = fOLLOWER_ID;
 		FOLLOWING_ID = fOLLOWING_ID;
+	}
+	public FollowVO(int num,String nickname, String gender) {
+		super();
+		this.nickname = nickname;
+		this.gender = gender;
 	}
 	
 	
