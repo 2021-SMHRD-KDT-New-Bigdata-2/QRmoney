@@ -42,7 +42,7 @@
                             <div>
                                 <input class="form-check-input " type="radio" name="flexRadioDefault" id="field">
                                 Field
-                                <input class="form-check-input" style="margin-left: 6%;" type="radio" name="flexRadioDefault" id="screen">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="screen">
                                 Screen
                             </div>
                         </td>

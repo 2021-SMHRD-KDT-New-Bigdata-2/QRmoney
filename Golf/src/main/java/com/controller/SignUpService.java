@@ -36,7 +36,7 @@ public class SignUpService extends HttpServlet {
 			File oldFile = new File(profile_folder+"/"+profilePic);
 			File newFile = new File(profile_folder+"/"+email+".jpg");
 			oldFile.renameTo(newFile);
-			profilePic = "email.jpg";
+			profilePic = email+".jpg";
 		} else {
 			profilePic = "default.jpg";
 		}
