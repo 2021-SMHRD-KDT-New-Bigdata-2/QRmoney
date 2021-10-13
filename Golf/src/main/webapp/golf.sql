@@ -117,4 +117,10 @@ start with 1
 minvalue 1
 maxvalue 999999;
 
+create sequence RATING_SEQ
+increment by 1
+start with 1
+minvalue 1
+maxvalue 999999;
+
 select * from Field;

@@ -151,4 +151,47 @@ public class MemberDAO extends DAO{
 		
 		return member_id;
 	}
+	
+	public int RatingEstimation(MemberVO vo) {
+		getConn();
+		try {
+			String sql="select email, ratings_total from members where email=?";
+			psmt =conn.prepareStatement(sql);
+			psmt.setString(1, vo.getEmail());
+			
+			rs=psmt.executeQuery();
+			String get_email=null;
+			int get_rating_total=0;
+			if(rs.next()){
+				get_email = rs.getString("email");
+				get_rating_total = rs.getInt("ratings_total");
+				System.out.println("레이팅시스템 검색성공");
+			}else {
+				System.out.println("레이팅시스템 검색실패");
+			}
+			
+			
+			
+			sql= "update members set ratings_total =?, ratings_cnt= RATING_SEQ.nextval where email =?" ;
+			
+			
+			
+			int Rating_total =get_rating_total +vo.getRating(); 
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, Rating_total);			
+			psmt.setString(2, vo.getEmail());
+			
+			result=psmt.executeUpdate();
+			
+		
+		
+		
+		} catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return result;
+	}
 }

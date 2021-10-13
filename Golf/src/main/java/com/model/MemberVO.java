@@ -13,11 +13,17 @@ public class MemberVO {
 	private String Address;
 	private String profilePic;
 	private String Ratings_total;
-	private String Ragings_cnt;
+	private String Ratings_cnt;
+	private int Rating;
 	
+	
+	public int getRating() {
+		return Rating;
+	}
 	public String getEmail() {
 		return Email;
 	}
+	
 	public String getPassword() {
 		return Password;
 	}
@@ -48,8 +54,8 @@ public class MemberVO {
 	public String getAddress() {
 		return Address;
 	}
-	public String getRagings_cnt() {
-		return Ragings_cnt;
+	public String getRatings_cnt() {
+		return Ratings_cnt;
 	}
 	public String getProfilePic() {
 		return profilePic;
@@ -88,7 +94,7 @@ public class MemberVO {
 	
 	public MemberVO(String email, String nickname, String gender, String contact, String age, String gametype,
 			String score_screen, String score_field, String address, String profilePic, String ratings_total,
-			String ragings_cnt) {
+			String ratings_cnt) {
 		super();
 		Email = email;
 		Nickname = nickname;
@@ -101,7 +107,7 @@ public class MemberVO {
 		Address = address;
 		this.profilePic = profilePic;
 		Ratings_total = ratings_total;
-		Ragings_cnt = ragings_cnt;
+		Ratings_cnt = ratings_cnt;
 	}
 	
 	// UpdateService
@@ -115,6 +121,13 @@ public class MemberVO {
 		this.score_screen = score_screen;
 		this.score_field = score_field;
 		this.profilePic = profilePic;
+	}
+	// Rating Service
+	public MemberVO(String email, int rating) {
+		super();
+		Email = email;
+		
+		Rating = rating;
 	}
 	
 	public MemberVO() {

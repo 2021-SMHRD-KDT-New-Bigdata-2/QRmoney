@@ -1,3 +1,4 @@
+<%@page import="com.model.MessageDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ include file= "head.html" %>
@@ -10,11 +11,13 @@
 			avg1=0;
 		}else{
 			int total= Integer.parseInt(member.getRatings_total());
-			int cnt = Integer.parseInt(member.getRagings_cnt());
+			int cnt = Integer.parseInt(member.getRatings_cnt());
 			double avg=total/cnt;
-			avg1=(double)Math.round(avg*10/10);
+			avg1=(double)Math.round(avg*100/10);
 		}
-		
+		//MessageDAO message = new MessageDAO();
+		//ArrayList<Me> message_list = new ArrayList<>();
+		//message_list = message.showMessage(member.getEmail());
 		
 	%>
 	<!-- My page-->

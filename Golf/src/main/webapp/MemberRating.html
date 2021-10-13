@@ -48,33 +48,33 @@
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content row">
-        <div class="modal-header bg-light">
-            <div class="col-md-1">
-                <img class="profile-pic100" src="../assets/profile_pic/sample.jpg">
-            </div>
-            <div class="col-md-9">
-                <h6 class="modal-title2"> 트럼프님의 경기 매너는 어땠나요?</h6>
-                <span class="small">성별 : 남성, 스코어 : 200, 경기시간 : 21-10-07 PM 4:00</span>
-            </div>
-        </div>
-        <div class="modal-body">
-            <form name="MemberRate" id="MemberRate" method="post" action="">
-			    <fieldset>
-			        <legend>게임 메너를 평가해주세요</legend>
-			        <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
-			        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
-			        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
-			        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
-			        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
-			    </fieldset>
-			</form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">나가기</button>
-          <button type="button" class="btn btn-primary">제출</button>
-        </div>
-      </div>
+    	<form name="MemberRate" id="MemberRate" method="post" action="RatingService">
+	      <div class="modal-content row">
+	        <div class="modal-header bg-light">
+	            <div class="col-md-1">
+	                <img class="profile-pic100" src="../assets/profile_pic/sample.jpg">
+	            </div>
+	            <div class="col-md-9">
+	                <h6 class="modal-title2"> 트럼프님의 경기 매너는 어땠나요?</h6>
+	                <span class="small">성별 : 남성, 스코어 : 200, 경기시간 : 21-10-07 PM 4:00</span>
+	            </div>        
+	       	</div>
+	        <div class="modal-body">
+	       			<fieldset>			    
+				        <legend>게임 메너를 평가해주세요</legend>
+				        <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+				        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+				        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+				        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+				        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+			    	</fieldset>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">나가기</button>
+	          <button type="submit" class="btn btn-primary" >제출하기</button>
+	      	</div>   
+	      </div>
+      	</form>
     </div>
   </div>
     
