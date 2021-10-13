@@ -1,3 +1,5 @@
+<%@page import="com.model.FollowDAO"%>
+<%@page import="com.model.FollowVO"%>
 <%@page import="com.model.MessageDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -18,6 +20,14 @@
 		//MessageDAO message = new MessageDAO();
 		//ArrayList<Me> message_list = new ArrayList<>();
 		//message_list = message.showMessage(member.getEmail());
+		FollowDAO dao = new FollowDAO();
+		ArrayList<FollowVO> followlist = new ArrayList<FollowVO>();
+		ArrayList<FollowVO> followinglist = new ArrayList<FollowVO>();
+		if(member!=null){
+			followlist= dao.ShowFollower(member.getMember_id());
+			followinglist =dao.ShowFolloweing(member.getMember_id());
+		}
+		
 		
 	%>
 	<!-- My page-->
@@ -31,9 +41,10 @@
 					        <img src="assets/profile_pic/<%= member.getProfilePic() %>" alt="profile one">
 					      </div>
 					      <div class="profile-details">
-					        <p>´Ð³×ÀÓ</p>
-					        <br>
-					        <span class="location-title"> <%= avg1/10 %> </span>        
+					        <p><%=member.getNickname() %></p>					        
+					        <span class="location-title"> ÆòÁ¡ :</span><span><%= avg1/10 %></span><br>
+							<span class="location-title"> ÆÈ·Î¿ö :</span><span><%= followlist.size() %></span><br>
+							<span class="location-title"> ÆÈ·ÎÀ× :</span><span><%= followinglist.size() %></span><br>					                
 					      </div>
 					    </div>
 					</div>
@@ -138,14 +149,53 @@
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingFive">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" >
                                     <img src="assets/icon/grade.png">
-                                        <h4>Manner</h4>
+                                        <h4>Follow</h4>
+                                        
                                 </button>
                             </h2>
                             <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionMypage">
-                                <div class="accordion-body">
-                                    insert Sample Trump's golf groups in here 
+                                <div class="accordion-body">                                    
+                                    <a href="FollowTEST.jsp">ÆÈ·Î¿ì¼­ºñ½º</a>
+                                    <h4>ÆÈ·Î¿ö ¸®½ºÆ®</h4>
+                                    <table class="table">
+									  <thead>
+									    <tr>
+									      <th scope="col">#</th>
+									      <th scope="col">NickName</th>
+									      <th scope="col">Gender</th>
+									    </tr>
+									  </thead>
+									  <tbody>
+									    <%for(int i =0;i<followlist.size();i++){%>
+									    <tr>
+									      <th scope="row"><%= i+1 %></th>
+									      <td><%= followlist.get(i).getNickname() %></td>
+									      <td><%= followlist.get(i).getGender() %></td>									      
+									    </tr>									    
+									    <%} %>
+									    </tbody>
+									</table>
+									<h4>ÆÈ·ÎÀ× ¸®½ºÆ®</h4>
+                                    <table class="table">
+									  <thead>
+									    <tr>
+									      <th scope="col">#</th>
+									      <th scope="col">NickName</th>
+									      <th scope="col">Gender</th>
+									    </tr>
+									  </thead>
+									  <tbody>
+									    <%for(int i =0;i<followinglist.size();i++){%>
+									    <tr>
+									      <th scope="row"><%= i+1 %></th>
+									      <td><%= followinglist.get(i).getNickname() %></td>
+									      <td><%= followinglist.get(i).getGender() %></td>									      
+									    </tr>									    
+									    <%} %>
+									  </tbody>
+									</table>
                                 </div>
                             </div>
                         </div>
