@@ -1,13 +1,19 @@
 package com.model;
 
 public class MessageVO {
+	
 	// 필드
+	private int message_id;
 	private int sender_id;
 	private int receive_id;
 	private String message;
 	private String message_date;
 	
 	// getter 메서드 
+	public int getMessge_id() {
+		return message_id;
+	}
+	
 	public int getSender_id() {
 		return sender_id;
 	}
@@ -34,7 +40,6 @@ public class MessageVO {
 		this.message = message;
 		this.message_date = message_date;
 	}
-
 
 	public MessageVO(int sender_id, int receiver_id, String message) {
 		this.sender_id = sender_id;
