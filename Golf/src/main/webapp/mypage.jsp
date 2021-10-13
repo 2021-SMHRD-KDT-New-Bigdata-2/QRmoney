@@ -28,7 +28,7 @@
                     <div class="profile-wrapper my-5 mx-auto">      
 						<div class="profile">
 					      <div class="profile-image">
-					        <img src="<%= member.getProfilePic() %>" alt="profile one">
+					        <img src="assets/profile_pic/<%= member.getProfilePic() %>" alt="profile one">
 					      </div>
 					      <div class="profile-details">
 					        <p>´Ð³×ÀÓ</p>
@@ -137,15 +137,15 @@
                             </div>
                         </div>
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <h2 class="accordion-header" id="headingFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                                     <img src="assets/icon/grade.png">
                                         <h4>Manner</h4>
                                 </button>
                             </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionMypage">
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionMypage">
                                 <div class="accordion-body">
-                                    insert Sample Trump's golf groups in here
+                                    insert Sample Trump's golf groups in here 
                                 </div>
                             </div>
                         </div>
