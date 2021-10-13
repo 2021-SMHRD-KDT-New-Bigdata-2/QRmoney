@@ -55,6 +55,7 @@ public class MemberDAO extends DAO{
 			
 			rs=psmt.executeQuery();
 			if(rs.next()) {
+				String get_memberid = rs.getString("member_id");
 				String get_email = rs.getString("email");
 				String get_nickname=rs.getString("nickname");
 				String get_profile_pic=rs.getString("profile_pic");
@@ -68,7 +69,7 @@ public class MemberDAO extends DAO{
 				String get_ratings_cnt=rs.getString("ratings_cnt");
 				String get_ratings_total=rs.getString("ratings_total");
 				
-				vo = new MemberVO(get_email, get_nickname, get_gender, get_contact, get_age, get_gametype, get_score_screen, get_score_field, get_address, get_profile_pic,get_ratings_total,get_ratings_cnt);
+				vo = new MemberVO(get_memberid, get_email, get_nickname, get_gender, get_contact, get_age, get_gametype, get_score_screen, get_score_field, get_address, get_profile_pic,get_ratings_total,get_ratings_cnt);
 				System.out.println("로긴성공");
 						
 			}else {

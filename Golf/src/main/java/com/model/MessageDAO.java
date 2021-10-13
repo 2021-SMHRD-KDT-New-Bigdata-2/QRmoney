@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 public class MessageDAO extends DAO {
 
+	int cnt = 0;
+	
 	// 메시지 전송
-	public int insertMessage(MessageVO vo) {
+	public int insertMessage(MessageVO vo1) {
 
-		int cnt = 0;
 		getConn();
 
 		try {
@@ -15,9 +16,9 @@ public class MessageDAO extends DAO {
 
 			psmt = conn.prepareStatement(sql);
 
-			psmt.setInt(1, vo.getSender_id());
-			psmt.setInt(2, vo.getReceive_id());
-			psmt.setString(3, vo.getMessage());
+			psmt.setInt(1, vo1.getSender_id());
+			psmt.setInt(2, vo1.getReceive_id());
+			psmt.setString(3, vo1.getMessage());
 
 			cnt = psmt.executeUpdate();
 
@@ -30,8 +31,8 @@ public class MessageDAO extends DAO {
 	}
 
 	// 나에게 온 메세지 확인하기
-	public void showMessage(String email) {
-		ArrayList<MessageVO> message_list = new ArrayList<MessageVO>();
+	public ArrayList<MessageVO> showMessage(int senderId) {
+		ArrayList<MessageVO> messageList = new ArrayList<MessageVO>();
 		getConn();
 
 		try {
@@ -39,7 +40,7 @@ public class MessageDAO extends DAO {
 
 			psmt = conn.prepareStatement(sql);
 
-			psmt.setString(1, email);
+			psmt.setInt(1, senderId);
 			rs = psmt.executeQuery();
 
 			// sender_id => nickname으로 수정하기 
@@ -50,12 +51,94 @@ public class MessageDAO extends DAO {
 				String message_date = rs.getString("message_date");
 
 				MessageVO vo = new MessageVO(sender_id, receiver_id, message, message_date);
-				message_list.add(vo);
+				messageList.add(vo);
 			}
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		} finally {
-
+			close();
 		}
+		
+		return messageList;
 	}
+	
+	// 메세지 전체 삭제하기
+	public int deleteAll(int senderId){
+		
+		getConn();
+		
+		try {
+			String sql = "delete from messages where receiver_id=?";
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, senderId);
+			
+			cnt = psmt.executeUpdate();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return cnt;
+	}
+	
+	// 메세지 선택 삭제하기 
+	public int deleteOne(String num) {
+		
+		getConn();
+		
+		try {
+			
+			String sql = "delete from messages where message_id=?";
+			
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, num);
+			
+			cnt = psmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return cnt;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
