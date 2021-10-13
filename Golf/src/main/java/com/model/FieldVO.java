@@ -63,4 +63,8 @@ public class FieldVO {
 		this.sitelink = sitelink;
 	}
 	
+	public FieldVO() {
+		super();
+	}
+	
 }

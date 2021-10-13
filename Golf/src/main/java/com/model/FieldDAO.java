@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class FieldDAO extends DAO {
 	ArrayList<FieldVO> fields = new ArrayList<FieldVO>();
+	FieldVO field = new FieldVO();
 
 	public ArrayList<FieldVO> getFieldList() {
 		getConn();
@@ -61,4 +62,5 @@ public class FieldDAO extends DAO {
 		
 		return location;
 	}
+	
 }
