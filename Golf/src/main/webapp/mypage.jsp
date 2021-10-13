@@ -142,7 +142,7 @@
                             </h2>
                             <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionMypage">
                                 <div class="accordion-body">
-                                    insert Sample Trump's golf groups in here
+                                    insert Sample Trump's golf groups in here 
                                 </div>
                             </div>
                         </div>
