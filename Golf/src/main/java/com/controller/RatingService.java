@@ -34,7 +34,7 @@ public class RatingService extends HttpServlet {
 			
 			
 		} else {
-			System.out.println("레이팅 시스템 실패");
+			System.out.println("레이팅 시스템 실패 ");
 		}
 	
 	}

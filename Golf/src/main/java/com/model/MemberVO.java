@@ -125,8 +125,7 @@ public class MemberVO {
 	// Rating Service
 	public MemberVO(String email, int rating) {
 		super();
-		Email = email;
-		
+		Email = email;		
 		Rating = rating;
 	}
 	

@@ -182,6 +182,7 @@ public class MemberDAO extends DAO{
 			psmt.setInt(1, Rating_total);			
 			psmt.setString(2, vo.getEmail());
 			
+			
 			result=psmt.executeUpdate();
 			
 		
