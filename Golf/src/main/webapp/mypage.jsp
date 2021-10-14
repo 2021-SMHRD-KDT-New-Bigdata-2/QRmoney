@@ -118,24 +118,29 @@
                             </h2>
                             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionMypage">
                                 <div class="accordion-body">
-                                	<table class="table">
+                                <a href="DeleteService" class="button next scrolly">전체삭제하기</a>
+                                    <table class="table">
 									  <thead>
 									    <tr>
 									      <th scope="col">#</th>
-									      <th scope="col">NickName</th>
-									      <th scope="col">Gender</th>
+									      <th scope="col">받은날짜</th>
+									      <th scope="col">보낸사람</th>
+									      <th scope="col">메시지내용</th>
 									    </tr>
 									  </thead>
 									  <tbody>
-									    <%for(int i =0;i<followlist.size();i++){%>
+									    <%for(int i =0;i<messagelist.size();i++){%>
 									    <tr>
 									      <th scope="row"><%= i+1 %></th>
-									      <td><%= followlist.get(i).getNickname() %></td>
-									      <td><%= followlist.get(i).getGender() %></td>									      
+									      <td><%= messagelist.get(i).getMessage_date() %></td>
+									      <td><%= messagelist.get(i).getSender_id() %></td>									      
+									      <td><%= messagelist.get(i).getMessage() %></td>
+									      <td><a href="MessageDeleteOne?num=<%= messagelist.get(i).getMessge_id() %>">삭제</a></td>
 									    </tr>									    
 									    <%} %>
 									    </tbody>
-									</table>                                    
+									</table>
+                                	                            
                                 </div>
                             </div>
                         </div>
@@ -177,28 +182,24 @@
                                 <div class="accordion-body">                                    
                                     <a href="FollowTEST.jsp">팔로우서비스</a>
                                     <h4>팔로워 리스트</h4>
-                                    <a href="DeleteService" class="button next scrolly">전체삭제하기</a>
                                     <table class="table">
 									  <thead>
 									    <tr>
 									      <th scope="col">#</th>
-									      <th scope="col">받은날짜</th>
-									      <th scope="col">보낸사람</th>
-									      <th scope="col">메시지내용</th>
+									      <th scope="col">NickName</th>
+									      <th scope="col">Gender</th>
 									    </tr>
 									  </thead>
 									  <tbody>
-									    <%for(int i =0;i<messagelist.size();i++){%>
+									    <%for(int i =0;i<followlist.size();i++){%>
 									    <tr>
 									      <th scope="row"><%= i+1 %></th>
-									      <td><%= messagelist.get(i).getMessage_date() %></td>
-									      <td><%= messagelist.get(i).getSender_id() %></td>									      
-									      <td><%= messagelist.get(i).getMessage() %></td>
-									      <td><a href="MessageDeleteOne?num=<%= messagelist.get(i).getMessge_id() %>">삭제</a></td>
+									      <td><%= followlist.get(i).getNickname() %></td>
+									      <td><%= followlist.get(i).getGender() %></td>									      
 									    </tr>									    
 									    <%} %>
 									    </tbody>
-									</table>
+									</table>        
 									<h4>팔로잉 리스트</h4>
                                     <table class="table">
 									  <thead>
