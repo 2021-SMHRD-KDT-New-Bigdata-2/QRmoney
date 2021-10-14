@@ -24,7 +24,15 @@
 		<div id="group-detail" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-xl modal-dialog-centered">
 		    <div class="modal-content">
-		    	<iframe id="group-iframe" src="" class="iframe-detail"></iframe>
+		    	<div class="modal-header">
+		        	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		        </div>
+		        <div class="modal-body iframe-detail">
+		        	<iframe id="group-iframe" src="" class="iframe-detail" style="border="0" frameborder="0" allowTransparency="true"></iframe>
+		        </div>
+		    	<div class="modal-footer">
+		        	<a id="join-game" href="#?game" class="btn btn-primary">참가하기</a>
+	       		</div>
 		    </div>
 		  </div>
 		</div>
@@ -41,7 +49,7 @@
          				<div class="profile-wrapper my-3 mx-auto">      
 						    <div class="profile">
 						      <div class="profile-image">
-						        <a href="#group-detail" data-bs-toggle="modal" onclick="changeSrc(<%= i %>)"><img src="<%= groupDAO.getGroupPic(gameList.get(i).getGame_id()) %>" alt="assets/profile_pic/default.jpg"></a>
+						        <a href="#group-detail" data-bs-toggle="modal" onclick="changeSrc(<%= i %>,<%= gameList.get(i).getGame_id() %>)"><img src="<%= groupDAO.getGroupPic(gameList.get(i).getGame_id()) %>" alt="assets/profile_pic/default.jpg"></a>
 						      </div>
 						      <div class="profile-details">
 						        <p><%= gameList.get(i).getLocation_name() %></p>
@@ -57,9 +65,11 @@
         </section>
        <%@ include file="footer.html" %>
        <script type="text/javascript">
-	       function changeSrc(id) {
+	       function changeSrc(id,gameid) {
 	    	   document.getElementById("group-iframe").src = "searchresultdetail.jsp?id="+id;
+	    	   document.getElementById("join-game").href = "JoinGroupService?id="+gameid;
 	    	}
+	   
        </script>
 </body>
 </html>

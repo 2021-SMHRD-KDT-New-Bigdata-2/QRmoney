@@ -73,7 +73,7 @@
         <div class="line">
         <%= gamevo.getLocation_address() %> 
         
-        <div id="map" style="width:900px;height:700px;"></div>
+        <div id="map" style="width:700px;height:500px;"></div>
         </div>
       </div>
       
@@ -100,7 +100,7 @@
       var ps = new kakao.maps.services.Places(); 
       
       // 키워드로 장소를 검색합니다
-      ps.keywordSearch('전주 샹그릴라', placesSearchCB); 
+      ps.keywordSearch(<%= "'"+gamevo.getLocation_name()+"'"%>, placesSearchCB); 
       
       // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
       searchAddrFromCoords(map.getCenter(), displayCenterInfo);
@@ -175,9 +175,7 @@
 
 
 <style type="text/css">
-body{margin-top:20px;
-background:#eee;
-}
+
 .single_advisor_profile {
     position: relative;
     margin-bottom: 50px;
