@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class GameDAO  extends DAO{
 	int result = 0;
-	ArrayList<GameVO> gameList = new ArrayList<GameVO>(); 
+	ArrayList<GameVO> gameList = new ArrayList<GameVO>();
+	
 	
 	public int makeGame(String game_name, String game_type, int location, String game_date, int game_fee, String game_length, int total_member) {
 		getConn();
@@ -85,5 +86,40 @@ public class GameDAO  extends DAO{
 		}
 		
 		return game_id;
+	}
+	
+	public GameVO GetGameinfo(int game_id){
+		GameVO vo = null;
+		getConn();
+		try {
+			String sql ="select * from games where game_id=?";
+			psmt=conn.prepareStatement(sql);
+			psmt.setInt(1, game_id);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				System.out.println("Àß½ÇÇàµÇ¾ù½¿");
+				String game_name = rs.getString("game_name");
+				String game_type = rs.getString("game_type");
+				int location = rs.getInt("location");
+				int game_fee = rs.getInt("game_fee");
+				String game_date=rs.getString("game_date");
+				String game_length=rs.getString("game_length");
+				int total_member=rs.getInt("total_member");
+				String location_name=rs.getString("location_name");
+				String location_address=rs.getString("location_address");
+				vo = new GameVO(game_name, game_type, location, game_fee, game_date, game_length, total_member, location_name, location_address); 
+						
+			}else {
+				System.out.println("½ÇÇà¾ÈµÊ");
+			}
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			close();
+		}
+		return vo;
 	}
 }
