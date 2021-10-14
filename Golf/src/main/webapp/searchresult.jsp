@@ -21,10 +21,10 @@
 	<% } else { %>
 		<%@ include file= "navbar_member.jsp" %>
 	<% } %>
-		<div class="modal fade" id="group-detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div id="group-detail" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-xl modal-dialog-centered">
 		    <div class="modal-content">
-		    	<jsp:include page="searchresult_detail.html"></jsp:include>
+		    	<iframe id="group-iframe" src=""></iframe>
 		    </div>
 		  </div>
 		</div>
@@ -41,7 +41,7 @@
          				<div class="profile-wrapper my-3 mx-auto">      
 						    <div class="profile">
 						      <div class="profile-image">
-						        <a href="#group-detail" data-bs-toggle="modal"><img src="<%= groupDAO.getGroupPic(game.getGame_id()) %>" alt="assets/profile_pic/default.jpg"></a>
+						        <a href="#group-detail" data-bs-toggle="modal" onclick="changeSrc(<%= game.getGame_id() %>)"><img src="<%= groupDAO.getGroupPic(game.getGame_id()) %>" alt="assets/profile_pic/default.jpg"></a>
 						      </div>
 						      <div class="profile-details">
 						        <p><%= game.getLocation_name() %></p>
@@ -56,5 +56,10 @@
             </div>
         </section>
        <%@ include file="footer.html" %>
+       <script type="text/javascript">
+	       function changeSrc(id) {
+	    	   document.getElementById("group-iframe").src = "test.jsp?id="+id;
+	    	}
+       </script>
 </body>
 </html>
