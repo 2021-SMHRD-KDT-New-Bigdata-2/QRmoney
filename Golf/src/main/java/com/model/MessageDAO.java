@@ -7,17 +7,33 @@ public class MessageDAO extends DAO {
 	int cnt = 0;
 	
 	// 메시지 전송
-	public int insertMessage(MessageVO vo1) {
+	public int insertMessage(String recieverNick, MessageVO vo1) {
 
 		getConn();
-
+		int receiver_id = 0;
+		
 		try {
-			String sql = "insert into messages values(messages_seq.nextval, ?, ?, ?, sysdate)";
+			String sql = "select * from members where nickname=?";
+			
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, recieverNick);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				receiver_id = rs.getInt("member_id");
+				System.out.println("찾기 성공");
+			}else {
+				System.out.println("찾기 실패");
+			}
+			
+			sql = "insert into messages values(messages_seq.nextval, ?, ?, ?, sysdate)";
 
 			psmt = conn.prepareStatement(sql);
 
-			psmt.setInt(1, vo1.getSender_id());
-			psmt.setInt(2, vo1.getReceive_id());
+			psmt.setInt(1, vo1.getSender_id()); 
+			psmt.setInt(2, receiver_id);
 			psmt.setString(3, vo1.getMessage());
 
 			cnt = psmt.executeUpdate();
@@ -30,29 +46,32 @@ public class MessageDAO extends DAO {
 		return cnt;
 	}
 
-	// 나에게 온 메세지 확인하기
+	// 내가 받은 메세지 확인하기
 	public ArrayList<MessageVO> showMessage(int senderId) {
+		
 		ArrayList<MessageVO> messageList = new ArrayList<MessageVO>();
+		
 		getConn();
 
 		try {
-			String sql = "select * from messages where receiver_id = ?";
+			
+			String sql = "select * from messages, members "
+					+ "where messages.sender_id = members.member_id and messages.receiver_id = ?";
 
 			psmt = conn.prepareStatement(sql);
 
 			psmt.setInt(1, senderId);
 			rs = psmt.executeQuery();
 
-			// sender_id => nickname으로 수정하기 
 			while (rs.next()) {
-				int sender_id = rs.getInt("sender_id");
-				int receiver_id = rs.getInt("receiver_id");
+				String sender_nick = rs.getString("nickname"); 
 				String message = rs.getString("message");
-				String message_date = rs.getString("message_date");
-
-				MessageVO vo = new MessageVO(sender_id, receiver_id, message, message_date);
+				String message_date = rs.getString("message_date");	
+				
+				MessageVO vo = new MessageVO(sender_nick, message, message_date);
 				messageList.add(vo);
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

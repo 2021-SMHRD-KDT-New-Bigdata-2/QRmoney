@@ -25,19 +25,19 @@ public class MessageService extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberVO vo = (MemberVO)session.getAttribute("member");
 		
-		int senderId = Integer.parseInt(vo.getMember_id());
-		int receiverId  = Integer.parseInt(request.getParameter("receiver_id"));
+		int senderId = Integer.parseInt(vo.getMember_id()); // 로그인 한 사람의 멤버 번호(시퀀스) 
+		String receiverNick  = request.getParameter("receiver_id"); // 보낸 사람 닉네임 
 		String message = request.getParameter("message");
 		
 		System.out.println(senderId);
-		System.out.println(receiverId);
+		System.out.println(receiverNick);
 		System.out.println(message);
 		
-		MessageVO vo1 = new MessageVO(senderId, receiverId, message);
+		// 메세지 전송 
+		MessageVO vo1 = new MessageVO(senderId, receiverNick, message);
 		MessageDAO dao = new MessageDAO();
 		
-		// 메세지 전송
-		int cnt = dao.insertMessage(vo1);
+		int cnt = dao.insertMessage(receiverNick, vo1);
 		
 		if(cnt>0) {
 			System.out.println("메시지 전송 성공");
@@ -46,7 +46,7 @@ public class MessageService extends HttpServlet {
 		}
 		
 		// 나에게 온 메세지 확인하기 
-		ArrayList<MessageVO> massageList = dao.showMessage(receiverId);
+		ArrayList<MessageVO> massageList = dao.showMessage(senderId);
 		
 		// 메세지 전체 삭제
 		cnt = dao.deleteAll(senderId);
