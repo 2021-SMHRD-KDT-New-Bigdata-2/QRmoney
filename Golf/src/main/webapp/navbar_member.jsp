@@ -40,7 +40,7 @@
 	                       <th scope="row">게임 타입</th>
 	                       <td>
 	                           <div>
-	                               <input class="form-check-input " type="radio" name="game_type" value="field">
+	                               <input class="form-check-input " type="radio" name="game_type" value="field" required>
 	                               Field
 	                               <input class="form-check-input" type="radio" name="game_type" value="screen">
 	                               Screen
@@ -122,7 +122,7 @@
                       <td colspan="2">
                         <div class="col-12" style="margin-left: auto;">
                           <div class="input-group">
-                            <input type="text" placeholder = "[필드] 게시글 제목을 입력해주세요" class="form-control" name="game-name">
+                            <input type="text" placeholder = "[필드] 게시글 제목을 입력해주세요" class="form-control" name="game-name" required>
                           </div>
                         </div>    
                       </td>
@@ -132,7 +132,7 @@
                       <td>
                         <div class="col-sm-10" style="margin-left: auto;">
                           <div class="input-group">
-                          	<input list="field-select" class="form-select" placeholder="장소를 선택해주세요" name="location">
+                          	<input list="field-select" class="form-select" placeholder="장소를 선택해주세요" name="location" required>
 	                            <datalist id="field-select">
 	                            	<% FieldDAO fieldDAO = new FieldDAO(); %>
 	                            	<% ArrayList<FieldVO> field_list = fieldDAO.getFieldList(); %>
@@ -150,7 +150,7 @@
                     <th scope="row">날짜</th>
                     <td>
                       <div class="col-sm-10" style="margin-left: auto;">
-                        <input type="datetime-local" class="form-control" name="game-date">
+                        <input type="datetime-local" class="form-control" name="game-date" required>
                       </div>
                     </td>
                   </tr>
@@ -158,7 +158,7 @@
                     <th scope="row">지참금</th>
                     <td>
                       <div class="col-sm-10" style="margin-left: auto;">
-                        <input type="number" class="form-control" name="game-fee">
+                        <input type="number" class="form-control" name="game-fee" required>
                       </div>
                     </td>
                   </tr>
@@ -178,7 +178,7 @@
                     <th scope="row">총인원</th>
                     <td>
                       <div class="col-sm-10" style="margin-left: auto;">
-                        <input type="number" class="form-control" min="2" max="4" name="total-member">
+                        <input type="number" class="form-control" min="2" max="4" name="total-member" required>
                       </div>
                     </td>
                   </tr>
@@ -236,7 +236,7 @@
 	                    <td colspan="2">
 	                      <div class="col-12" style="margin-left: auto;">
 	                        <div class="input-group">
-	                          <input type="text" placeholder = "[스크린] 게시글 제목을 입력해주세요" class="form-control" name="game-name">
+	                          <input type="text" placeholder = "[스크린] 게시글 제목을 입력해주세요" class="form-control" name="game-name" required>
 	                        </div>
 	                      </div>    
 	                    </td>
@@ -246,7 +246,7 @@
 	                      <td>
 	                        <div class="col-sm-10" style="margin-left: auto;">
 	                          <div class="input-group">
-	                          	<input list="screen-select" class="form-select" placeholder="장소를 선택해주세요" name="location">
+	                          	<input list="screen-select" class="form-select" placeholder="장소를 선택해주세요" name="location" required>
 		                            <datalist id="screen-select">
 		                            	<% ScreenDAO screenDAO = new ScreenDAO(); %>
 		                            	<% ArrayList<ScreenVO> screen_list = screenDAO.getScreenList(); %>
@@ -264,7 +264,7 @@
 	                    <th scope="row">날짜</th>
 	                    <td>
 	                      <div class="col-sm-10" style="margin-left: auto;">
-	                        <input type="datetime-local" class="form-control" name="game-date">
+	                        <input type="datetime-local" class="form-control" name="game-date" required>
 	                      </div>
 	                    </td>
 	                  </tr>
@@ -283,7 +283,7 @@
 	                    <th scope="row">총인원</th>
 	                    <td>
 	                      <div class="col-sm-10" style="margin-left: auto;">
-	                        <input type="number" class="form-control" min="2" max="4" name="total-member">
+	                        <input type="number" class="form-control" min="2" max="4" name="total-member" required>
 	                      </div>
 	                    </td>
 	                  </tr>
