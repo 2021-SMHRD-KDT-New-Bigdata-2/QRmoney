@@ -11835,3 +11835,7 @@ body {
   color: #333;
   font-weight: 300;
 }
+
+.iframe-detail {
+  height: 800px
+}

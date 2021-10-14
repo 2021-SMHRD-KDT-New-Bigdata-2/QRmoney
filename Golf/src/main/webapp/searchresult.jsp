@@ -24,7 +24,7 @@
 		<div id="group-detail" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-xl modal-dialog-centered">
 		    <div class="modal-content">
-		    	<iframe id="group-iframe" src=""></iframe>
+		    	<iframe id="group-iframe" src="" class="iframe-detail"></iframe>
 		    </div>
 		  </div>
 		</div>
@@ -37,17 +37,17 @@
             		</div>
             	</div>
            		<div class="row">
-           			<% for(GameVO game : gameList) { %>
+           			<% for(int i = 0; i<gameList.size(); i++) { %>
          				<div class="profile-wrapper my-3 mx-auto">      
 						    <div class="profile">
 						      <div class="profile-image">
-						        <a href="#group-detail" data-bs-toggle="modal" onclick="changeSrc(<%= game.getGame_id() %>)"><img src="<%= groupDAO.getGroupPic(game.getGame_id()) %>" alt="assets/profile_pic/default.jpg"></a>
+						        <a href="#group-detail" data-bs-toggle="modal" onclick="changeSrc(<%= i %>)"><img src="<%= groupDAO.getGroupPic(gameList.get(i).getGame_id()) %>" alt="assets/profile_pic/default.jpg"></a>
 						      </div>
 						      <div class="profile-details">
-						        <p><%= game.getLocation_name() %></p>
-						        <p><%= groupDAO.getGroupMemberCnt(game.getGame_id()) %>/<%= game.getTotal_member() %></p>
+						        <p><%= gameList.get(i).getLocation_name() %></p>
+						        <p><%= groupDAO.getGroupMemberCnt(gameList.get(i).getGame_id()) %>/<%= gameList.get(i).getTotal_member() %></p>
 						        <br>
-						        <span class="location-title"> <%= game.getLocation_address() %> </span>        
+						        <span class="location-title"> <%= gameList.get(i).getLocation_address() %> </span>        
 						      </div>
 						    </div>
 						</div>
@@ -58,7 +58,7 @@
        <%@ include file="footer.html" %>
        <script type="text/javascript">
 	       function changeSrc(id) {
-	    	   document.getElementById("group-iframe").src = "test.jsp?id="+id; // test.jsp 주소 수정 
+	    	   document.getElementById("group-iframe").src = "searchresultdetail.jsp?id="+id;
 	    	}
        </script>
 </body>

@@ -1,5 +1,7 @@
 package com.model;
 
+import java.util.ArrayList;
+
 public class GroupDAO extends DAO{
 	int result = 0;
 	
@@ -47,7 +49,7 @@ public class GroupDAO extends DAO{
 		
 		getConn();
 		try {
-			String sql = "select * from groups,members where groups.member_id = members.member_id and game_id = ?";
+			String sql = "select * from groups,members where groups.member_id = members.member_id and game_id = ? order by group_id";
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, game_id);
 			rs =psmt.executeQuery();
@@ -62,5 +64,42 @@ public class GroupDAO extends DAO{
 		}
 		
 		return pic;
+	}
+	
+	public ArrayList<MemberVO> getGroupMemberVO(int game_id) {
+		ArrayList<MemberVO> members = new ArrayList<MemberVO>();
+		getConn();
+		try {
+			String sql = "select * from groups,members where groups.member_id = members.member_id and game_id = ? order by group_id";
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, game_id);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				String memberid = rs.getString("member_id");
+				String email = rs.getString("email");
+				String nickname=rs.getString("nickname");
+				String profile_pic=rs.getString("profile_pic");
+				String gender=rs.getString("gender");
+				String age=rs.getString("age");
+				String contact=rs.getString("contact");
+				String address=rs.getString("address");
+				String gametype=rs.getString("game_type");
+				String score_field=rs.getString("SCORE_FIELD");
+				String score_screen=rs.getString("SCORE_SCREEN");
+				String ratings_cnt=rs.getString("ratings_cnt");
+				String ratings_total=rs.getString("ratings_total");
+				
+				MemberVO vo = new MemberVO(memberid, email, nickname, gender, contact, age, gametype, score_screen, score_field, address, profile_pic, ratings_total, ratings_cnt);
+				members.add(vo);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		
+		return members;
 	}
 }

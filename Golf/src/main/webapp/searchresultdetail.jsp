@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.model.GameDAO"%>
 <%@page import="com.model.GroupDAO"%>
 <%@page import="com.model.GameVO"%>
@@ -21,9 +22,16 @@
 
 <body>
 	<% 
-	int game_id = Integer.parseInt(request.getParameter("id")); 
+	int id = Integer.parseInt(request.getParameter("id")); 
+	ArrayList<GameVO> gameList = (ArrayList<GameVO>)session.getAttribute("searchResult");
+	
+	
 	GameDAO gamedao = new GameDAO();
-    GameVO gamevo = gamedao.GetGameinfo(game_id);
+	GroupDAO groupdao = new GroupDAO();
+    GameVO gamevo = new GameVO();
+    gamevo = gameList.get(id);
+    ArrayList<MemberVO> members = new ArrayList<MemberVO>();
+    members = groupdao.getGroupMemberVO(gamevo.getGame_id());
     
 	%>
     
@@ -33,72 +41,29 @@
             <!-- Section Heading-->
             <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
               <h3> <%= gamevo.getGame_name() %> <span> <%= gamevo.getGame_type() %> </span></h3>
-              <p> <%= gamevo.getGame_date() %> <%= gamevo.getLocation_name() %> &amp; 3/<%= gamevo.getTotal_member() %> 명 </p>
+              <p> <%= gamevo.getGame_date() %> <%= gamevo.getLocation_name() %> &amp; <%= groupdao.getGroupMemberCnt(gamevo.getGame_id()) %>/<%= gamevo.getTotal_member() %> 명 </p>
               <div class="line"></div>
             </div>
           </div>
         </div>
         <div class="row">
-          <!-- Single Advisor-->
+          <!-- 그룹 멤버 정보 -->
+          <% for(MemberVO vo : members) {%>
           <div class="col-12 col-sm-6 col-lg-3">
             <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
               <!-- Team Thumb-->
-              <div class="advisor_thumb"><img class="img-auto" src="https://img.hankyung.com/photo/202007/1593750238196725.jpg" alt="">
+              <div class="advisor_thumb"><img class="img-auto" src="assets/profile_pic/<%= vo.getProfilePic() %>" alt="assets/profile_pic/default.jpg">
                 <!-- Social Info-->
                 <div class="social-info"><a href="#"><i class="fa fa-instagram"></i></a></div>
               </div>
               <!-- Team Details-->
               <div class="single_advisor_details_info">
-                <h6> 안소현 </h6>
-                <p class="designation"> 광주 &amp; 27 </p>
+                <h6> <%= vo.getNickname() %> </h6>
+                <p class="designation"> <%= vo.getAddress() %> &amp; <%= vo.getAge() %> </p>
               </div>
             </div>
           </div>
-          <!-- Single Advisor-->
-          <div class="col-12 col-sm-6 col-lg-3">
-            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
-              <!-- Team Thumb-->
-              <div class="advisor_thumb"><img class="img-auto" src="https://img.hankyung.com/photo/202005/03.22609759.1.jpg" alt="">
-                <!-- Social Info-->
-                <div class="social-info"><a href="#"><i class="fa fa-instagram"></i></a></div>
-              </div>
-              <!-- Team Details-->
-              <div class="single_advisor_details_info">
-                <h6> 이혜정 </h6>
-                <p class="designation"> 전남 여수 &amp; 29 </p>
-              </div>
-            </div>
-          </div>
-          <!-- Single Advisor-->
-          <div class="col-12 col-sm-6 col-lg-3">
-            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-              <!-- Team Thumb-->
-              <div class="advisor_thumb"><img class="img-auto" src="https://cdn.topstarnews.net/news/photo/201910/682590_391408_2734.jpg" alt="">
-                <!-- Social Info-->
-                <div class="social-info"><a href="#"><i class="fa fa-instagram"></i></a></div>
-              </div>
-              <!-- Team Details-->
-              <div class="single_advisor_details_info">
-                <h6> 신나송 </h6>
-                <p class="designation"> 서울 &amp; 32 </p>
-              </div>
-            </div>
-          </div>
-          <!-- Single Advisor-->
-          <div class="col-12 col-sm-6 col-lg-3">
-            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
-              <!-- Team Thumb-->
-              <div class="advisor_thumb"><img class="img-auto" src="https://external-preview.redd.it/4HFjIVKcPb4zfsEGpkoOnpIvMY4erBqi0W0gv3V1LG8.png?auto=webp&s=3df38d127ac8009892ba0aabd6c970288ba65b4c" alt="">
-                <!-- Social Info-->
-                <div class="social-info"><a href="#"><i class="fa fa-instagram"></i></a></div>
-              </div>
-              <!-- Team Details-->
-              <div class="single_advisor_details_info">
-                <h6> we want you </h6>
-                <p class="designation">  &amp;  </p>
-              </div>
-            </div>
-          </div>
+          <% } %>
         </div>
       </div>
 
@@ -106,7 +71,7 @@
 
       <div class="row justify-content-center">
         <div class="line">
-        충장로 CC (광주 동구 예술길 31-15) 
+        <%= gamevo.getLocation_address() %> 
         
         <div id="map" style="width:900px;height:700px;"></div>
         </div>
@@ -357,6 +322,5 @@ background:#eee;
 
 
 
-    <%@ include file="footer.html" %>
 </body>
 </html>
