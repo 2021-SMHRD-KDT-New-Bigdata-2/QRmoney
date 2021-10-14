@@ -21,6 +21,13 @@
 	<% } else { %>
 		<%@ include file= "navbar_member.jsp" %>
 	<% } %>
+		<div class="modal fade" id="group-detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-xl modal-dialog-centered">
+		    <div class="modal-content">
+		    	<jsp:include page="searchresult_detail.html"></jsp:include>
+		    </div>
+		  </div>
+		</div>
 	    <section class="bg-section">
             <div class="container-sm mx-auto search-result">
             	<div class="row">
@@ -34,7 +41,7 @@
          				<div class="profile-wrapper my-3 mx-auto">      
 						    <div class="profile">
 						      <div class="profile-image">
-						        <img src="<%= groupDAO.getGroupPic(game.getGame_id()) %>" alt="assets/profile_pic/default.jpg">
+						        <a href="#group-detail" data-bs-toggle="modal"><img src="<%= groupDAO.getGroupPic(game.getGame_id()) %>" alt="assets/profile_pic/default.jpg"></a>
 						      </div>
 						      <div class="profile-details">
 						        <p><%= game.getLocation_name() %></p>
