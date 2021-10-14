@@ -8,7 +8,6 @@
 <%@ include file= "navbar_member.jsp" %>
 <body>  
 	<%
-		System.out.println("마이페이지 ");
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		double avg1=0;
 		if(member.getRatings_total().equals("0")){
@@ -23,11 +22,8 @@
 		// message 기능 
 		MessageDAO message = new MessageDAO(); 
 		ArrayList<MessageVO> messageList = new ArrayList<MessageVO>();
-		if(member != null){
-			messageList = message.showMessage((Integer.parseInt(member.getMember_id())));
-		}else{
-			System.out.println("member = null");
-		}
+		messageList = message.showMessage((Integer.parseInt(member.getMember_id())));
+		
 		
 		// follow 기능
 		FollowDAO dao = new FollowDAO();

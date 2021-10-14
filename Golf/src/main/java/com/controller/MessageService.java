@@ -25,8 +25,8 @@ public class MessageService extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberVO vo = (MemberVO)session.getAttribute("member");
 		
-		int senderId = Integer.parseInt(vo.getMember_id()); // 로그인 한 사람의 멤버 번호(시퀀스) 
-		String receiverNick  = request.getParameter("receiver_id"); // 보낸 사람 닉네임 
+		int senderId = Integer.parseInt(vo.getMember_id()); 
+		String receiverNick  = request.getParameter("receiver_id"); 
 		String message = request.getParameter("message");
 		
 		System.out.println(senderId);
