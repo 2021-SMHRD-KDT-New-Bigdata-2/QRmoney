@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+</head>
+<body>
+    <button onclick="sibalsibal()">빠른대전 제발좀 되라 시발시발</button><br/>
+    
+    <script>
+    function moveloctaion(latitude,longitude){
+        location.href = "FastGameService?Latiude="+latitude+"&longitude="+longitude;
+    }
+    
+    function sibalsibal(){	
+    	if('geolocation' in navigator) {
+    		navigator.geolocation.getCurrentPosition((position) => {
+                moveloctaion(position.coords.latitude, position.coords.longitude)
+    			});
+    	} else {
+    		function error() {
+                status.textContent = '현재위치를 찾을수 없습니다.';
+                }
+
+                if(!navigator.geolocation) {
+                status.textContent = '당신의 브라우져에서는 위치검색기능이 안됩니다. 브라우져를 바꾸세요시발년아.';
+                } else {
+                status.textContent = '찾고잇음.…';
+                navigator.geolocation.getCurrentPosition(success, error);
+            }
+    	}	
+    }
+		
+    </script>
+</body>
+</html>
