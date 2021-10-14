@@ -14,9 +14,10 @@ import com.model.MessageDAO;
 public class MessageDeleteOne extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String num = request.getParameter("num");
+		int num = Integer.parseInt(request.getParameter("num"));
 		MessageDAO dao = new MessageDAO();
 		
+		System.out.println(num);
 		int result = dao.deleteOne(num);
 		if(result>0) {
 			System.out.println("삭제성공");

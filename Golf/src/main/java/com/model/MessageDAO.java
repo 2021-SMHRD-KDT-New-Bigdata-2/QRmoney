@@ -64,11 +64,12 @@ public class MessageDAO extends DAO {
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
+				int message_id = rs.getInt("message_id");
 				String sender_nick = rs.getString("nickname"); 
 				String message = rs.getString("message");
 				String message_date = rs.getString("message_date");	
 				
-				MessageVO vo = new MessageVO(sender_nick, message, message_date);
+				MessageVO vo = new MessageVO(message_id, message, message_date, sender_nick);
 				messageList.add(vo);
 			}
 			
@@ -104,7 +105,7 @@ public class MessageDAO extends DAO {
 	}
 	
 	// 메세지 선택 삭제하기 
-	public int deleteOne(String num) {
+	public int deleteOne(int num) {
 		
 		getConn();
 		
@@ -114,7 +115,7 @@ public class MessageDAO extends DAO {
 			
 			psmt = conn.prepareStatement(sql);
 			
-			psmt.setString(1, num);
+			psmt.setInt(1, num);
 			
 			cnt = psmt.executeUpdate();
 			

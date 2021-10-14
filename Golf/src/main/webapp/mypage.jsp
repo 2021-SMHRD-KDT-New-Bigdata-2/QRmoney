@@ -140,7 +140,7 @@
 									      <td><%= messageList.get(i).getSender_nick() %></td>									      
 									      <td><%= messageList.get(i).getMessage() %></td>
 									      <td><%= messageList.get(i).getMessage_date() %></td>
-									      <td><a href="MessageDeleteOne?num=<%= messageList.get(i).getMessge_id() %>">삭제</a></td>
+									      <td><a href="MessageDeleteOne?num=<%= messageList.get(i).getMessage_id() %>">삭제</a></td>
 									    </tr>									    
 									    <%} %>
 									    </tbody>

@@ -51,8 +51,6 @@ public class MessageService extends HttpServlet {
 		// 메세지 전체 삭제
 		cnt = dao.deleteAll(senderId);
 		
-		// 메세지 선택 삭제 - 페이지에서 num값을 받아와야 합니다
-//		cnt = dao.deleteOne(num);
 	}
 
 }
