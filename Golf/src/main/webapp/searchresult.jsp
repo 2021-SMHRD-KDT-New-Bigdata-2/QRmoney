@@ -58,7 +58,7 @@
        <%@ include file="footer.html" %>
        <script type="text/javascript">
 	       function changeSrc(id) {
-	    	   document.getElementById("group-iframe").src = "test.jsp?id="+id;
+	    	   document.getElementById("group-iframe").src = "test.jsp?id="+id; // test.jsp 주소 수정 
 	    	}
        </script>
 </body>
