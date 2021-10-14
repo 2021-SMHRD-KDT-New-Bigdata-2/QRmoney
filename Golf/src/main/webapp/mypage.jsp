@@ -8,6 +8,7 @@
 <%@ include file= "navbar_member.jsp" %>
 <body>  
 	<%
+		System.out.println("마이페이지 ");
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		double avg1=0;
 		if(member.getRatings_total().equals("0")){
@@ -18,9 +19,17 @@
 			double avg=total/cnt;
 			avg1=(double)Math.round(avg*100/10);
 		}
-		MessageDAO message = new MessageDAO();
-		ArrayList<MessageVO> messagelist = new ArrayList<MessageVO>();
-		messagelist = message.showMessage(Integer.parseInt(member.getMember_id()));
+		
+		// message 기능 
+		MessageDAO message = new MessageDAO(); 
+		ArrayList<MessageVO> messageList = new ArrayList<MessageVO>();
+		if(member != null){
+			messageList = message.showMessage((Integer.parseInt(member.getMember_id())));
+		}else{
+			System.out.println("member = null");
+		}
+		
+		// follow 기능
 		FollowDAO dao = new FollowDAO();
 		ArrayList<FollowVO> followlist = new ArrayList<FollowVO>();
 		ArrayList<FollowVO> followinglist = new ArrayList<FollowVO>();
@@ -123,19 +132,19 @@
 									  <thead>
 									    <tr>
 									      <th scope="col">#</th>
-									      <th scope="col">받은날짜</th>
 									      <th scope="col">보낸사람</th>
-									      <th scope="col">메시지내용</th>
+									      <th scope="col">메세지</th>
+									      <th scope="col">받은날짜</th>
 									    </tr>
 									  </thead>
 									  <tbody>
-									    <%for(int i =0;i<messagelist.size();i++){%>
+									    <% for(int i=0; i<messageList.size(); i++){%>
 									    <tr>
 									      <th scope="row"><%= i+1 %></th>
-									      <td><%= messagelist.get(i).getMessage_date() %></td>
-									      <td><%= messagelist.get(i).getSender_id() %></td>									      
-									      <td><%= messagelist.get(i).getMessage() %></td>
-									      <td><a href="MessageDeleteOne?num=<%= messagelist.get(i).getMessge_id() %>">삭제</a></td>
+									      <td><%= messageList.get(i).getSender_nick() %></td>									      
+									      <td><%= messageList.get(i).getMessage() %></td>
+									      <td><%= messageList.get(i).getMessage_date() %></td>
+									      <td><a href="MessageDeleteOne?num=<%= messageList.get(i).getMessge_id() %>">삭제</a></td>
 									    </tr>									    
 									    <%} %>
 									    </tbody>
