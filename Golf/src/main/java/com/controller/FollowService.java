@@ -27,7 +27,7 @@ public class FollowService extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberVO vo = (MemberVO)session.getAttribute("member");
 		
-		
+		// 버튼을 누르면 상대방 아이디를 가져와서 
 		String FollowStart = request.getParameter("Startfollow");
 		String FollowCancel = request.getParameter("cancelfollow");
 		
