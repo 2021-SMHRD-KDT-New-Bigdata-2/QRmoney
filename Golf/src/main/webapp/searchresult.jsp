@@ -54,7 +54,7 @@
            					boolean mygame = false;
            					for(MemberVO vo : memberList) {
            						if(vo.getMember_id().equals(member.getMember_id())) {
-           							mygame = true;
+           							mygame = true; 
            						}
            					}
            				%>
