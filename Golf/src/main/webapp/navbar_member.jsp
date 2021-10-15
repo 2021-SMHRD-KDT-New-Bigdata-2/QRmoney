@@ -37,13 +37,24 @@
 	               <table class="table">
 	                   <tbody>
 	                     <tr>
+	                       <th scope="row">검색 타입</th>
+	                       <td>
+	                           <div>
+	                               <input class="form-check-input " type="radio" name="search_type" value="fast" required>
+	                               빠른 매칭
+	                               <input class="form-check-input" type="radio" name="search_type" value="search" checked>
+	                               직접 선택
+	                           </div>
+	                       </td>
+	                     </tr>
+	                     <tr>
 	                       <th scope="row">게임 타입</th>
 	                       <td>
 	                           <div>
 	                               <input class="form-check-input " type="radio" name="game_type" value="field" required>
-	                               Field
+	                               필드
 	                               <input class="form-check-input" type="radio" name="game_type" value="screen">
-	                               Screen
+	                               스크린 골프
 	                           </div>
 	                       </td>
 	                     </tr>
@@ -92,16 +103,6 @@
 	            <div class="col-10">
 	              <h6 class="modal-title">  <b><%= vo.getNickname() %></b>님!<br>함께 할 메이트를 구해보세요</h6>
 	              <span class="small">
-	              	성별 : 
-	              	<%
-	              		if(vo.getGender() == null) {
-							out.print("설정 안됨");
-	             		} else if(vo.getGender().equals("male")) {
-	             			out.print("남성");
-	             		} else {
-	             			out.print("여성");
-	             		}
-	              	%>,
 	              	스코어 : 
 	              	<%
 		              	if(vo.getscore_field() == null) {
@@ -207,16 +208,6 @@
 	            <div class="col-10">
 	              <h6 class="modal-title">  <b><%= vo.getNickname() %></b>님!<br>함께 할 메이트를 구해보세요</h6>
 	              <span class="small">
-	              	성별 : 
-	              	<%
-	              		if(vo.getGender() == null) {
-							out.print("설정 안됨");
-	             		} else if(vo.getGender().equals("male")) {
-	             			out.print("남성");
-	             		} else {
-	             			out.print("여성");
-	             		}
-	              	%>,
 	              	스코어 : 
 	              	<%
 		              	if(vo.getscore_field() == null) {

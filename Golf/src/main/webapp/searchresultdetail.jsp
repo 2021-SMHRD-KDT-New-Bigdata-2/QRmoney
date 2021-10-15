@@ -40,21 +40,46 @@
           <div class="col-12 col-sm-8 col-lg-6">
             <!-- Section Heading-->
             <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-              <h3> <%= gamevo.getGame_name() %> <span> <%= gamevo.getGame_type() %> </span></h3>
-              <p> <%= gamevo.getGame_date() %> <%= gamevo.getLocation_name() %> &amp; <%= groupdao.getGroupMemberCnt(gamevo.getGame_id()) %>/<%= gamevo.getTotal_member() %> 명 </p>
-              <div class="line"></div>
+              <h3> <%= gamevo.getGame_name() %> </h3>
+              <span class="small">
+              	<%
+	            if(gamevo.getGame_type().equals("field")) {
+              		out.print("필드");	
+              	} else {
+              		out.print("스크린 골프");
+              	}
+    			%>
+              </span>
             </div>
           </div>
         </div>
+        <table class="table my-3">
+          <caption>참가자 정보</caption>
+		  <thead>
+		    <tr>
+		      <th>장소</th>
+		      <th>주소</th>
+		      <th>날짜</th>
+		      <th>인원</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td nowrap><%= gamevo.getLocation_name() %></td>
+		      <td nowrap><%= gamevo.getLocation_address() %></td>
+		      <td nowrap><%= gamevo.getGame_date() %></td>
+		      <td nowrap><%= groupdao.getGroupMemberCnt(gamevo.getGame_id()) %>/<%= gamevo.getTotal_member() %>명</td>
+		    </tr>
+		  </tbody>
+		</table>
         <div class="row">
           <!-- 그룹 멤버 정보 -->
           <% for(MemberVO vo : members) {%>
           <div class="col-12 col-sm-6 col-lg-3">
             <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
               <!-- Team Thumb-->
-              <div class="advisor_thumb"><img class="img-auto" src="assets/profile_pic/<%= vo.getProfilePic() %>" alt="assets/profile_pic/default.jpg">
-                <!-- Social Info-->
-                <div class="social-info"><a href="#"><i class="fa fa-instagram"></i></a></div>
+              <div class="advisor_thumb">
+              	<img class="img-auto" src="assets/profile_pic/<%= vo.getProfilePic() %>" alt="assets/profile_pic/default.jpg">
               </div>
               <!-- Team Details-->
               <div class="single_advisor_details_info">
@@ -67,14 +92,13 @@
         </div>
       </div>
 
-
-
-      <div class="row justify-content-center">
-        <div class="line">
-        <%= gamevo.getLocation_address() %> 
-        
+	  <hr>
+	  <div class="text-center">
+	    <h4>장소 정보</h4>
+	  	<span class="small"><%= gamevo.getLocation_address() %></span>
+	  </div>
+      <div class="row justify-content-center">        
         <div id="map" style="width:700px;height:500px;"></div>
-        </div>
       </div>
       
       
