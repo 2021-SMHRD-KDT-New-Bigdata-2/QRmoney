@@ -113,7 +113,7 @@ public class GroupDAO extends DAO{
 			rs=psmt.executeQuery();
 			if(rs.next()) {
 				System.out.println("에버리지구하기성공");
-				GameAvg = rs.getInt("avg(score_screen");
+				GameAvg = rs.getInt("avg(score_screen)");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
