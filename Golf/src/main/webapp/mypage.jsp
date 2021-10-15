@@ -123,14 +123,14 @@
                             </h2>
                             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionMypage">
                                 <div class="accordion-body">
-                                <a href="DeleteService" class="button next scrolly">전체삭제하기</a>
                                     <table class="table">
 									  <thead>
 									    <tr>
-									      <th scope="col">#</th>
+									      <th scope="col"> </th>
 									      <th scope="col">보낸사람</th>
 									      <th scope="col">메세지</th>
 									      <th scope="col">받은날짜</th>
+									      <th scope="col">삭제</th>
 									    </tr>
 									  </thead>
 									  <tbody>
@@ -140,12 +140,11 @@
 									      <td><%= messageList.get(i).getSender_nick() %></td>									      
 									      <td><%= messageList.get(i).getMessage() %></td>
 									      <td><%= messageList.get(i).getMessage_date() %></td>
-									      <td><a href="MessageDeleteOne?num=<%= messageList.get(i).getMessage_id() %>">삭제</a></td>
-									    </tr>									    
+									      <td><a href="MessageDeleteOne?num=<%= messageList.get(i).getMessage_id() %>"><img src="assets/icon/trash.png"></a></td>
+									    </tr>	
 									    <%} %>
 									    </tbody>
 									</table>
-                                	                            
                                 </div>
                             </div>
                         </div>
