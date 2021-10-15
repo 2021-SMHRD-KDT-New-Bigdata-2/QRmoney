@@ -4,13 +4,25 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
-	<script src="js/cropper.js"></script>
-	<link rel="stylesheet" href="css/cropper.css">   
-    <script src="js/jquery-cropper.js"></script>
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+    <link href="css/styles.css" rel="stylesheet"/>
+
+    
     
 <body>
-    <form action="">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form action="SignUpService">
         <div class="photo_box">
             <div class="upload_btn">
                 <div class="upload">
@@ -20,28 +32,20 @@
             <div class="reupload_btn">
                 <a href="javascript:void(0);" id="resetPhoto">다시 할래?</a>
             </div>
-                    
-            
             <div class="photo_them">
                 <div class="them_img">
                     <img id="image" src="">
                 </div>
             </div>
-            <a href="javascript:void(0);" id="complete">업로드</a>
+            <a href="javascript:void(0);" id="complete" data-bs-dismiss="modal">업로드</a>
         </div>
     </form>
-<style>
-    .photo_box{margin:0 auto; max-width: 500px;}
-    .upload_btn{overflow:hidden;width: 100%;}    
-    .upload_btn #photoBtn{display: none;}
-    .upload_btn .upload{float: center;text-align: center;text-decoration: none;color: #fff;padding: 15px 0;background-color: steelblue;}
-    .reupload_btn a{display:block; margin-top: 10px;margin-bottom: 10; background: #ccc;text-align: center;text-decoration: none;color: #fff;padding: 15px 0; width: 100%;}
-    .photo_them{position: relative;margin-top: 20px;width: 100%;height: 600px;background: #eee;}
-    .them_img, .result_box{position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
-    .result_box{background: #fff;}
-    .them_img img, .result_box img{display: block;margin: 0 auto;height: 100%;}
-    #complete{display: block;margin-top: 20px;padding: 15px 0;width: 100%;text-align: center;color: #fff;text-decoration: none;background-color: steelblue;}    
-</style>
+      </div>
+     </div>
+  </div>
+</div>
+    
+
 
     
 <script>
@@ -103,7 +107,7 @@
             canvas.toBlob(function (blob) {
                 var formData = new FormData();
 
-                $.ajax('업로드 유알엘', {
+                $.ajax('url주소', {
                     method: 'POST',
                     data: formData,
                     processData: false,
@@ -127,4 +131,16 @@
 </script>
 
 </body>
+<style>
+    .photo_box{margin:0 auto; max-width: 500px;}
+    .upload_btn{overflow:hidden;width: 100%;}    
+    .upload_btn #photoBtn{display: none;}
+    .upload_btn .upload{float: center;text-align: center;text-decoration: none;color: #fff;padding: 15px 0;background-color: steelblue;}
+    .reupload_btn a{display:block; margin-top: 10px;margin-bottom: 10; background: #ccc;text-align: center;text-decoration: none;color: #fff;padding: 15px 0; width: 100%;}
+    .photo_them{position: relative;margin-top: 20px;width: 100%;height: 600px;background: #eee;}
+    .them_img, .result_box{position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
+    .result_box{background: #fff;}
+    .them_img img, .result_box img{display: block;margin: 0 auto;height: 100%;}
+    #complete{display: block;margin-top: 20px;padding: 15px 0;width: 100%;text-align: center;color: #fff;text-decoration: none;background-color: steelblue;}    
+</style>
 </html>
