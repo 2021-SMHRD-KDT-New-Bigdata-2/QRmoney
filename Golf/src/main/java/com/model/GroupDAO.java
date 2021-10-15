@@ -107,7 +107,7 @@ public class GroupDAO extends DAO{
 		getConn();
 		int GameAvg =0;
 		try {
-			String sql ="select avg(screen_score) from member m, groubs g where m.member_id=g.member_id and goups_id=?";
+			String sql ="select avg(score_screen) from members m, groups g where m.member_id=g.member_id and g.game_id = ?";
 			psmt= conn.prepareStatement(sql);
 			psmt.setInt(1, game_id);
 			rs=psmt.executeQuery();
