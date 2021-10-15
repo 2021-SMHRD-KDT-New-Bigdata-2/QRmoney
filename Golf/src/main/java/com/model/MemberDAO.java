@@ -116,7 +116,7 @@ public class MemberDAO extends DAO{
 					psmt.setDouble(5, Integer.parseInt(vo1.getscore_screen()));
 				}
 			}catch(NumberFormatException e) {
-				
+				e.printStackTrace();
 			}
 			
 			cnt = psmt.executeUpdate();
@@ -186,9 +186,6 @@ public class MemberDAO extends DAO{
 			
 			result=psmt.executeUpdate();
 			
-		
-		
-		
 		} catch(Exception e){
 			e.printStackTrace();
 		}finally {
@@ -196,4 +193,79 @@ public class MemberDAO extends DAO{
 		}
 		return result;
 	}
+	
+	public MemberVO getInfo(String nickName) {
+		
+		String nick_name = "";
+		String gender= "";
+		String age = "";
+		String gameType = "";
+		String scoreScreen = "";
+		String scoreField = "";
+		String profilePic = "";
+		
+		getConn();
+		
+		try {
+			// ? 준현이가 가꼬온 거 
+			
+			System.out.println("dao 호출 성공");
+			System.out.println(nickName);
+			
+			String sql = "select * from members where nickname = ?";
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, nickName);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				nick_name = rs.getString("nickname");
+				gender = rs.getString("gender");
+				age = rs.getString("age");
+				gameType = rs.getString("game_type");
+				scoreScreen = rs.getString("score_field");
+				scoreField = rs.getString("score_screen");
+				profilePic = rs.getString("profile_pic");
+			}else {
+				System.out.println("검색 실패");
+			}
+			
+			System.out.println(gender+" "+age);
+			System.out.println("sql검색 성공");
+			MemberVO vo = new MemberVO(nick_name, gender, age, gameType, scoreScreen, scoreField, profilePic);
+		
+			System.out.println(vo.getAge());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return vo;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

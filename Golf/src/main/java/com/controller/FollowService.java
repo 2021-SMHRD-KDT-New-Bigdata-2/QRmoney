@@ -33,7 +33,7 @@ public class FollowService extends HttpServlet {
 		
 		//ÆÈ·Î¿ì ±â´É
 		FollowDAO dao = new FollowDAO();
-		String Follower=dao.FollowEmailConfirm(FollowStart);
+		String Follower=dao.FollowEmailConfirm(FollowStart); 
 		if(Follower == null) {
 			PrintWriter out = response.getWriter();
 			out.print("<script>"

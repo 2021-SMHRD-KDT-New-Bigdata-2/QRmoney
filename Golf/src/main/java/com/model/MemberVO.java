@@ -139,10 +139,19 @@ public class MemberVO {
 		super();
 	}
 
-
-	
+	// 친구 정보 불러오기
+	public MemberVO(String nickname, String gender, String age, String gametype, String score_screen,
+			String score_field, String profilePic) {
+		System.out.println("vo호출 성공");
+		this.Nickname = nickname;
+		this.Gender = gender;
+		this.Age = age;
+		this.Gametype = gametype;
+		this.score_screen = score_screen;
+		this.score_field = score_field;
+		this.profilePic = profilePic;
 		
-
+	}
 
 }
 

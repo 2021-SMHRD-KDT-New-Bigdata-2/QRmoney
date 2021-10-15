@@ -9,8 +9,6 @@ import java.util.ArrayList;
 public class FollowDAO extends DAO{
 	int result = 0;
 	
-	
-	
 //	입력값이 제대로 들어왓나 확인하는 기능 text용 실제로 쓸지는 모르겟음
 	public String FollowEmailConfirm(String email) {
 		getConn();
