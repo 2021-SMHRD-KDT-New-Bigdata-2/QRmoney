@@ -107,13 +107,13 @@ public class GroupDAO extends DAO{
 		getConn();
 		int GameAvg =0;
 		try {
-			String sql ="select avg(score_screen) from members m, groups g where m.member_id=g.member_id and g.game_id = ?";
+			String sql ="select avg(score_screen) from members m, groups g  where m.member_id=g.member_id and g.game_id= ?";
 			psmt= conn.prepareStatement(sql);
 			psmt.setInt(1, game_id);
 			rs=psmt.executeQuery();
 			if(rs.next()) {
 				System.out.println("에버리지구하기성공");
-				GameAvg = rs.getInt("avg(screen_score");
+				GameAvg = rs.getInt("avg(score_screen");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
