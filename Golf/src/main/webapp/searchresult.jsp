@@ -8,6 +8,7 @@
 	<%
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		ArrayList<GameVO> gameList = (ArrayList<GameVO>)session.getAttribute("searchResult");
+		ArrayList<MemberVO> memberList = new ArrayList<MemberVO>();
 		GroupDAO groupDAO = new GroupDAO();
 		if(gameList.isEmpty()) {
 			out.print("<script>"
@@ -46,6 +47,19 @@
             	</div>
            		<div class="row">
            			<% for(int i = 0; i<gameList.size(); i++) { %>
+           				<%
+           					int memberCnt = groupDAO.getGroupMemberCnt(gameList.get(i).getGame_id());
+           					int totalMembers = gameList.get(i).getTotal_member();
+           					memberList = groupDAO.getGroupMemberVO(gameList.get(i).getGame_id());
+           					boolean mygame = false;
+           					for(MemberVO vo : memberList) {
+           						if(vo.getMember_id().equals(member.getMember_id())) {
+           							mygame = true;
+           						}
+           					}
+           				%>
+           				<% if(totalMembers <= memberCnt || mygame) { %>
+           				<% } else { %>
          				<div class="profile-wrapper my-3 mx-auto">      
 						    <div class="profile">
 						      <div class="profile-image">
@@ -53,12 +67,13 @@
 						      </div>
 						      <div class="profile-details">
 						        <p><%= gameList.get(i).getLocation_name() %></p>
-						        <p><%= groupDAO.getGroupMemberCnt(gameList.get(i).getGame_id()) %>/<%= gameList.get(i).getTotal_member() %></p>
+						        <p><%= memberCnt %>/<%= totalMembers %></p>
 						        <br>
 						        <span class="location-title"> <%= gameList.get(i).getLocation_address() %> </span>        
 						      </div>
 						    </div>
 						</div>
+						<% } %>
            			<% } %>
            		</div>
             </div>
