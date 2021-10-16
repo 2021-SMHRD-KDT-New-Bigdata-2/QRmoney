@@ -145,16 +145,13 @@
                 <div class="modal fade" id="sendMsg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			        <div class="modal-dialog">
 				        <form action="MessageService" id="messageForm">
+				        	<input type="hidden" name="receiver" value="<%= profile.getNickname() %>">
 				            <div class="modal-content">
 				                <div class="modal-header bg-light">
 					                <h5 class="modal-title" id="exampleModalLabel" >메시지 보내기</h5>
 					                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				                </div>
 				                <div class="modal-body">
-			                        <div>
-			                            <input name="receiver_id" id="receiver_id" type="text" class="form-control" placeholder="받는 사람을 입력하세요">       
-			                        </div>
-			                        <br>
 			                        <div>
 			                            <div >
 			                                <textarea name="message" id="message" class="form-control" cols="53" rows="5" placeholder="메시지를 입력하세요"></textarea>

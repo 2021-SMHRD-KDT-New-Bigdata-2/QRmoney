@@ -26,7 +26,7 @@ public class MessageService extends HttpServlet {
 		MemberVO vo = (MemberVO)session.getAttribute("member");
 		
 		int senderId = Integer.parseInt(vo.getMember_id()); 
-		String receiverNick  = request.getParameter("receiver_id"); 
+		String receiverNick  = request.getParameter("receiver"); 
 		String message = request.getParameter("message");
 		
 		System.out.println(senderId);
@@ -41,15 +41,11 @@ public class MessageService extends HttpServlet {
 		
 		if(cnt>0) {
 			System.out.println("메시지 전송 성공");
+			response.sendRedirect(request.getHeader("Referer"));
 		}else {
 			System.out.println("메시지 전송 실패");
+			response.sendRedirect(request.getHeader("Referer"));
 		}
-		
-		// 나에게 온 메세지 확인하기 
-		ArrayList<MessageVO> massageList = dao.showMessage(senderId);
-		
-		// 메세지 전체 삭제
-		cnt = dao.deleteAll(senderId);
 		
 	}
 
