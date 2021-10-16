@@ -33,7 +33,7 @@
 		        	<iframe id="group-iframe" src="" class="iframe-detail" style="border="0" frameborder="0" allowTransparency="true"></iframe>
 		        </div>
 		    	<div class="modal-footer">
-		        	<a id="join-game" href="#?game" class="btn btn-primary mx-auto">참가하기</a>
+		        	<a id="join-game" href="JoinGroupService" class="btn btn-primary mx-auto">참가하기</a>
 	       		</div>
 		    </div>
 		  </div>

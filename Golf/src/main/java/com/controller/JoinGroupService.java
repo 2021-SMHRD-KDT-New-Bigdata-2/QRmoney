@@ -18,20 +18,32 @@ public class JoinGroupService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("euc-kr");
 		
 		request.setCharacterEncoding("euc-kr");		
 		HttpSession session = request.getSession();
 		MemberVO vo = (MemberVO)session.getAttribute("member");
 		
-		
 		String game_id = request.getParameter("id");
 		String member_id = vo.getMember_id();
 		
+		String page = request.getHeader("Referer");
+		
 		GroupDAO dao = new GroupDAO();
-		dao.joinGroup(Integer.parseInt(game_id), Integer.parseInt(member_id));
+		int result = dao.joinGroup(Integer.parseInt(game_id), Integer.parseInt(member_id));
 		PrintWriter out = response.getWriter();
-		out.print("<script>alert('참가완료')</script>");
-		response.sendRedirect("searchresult.jsp");
+		
+		if(result>0) {
+			out.print("<script>"
+					+"alert('그룹에 참가했습니다.');"
+					+"location.href ='"+page+"';"
+					+"</script>");
+		} else {
+			out.print("<script>"
+					+"alert('그룹 참가에 문제가 발생했습니다.\n다시 시도해주세요.');"
+					+"location.href ='"+page+"';"
+					+"</script>");
+		}
 		
 	}
 
