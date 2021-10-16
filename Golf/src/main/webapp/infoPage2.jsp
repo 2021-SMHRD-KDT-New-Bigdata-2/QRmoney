@@ -1,3 +1,4 @@
+<%@page import="com.model.FollowDAO2"%>
 <%@page import="com.model.MemberDAO"%>
 <%@page import="com.model.MessageVO"%>
 <%@page import="com.model.FollowDAO"%>
@@ -9,10 +10,39 @@
 <%@ include file= "navbar_member.jsp" %>
 <body>  
 	<%  
-		String nickname = request.getParameter("nickName");
+	
+		// 회원 정보
+		String nickName = request.getParameter("nickName");
+		
 		MemberDAO memberDAO = new MemberDAO();
-		MemberVO profile = memberDAO.getInfo(nickname);
+		MemberVO profile = memberDAO.getInfo(nickName);
+		
+		// 평점 확인
+		double avg1 = 0;
+		if(profile.getRatings_total().equals("0")){
+			avg1 = 0;
+		}else{
+			double total = Integer.parseInt(profile.getRatings_total());
+			double cnt = Integer.parseInt(profile.getRatings_cnt());
+			
+			double avg = total/cnt;
+			avg1 = (double)Math.round(avg*100/10);
+		}
+				
+		// 로그인 세션 
 		MemberVO member = (MemberVO)session.getAttribute("member");	
+		
+		// 팔로우/언팔로우 확인
+		FollowDAO2 followdao = new FollowDAO2();
+		boolean chk = followdao.followCheck(Integer.parseInt(member.getMember_id()), nickName);
+		
+		// 나를 팔로우 한 사람 => 팔로워
+		ArrayList<String> follower = followdao.followList(member.getMember_id());
+		
+		// 팔로잉
+		ArrayList<String> following = followdao.followingList(member.getMember_id());
+		
+		
 	%>
 	<!-- My page-->
     <section class="bg-section" id="mypage">
@@ -26,9 +56,9 @@
 					      </div>
 					      <div class="profile-details">
 					        <p><%=profile.getNickname() %></p>					        
-					        <span class="location-title"> 평점 :</span><span></span><br>
-							<span class="location-title"> 팔로워 :</span><span></span><br>
-							<span class="location-title"> 팔로잉 :</span><span></span><br>					                
+					        <span class="location-title"> 평점 : <%=avg1/10%></span><span></span><br> 
+							<span class="location-title"> 팔로워 : <%=follower.size()%></span><span></span><br>
+							<span class="location-title"> 팔로잉 : <%=following.size()%></span><span></span><br>					                
 					      </div>
 					    </div>
 					</div>
@@ -38,35 +68,75 @@
 	                <tbody>
 	                    <tr>
 		                    <th scope="row" >닉네임</th>
-		                    <td><%=vo.getNickname()  %></td>
+		                    <td><%=profile.getNickname()  %></td>
 	                    </tr>
 	                    <tr>
 		                    <th scope="row">나이</th>
-		                    <td><%=vo.getAge()  %></td>
+		                    <td>
+		                    	<%
+		                    		if(profile.getAge() == null){
+		                    			out.print("설정 없음");
+		                    		}else{
+		                    			out.print(profile.getAge());
+		                    		}
+		                    	%>
+		                    </td>
 	                    </tr>
 	                    <tr>
 		                    <th scope="row">성별</th>
-		                    <td ><%=vo.getGender() %></td>
+		                    <td>
+		                    	<%
+		                    		if(profile.getAge() == null){
+		                    			out.print("설정 없음");
+		                    		}else{
+		                    			out.print(profile.getAge());
+		                    		}
+		                    	%>
+		                    </td>
 	                    </tr>
 	                    <tr>
 		                    <th scope="row">선호 게임타입</th>
-		                    <td ><%=vo.getGametype() %></td>
+		                    <td>
+		                    	<%
+		                    		if(profile.getAge() == null){
+		                    			out.print("설정 없음");
+		                    		}else{
+		                    			out.print(profile.getAge());
+		                    		}
+		                    	%>
+		                    </td>
 	                    </tr>
 	                    <tr>
 		                    <th scope="row">스크린 스코어</th>
-		                    <td><%=vo.getscore_screen() %></td>
+		                    <td>
+		                    	<%
+		                    		if(profile.getAge() == null){
+		                    			out.print("설정 없음");
+		                    		}else{
+		                    			out.print(profile.getAge());
+		                    		}
+		                    	%>
+		                    </td>
 	                    </tr>
 	                    <tr>
 		                    <th scope="row">필드 스코어</th>
-		                    <td ><%=vo.getscore_field() %></td>
+		                    <td>
+		                    	<%
+		                    		if(profile.getAge() == null){
+		                    			out.print("설정 없음");
+		                    		}else{
+		                    			out.print(profile.getAge());
+		                    		}
+		                    	%>
+		                    </td>
 	                    </tr>
 	                </tbody>
                 </table>
                 <button class="btn btn-primary">메세지 보내기</button>
-                <% if(true) { %>
-                	<a class="btn btn-primary">언팔로우</a>
+                <% if(chk) { %>
+                	<a class="btn btn-primary" href="UnfollowService?nickName=<%=profile.getNickname()%>">언팔로우</a>
                 <% } else { %>
-                	<a class="btn btn-primary">팔로우</a>
+                	<a class="btn btn-primary" href="followService2?nickName=<%=profile.getNickname()%>">팔로우</a>
                 <% } %>
                 </div>
             </div>

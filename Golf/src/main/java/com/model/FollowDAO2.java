@@ -130,7 +130,7 @@ public class FollowDAO2 extends DAO {
 	}
 	
 	// 내가 팔로우한 사람 
-	public ArrayList<String> follwingList(String me) {
+	public ArrayList<String> followingList(String me) {
 		
 		ArrayList<String> nickList2 = new ArrayList<String>();
 		String nickName = "";
@@ -162,8 +162,34 @@ public class FollowDAO2 extends DAO {
 		return nickList2;
 	}
 	
-	
-	
+	// 나랑 팔로우 돼있는지 확인하는 메서드
+	public boolean followCheck(int me, String you) {
+		
+		boolean chk = false;
+		
+		getConn();
+		
+		try {
+			String sql = "select * from follow, members "
+					+ "where follow.following_id = members.member_id and follower_id = ? and nickname = ?";
+			
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, me);
+			psmt.setString(2, you);
+			
+			rs = psmt.executeQuery();
+			
+			chk = rs.next();
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return chk;
+	}
 	
 	
 	

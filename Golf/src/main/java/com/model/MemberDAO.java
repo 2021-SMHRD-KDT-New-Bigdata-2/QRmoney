@@ -3,6 +3,8 @@ package com.model;
 public class MemberDAO extends DAO{
 	int result =0;
 	MemberVO vo = new MemberVO();
+	
+	// 회원 가입
 	public int SignUp(MemberVO vo) {
 		getConn();
 		try {
@@ -45,6 +47,7 @@ public class MemberDAO extends DAO{
 		return result;
 	}
 	
+	// 로그인
 	public MemberVO Login(String email, String pw) {
 		getConn();
 		try {
@@ -171,11 +174,7 @@ public class MemberDAO extends DAO{
 				System.out.println("레이팅시스템 검색실패");
 			}
 			
-			
-			
 			sql= "update members set ratings_total =?, ratings_cnt= RATING_SEQ.nextval where email =?" ;
-			
-			
 			
 			int Rating_total =get_rating_total +vo.getRating(); 
 			
@@ -194,23 +193,12 @@ public class MemberDAO extends DAO{
 		return result;
 	}
 	
+	// 회원 정보 보여주기
 	public MemberVO getInfo(String nickName) {
-		
-		String nick_name = "";
-		String gender= "";
-		String age = "";
-		String gameType = "";
-		String scoreScreen = "";
-		String scoreField = "";
-		String profilePic = "";
-		
+				
 		getConn();
 		
 		try {
-			// ? 준현이가 가꼬온 거 
-			
-			System.out.println("dao 호출 성공");
-			System.out.println(nickName);
 			
 			String sql = "select * from members where nickname = ?";
 			
@@ -220,22 +208,22 @@ public class MemberDAO extends DAO{
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-				nick_name = rs.getString("nickname");
-				gender = rs.getString("gender");
-				age = rs.getString("age");
-				gameType = rs.getString("game_type");
-				scoreScreen = rs.getString("score_field");
-				scoreField = rs.getString("score_screen");
-				profilePic = rs.getString("profile_pic");
+				String nick_name = rs.getString("nickname");
+				String gender = rs.getString("gender");
+				String age = rs.getString("age");
+				String gameType = rs.getString("game_type");
+				String scoreScreen = rs.getString("score_field");
+				String scoreField = rs.getString("score_screen");
+				String profilePic = rs.getString("profile_pic");
+				String ratings_cnt = rs.getString("ratings_cnt");
+				String ratings_total = rs.getString("ratings_total");
+				
+				vo = new MemberVO(nick_name, gender, age, gameType, scoreScreen, scoreField, profilePic, ratings_cnt, ratings_total);
+				
 			}else {
 				System.out.println("검색 실패");
 			}
-			
-			System.out.println(gender+" "+age);
-			System.out.println("sql검색 성공");
-			vo = new MemberVO(nick_name, gender, age, gameType, scoreScreen, scoreField, profilePic);
-		
-			System.out.println(vo.getAge());
+					
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {

@@ -22,8 +22,8 @@ public class followService2 extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int cnt = 0;
-		
+		// 팔로우 서비스 
+				
 		// 로그인 정보
 		HttpSession session = request.getSession();
 		MemberVO vo = (MemberVO)session.getAttribute("member");
@@ -32,48 +32,12 @@ public class followService2 extends HttpServlet {
 		
 		FollowDAO2 dao = new FollowDAO2();
 		
-		// followhaja
-		cnt = dao.follow(vo.getMember_id(), nickName);
+		int cnt = dao.follow(vo.getMember_id(), nickName);
 		
-		// followcancel
-		cnt = dao.followcancel(vo.getMember_id(), nickName);
-		
-		// followList = 나를 팔로우한 사람 목록
-		
-		// followingList = 내가 팔로우한 사람
-		
-		// -------------- 재현쓰 -------------
-		
-//		// 버튼을 누르면 상대방 아이디를 가져와서 
-//		String FollowStart = request.getParameter("Startfollow");
-//		String FollowCancel = request.getParameter("cancelfollow");
-//		
-//		//팔로우 기능
-//		FollowDAO dao = new FollowDAO();
-//		String Follower=dao.FollowEmailConfirm(FollowStart);
-//		if(Follower == null) {
-//			PrintWriter out = response.getWriter();
-//			out.print("<script>"
-//					+"alert('이메일 제대로 적어주세요.');"
-//					+"location.href = 'FollowTEST.jsp';"
-//					+"</script>");
-//			
-//		} else {
-//			FollowVO fvo= new FollowVO(Follower, vo.getMember_id());
-//			int result =dao.FollowHaJa(fvo);
-//			if(result>0) {
-//				System.out.println("정상적 팔로우가 실행되엇습니다.");
-//				response.sendRedirect("mypage.jsp");
-//			}else {
-//				System.out.println("팔로우가 실행되지 않앗습니다.");
-//				response.sendRedirect("FollowTEST.jsp");
-//			}
-//			
-//			
-//		}
-		
-		
-		
+		if(cnt>0) {
+			response.sendRedirect("infoPage2.jsp?nickName="+nickName);
+		}
+			
 	}
 
 }

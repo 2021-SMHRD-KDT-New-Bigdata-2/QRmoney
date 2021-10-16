@@ -141,7 +141,7 @@ public class MemberVO {
 
 	// 친구 정보 불러오기
 	public MemberVO(String nickname, String gender, String age, String gametype, String score_screen,
-			String score_field, String profilePic) {
+			String score_field, String profilePic, String ratings_cnt, String ratings_total) {
 		System.out.println("vo호출 성공");
 		this.Nickname = nickname;
 		this.Gender = gender;
@@ -150,6 +150,8 @@ public class MemberVO {
 		this.score_screen = score_screen;
 		this.score_field = score_field;
 		this.profilePic = profilePic;
+		this.Ratings_cnt = ratings_cnt;
+		this.Ratings_total = ratings_total;
 		
 	}
 
