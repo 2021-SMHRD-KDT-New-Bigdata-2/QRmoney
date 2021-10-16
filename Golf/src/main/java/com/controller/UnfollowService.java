@@ -16,8 +16,8 @@ public class UnfollowService extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 팔로우 취소 서비스
-		
+		request.setCharacterEncoding("euc-kr");
+		response.setCharacterEncoding("euc-kr");
 		// 로그인 정보
 		HttpSession session = request.getSession();
 		MemberVO vo = (MemberVO)session.getAttribute("member");
@@ -29,7 +29,7 @@ public class UnfollowService extends HttpServlet {
 		int cnt = dao.followcancel(vo.getMember_id(), nickName);
 		
 		if(cnt>0) {
-			response.sendRedirect("infoPage2.jsp?nickName="+nickName);
+			response.sendRedirect(request.getHeader("Referer"));
 		}
 				
 	}

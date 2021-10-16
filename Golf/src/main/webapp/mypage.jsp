@@ -188,7 +188,7 @@
                                     <table class="table">
 									  <thead>
 									    <tr>
-									      <th scope="col">#</th>
+									      <th scope="col"></th>
 									      <th scope="col">닉네임</th>
 									      <th scope="col">메세지</th>
 									    </tr>
@@ -198,7 +198,7 @@
 									    <tr>
 									      <th scope="row"><%= i+1 %></th>
 									      <td><%= followList.get(i)%></td>
-									      <td><a data-bs-toggle="modal" href="#sendMsg"><img src="assets/img/message.png"></a></td>									      
+									      <td><a data-bs-toggle="modal" href="#sendMsg" onclick="changeValue('<%= followList.get(i) %>')"><img src="assets/img/message.png"></a></td>									      
 									    </tr>									    
 									    <%} %>
 									    </tbody>
@@ -207,7 +207,7 @@
                                     <table class="table">
 									  <thead>
 									    <tr>
-									      <th scope="col">#</th>
+									      <th scope="col"></th>
 									      <th scope="col">닉네임</th>
 									      <th scope="col">메세지</th>
 									    </tr>
@@ -217,7 +217,7 @@
 									    <tr>
 									      <th scope="row"><%= i+1 %></th>
 									      <td><%= followingList.get(i)%></td>
-									      <td><a data-bs-toggle="modal" href="#sendMsg"><img src="assets/img/message.png"></a></td>									      
+									      <td><a data-bs-toggle="modal" href="#sendMsg" onclick="changeValue('<%= followingList.get(i) %>')"><img src="assets/img/message.png"></a></td>									      
 									    </tr>									    
 									    <%} %>
 									  </tbody>
@@ -225,16 +225,12 @@
 									<div class="modal fade" id="sendMsg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			        					<div class="modal-dialog">
 				        					<form action="MessageService" id="messageForm">
+				        						<input type="hidden" value="" name="receiver" id="receiverNick">
 				            					<div class="modal-content">
 				                					<div class="modal-header bg-light">
-					                					<h5 class="modal-title" id="exampleModalLabel" >메시지 보내기</h5>
 					                					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				                					</div>
 				                					<div class="modal-body">
-			                        					<div>
-			                            					<input name="receiver_id" id="receiver_id" type="text" class="form-control" placeholder="받는 사람을 입력하세요">       
-			                      					 	</div>
-			                        					<br>
 			                        					<div>
 			                            					<div>
 			                                					<textarea name="message" id="message" class="form-control" cols="53" rows="5" placeholder="메시지를 입력하세요"></textarea>
@@ -258,5 +254,10 @@
         </div>
     </section>
     <%@ include file="footer.html" %>
+    <script type="text/javascript">
+	    function changeValue(nick) {
+	 	   document.getElementById("receiverNick").setAttribute('value', nick);
+	 	}
+    </script>
 </body>
 </html>
