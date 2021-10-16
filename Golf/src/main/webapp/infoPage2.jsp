@@ -133,7 +133,7 @@
 	                    </tr>
 	                </tbody>
                 </table>
-                <div class="my-4">
+                <div class="my-4 float-end">
 	                <a class="btn btn-primary" data-bs-toggle="modal" href="#sendMsg">메세지보내기</a>
 	                <% if(chk) { %>
 	                	<a class="btn btn-primary" href="UnfollowService?nickName=<%=profile.getNickname()%>">언팔로우</a>
