@@ -79,7 +79,9 @@
             <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
               <!-- Team Thumb-->
               <div class="advisor_thumb">
+              	<a href="infoPage2.jsp?nickName=<%= vo.getNickname() %>" target="_blank">
               	<img class="img-auto" src="assets/profile_pic/<%= vo.getProfilePic() %>" alt="assets/profile_pic/default.jpg">
+              	</a>
               </div>
               <!-- Team Details-->
               <div class="single_advisor_details_info">
