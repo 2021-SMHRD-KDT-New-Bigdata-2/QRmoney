@@ -10,12 +10,7 @@
 		ArrayList<GameVO> gameList = (ArrayList<GameVO>)session.getAttribute("searchResult");
 		ArrayList<MemberVO> memberList = new ArrayList<MemberVO>();
 		GroupDAO groupDAO = new GroupDAO();
-		if(gameList.isEmpty()) {
-			out.print("<script>"
-					+"alert('검색조건에 맞는 그룹이 없습니다.\n메인 페이지로 돌아갑니다');"
-					+"location.href = 'main.jsp';"
-					+"</script>");
-		}
+		int cnt = 0;
 	%>
 	<% if(member == null) { %>
 		<%@ include file= "navbar_non_member.jsp" %>
@@ -41,8 +36,8 @@
 	    <section class="bg-section">
             <div class="container-sm mx-auto search-result">
             	<div class="row">
-            		<div class="col mt-4">
-            			<p><strong><%= gameList.size() %></strong>개의 그룹이 있어요</p>
+            		<div class="mt-4">
+            			<p>검색결과</p>
             			<hr>
             		</div>
             	</div>
@@ -74,7 +69,15 @@
 						      </div>
 						    </div>
 						</div>
+						<% cnt++; %>
 						<% } %>
+           			<% } %>
+           			<% if(cnt == 0) { %>
+           			<div class="my-4 text-center">
+            			<p>검색된 그룹이 없습니다, 직접 그룹을 만들어보세요.</p>
+            			<br>
+            			<a href="main.jsp">직접 그룹 만들러가기</a>
+            		</div>
            			<% } %>
            		</div>
             </div>
