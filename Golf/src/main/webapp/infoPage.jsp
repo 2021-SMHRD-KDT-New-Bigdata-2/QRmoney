@@ -17,7 +17,7 @@
 <body>
 
 	<%
-		String nickName = "asd";
+		String nickName = request.getParameter("nickName");
 		MemberDAO dao = new MemberDAO();
 		
 		MemberVO vo = dao.getInfo(nickName);

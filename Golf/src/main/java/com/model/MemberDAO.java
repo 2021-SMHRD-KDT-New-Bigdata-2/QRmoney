@@ -233,7 +233,7 @@ public class MemberDAO extends DAO{
 			
 			System.out.println(gender+" "+age);
 			System.out.println("sql검색 성공");
-			MemberVO vo = new MemberVO(nick_name, gender, age, gameType, scoreScreen, scoreField, profilePic);
+			vo = new MemberVO(nick_name, gender, age, gameType, scoreScreen, scoreField, profilePic);
 		
 			System.out.println(vo.getAge());
 		}catch (Exception e) {
