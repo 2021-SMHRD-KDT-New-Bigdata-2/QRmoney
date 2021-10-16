@@ -147,8 +147,8 @@
 				        <form action="MessageService" id="messageForm">
 				            <div class="modal-content">
 				                <div class="modal-header bg-light">
-				                <h5 class="modal-title" id="exampleModalLabel" >메시지 보내기</h5>
-				                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					                <h5 class="modal-title" id="exampleModalLabel" >메시지 보내기</h5>
+					                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				                </div>
 				                <div class="modal-body">
 			                        <div>

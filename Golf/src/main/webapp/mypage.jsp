@@ -1,3 +1,4 @@
+<%@page import="com.model.FollowDAO2"%>
 <%@page import="com.model.MessageVO"%>
 <%@page import="com.model.FollowDAO"%>
 <%@page import="com.model.FollowVO"%>
@@ -8,32 +9,31 @@
 <%@ include file= "navbar_member.jsp" %>
 <body>  
 	<%
+
+		// 로그인 세션
 		MemberVO member = (MemberVO)session.getAttribute("member");
-		double avg1=0;
+	
+		// 평점 확인 
+		double avg1 = 0;
 		if(member.getRatings_total().equals("0")){
-			avg1=0;
+			avg1 = 0;
 		}else{
 			double total= Integer.parseInt(member.getRatings_total());
 			double cnt = Integer.parseInt(member.getRatings_cnt());
-			double avg=total/cnt;
-			avg1=(double)Math.round(avg*100/10);
+			double avg = total/cnt;
+			avg1 = (double)Math.round(avg*100/10);
 		}
 		
-		// message 기능 
+		// 받은 메세지 보여주기
 		MessageDAO message = new MessageDAO(); 
 		ArrayList<MessageVO> messageList = new ArrayList<MessageVO>();
 		messageList = message.showMessage((Integer.parseInt(member.getMember_id())));
 		
 		
-		// follow 기능
-		FollowDAO dao = new FollowDAO();
-		ArrayList<FollowVO> followlist = new ArrayList<FollowVO>();
-		ArrayList<FollowVO> followinglist = new ArrayList<FollowVO>();
-		if(member!=null){
-			followlist= dao.ShowFollower(member.getMember_id());
-			followinglist =dao.ShowFolloweing(member.getMember_id());
-		}
-		
+		// 팔로우, 팔로워 리스트 보여주기
+		FollowDAO2 follow = new FollowDAO2();
+		ArrayList<String> followList = follow.followList(member.getMember_id());
+		ArrayList<String> followingList = follow.followingList(member.getMember_id());
 		
 	%>
 	<!-- My page-->
@@ -48,9 +48,9 @@
 					      </div>
 					      <div class="profile-details">
 					        <p><%=member.getNickname() %></p>					        
-					        <span class="location-title"> 평점 :</span><span><%= avg1/10 %></span><br>
-							<span class="location-title"> 팔로워 :</span><span><%= followlist.size() %></span><br>
-							<span class="location-title"> 팔로잉 :</span><span><%= followinglist.size() %></span><br>					                
+					        <span class="location-title"> 평점 :</span><span><%=avg1/10 %></span><br>
+							<span class="location-title"> 팔로워 :</span><span><%=followList.size()%></span><br>
+							<span class="location-title"> 팔로잉 :</span><span><%=followingList.size()%></span><br>					                
 					      </div>
 					    </div>
 					</div>
@@ -72,7 +72,7 @@
                                                 <th scope="row">
                                                     <img src="assets/icon/grade.png">
                                                 </th>
-                                                <td><%= avg1/10  %></td>
+                                                <td><%= avg1/10 %></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
@@ -184,22 +184,21 @@
                             </h2>
                             <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionMypage">
                                 <div class="accordion-body">                                    
-                                    <a href="FollowTEST.jsp">팔로우서비스</a>
                                     <h4>팔로워 리스트</h4>
                                     <table class="table">
 									  <thead>
 									    <tr>
 									      <th scope="col">#</th>
-									      <th scope="col">NickName</th>
-									      <th scope="col">Gender</th>
+									      <th scope="col">닉네임</th>
+									      <th scope="col">메세지</th>
 									    </tr>
 									  </thead>
 									  <tbody>
-									    <%for(int i =0;i<followlist.size();i++){%>
+									    <%for(int i=0; i<followList.size(); i++){%>
 									    <tr>
 									      <th scope="row"><%= i+1 %></th>
-									      <td><%= followlist.get(i).getNickname() %></td>
-									      <td><%= followlist.get(i).getGender() %></td>									      
+									      <td><%= followList.get(i)%></td>
+									      <td><a data-bs-toggle="modal" href="#sendMsg"><img src="assets/img/message.png"></a></td>									      
 									    </tr>									    
 									    <%} %>
 									    </tbody>
@@ -209,20 +208,47 @@
 									  <thead>
 									    <tr>
 									      <th scope="col">#</th>
-									      <th scope="col">NickName</th>
-									      <th scope="col">Gender</th>
+									      <th scope="col">닉네임</th>
+									      <th scope="col">메세지</th>
 									    </tr>
 									  </thead>
 									  <tbody>
-									    <%for(int i =0;i<followinglist.size();i++){%>
+									    <%for(int i =0;i<followingList.size();i++){%>
 									    <tr>
 									      <th scope="row"><%= i+1 %></th>
-									      <td><%= followinglist.get(i).getNickname() %></td>
-									      <td><%= followinglist.get(i).getGender() %></td>									      
+									      <td><%= followingList.get(i)%></td>
+									      <td><a data-bs-toggle="modal" href="#sendMsg"><img src="assets/img/message.png"></a></td>									      
 									    </tr>									    
 									    <%} %>
 									  </tbody>
 									</table>
+									<div class="modal fade" id="sendMsg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			        					<div class="modal-dialog">
+				        					<form action="MessageService" id="messageForm">
+				            					<div class="modal-content">
+				                					<div class="modal-header bg-light">
+					                					<h5 class="modal-title" id="exampleModalLabel" >메시지 보내기</h5>
+					                					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				                					</div>
+				                					<div class="modal-body">
+			                        					<div>
+			                            					<input name="receiver_id" id="receiver_id" type="text" class="form-control" placeholder="받는 사람을 입력하세요">       
+			                      					 	</div>
+			                        					<br>
+			                        					<div>
+			                            					<div>
+			                                					<textarea name="message" id="message" class="form-control" cols="53" rows="5" placeholder="메시지를 입력하세요"></textarea>
+			                            					</div> 
+			                        					</div>
+				                					</div>
+				                					<div class="modal-footer bg-light">
+					               				 		<button class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+					                					<button type="submit" class="btn btn-outline-primary">보내기</button>
+				                					</div>
+				            					</div>
+				       					 	</form>
+			        					</div>
+		    						</div>
                                 </div>
                             </div>
                         </div>
