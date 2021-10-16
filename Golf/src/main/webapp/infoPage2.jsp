@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.model.MemberVO"%>
 <%@page import="com.model.FollowDAO2"%>
 <%@page import="com.model.MemberDAO"%>
 <%@page import="com.model.MessageVO"%>
@@ -7,7 +9,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ include file= "head.html" %>
-<%@ include file= "navbar_member.jsp" %>
 <body>  
 	<%  
 	
@@ -64,10 +65,10 @@
 					</div>
                 </div>
                 <div class="col-md-8">
-                	<table class="table my-5 table-hover" >
-	                <tbody>
+                	<table class="table mt-5 mb-2 table-hover" >
+	                <tbody class="profile-table">
 	                    <tr>
-		                    <th scope="row" >닉네임</th>
+		                    <th scope="row" class="col-md-4">닉네임</th>
 		                    <td><%=profile.getNickname()  %></td>
 	                    </tr>
 	                    <tr>
@@ -132,16 +133,47 @@
 	                    </tr>
 	                </tbody>
                 </table>
-                <button class="btn btn-primary">메세지 보내기</button>
-                <% if(chk) { %>
-                	<a class="btn btn-primary" href="UnfollowService?nickName=<%=profile.getNickname()%>">언팔로우</a>
-                <% } else { %>
-                	<a class="btn btn-primary" href="followService2?nickName=<%=profile.getNickname()%>">팔로우</a>
-                <% } %>
+                <div class="my-4">
+	                <a class="btn btn-primary" data-bs-toggle="modal" href="#sendMsg">메세지보내기</a>
+	                <% if(chk) { %>
+	                	<a class="btn btn-primary" href="UnfollowService?nickName=<%=profile.getNickname()%>">언팔로우</a>
+	                <% } else { %>
+	                	<a class="btn btn-primary" href="followService2?nickName=<%=profile.getNickname()%>">팔로우</a>
+	                <% } %>
+	            </div>
                 </div>
+                <div class="modal fade" id="sendMsg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			        <div class="modal-dialog">
+				        <form action="MessageService" id="messageForm">
+				            <div class="modal-content">
+				                <div class="modal-header bg-light">
+				                <h5 class="modal-title" id="exampleModalLabel" >메시지 보내기</h5>
+				                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				                </div>
+				                <div class="modal-body">
+			                        <div>
+			                            <input name="receiver_id" id="receiver_id" type="text" class="form-control" placeholder="받는 사람을 입력하세요">       
+			                        </div>
+			                        <br>
+			                        <div>
+			                            <div >
+			                                <textarea name="message" id="message" class="form-control" cols="53" rows="5" placeholder="메시지를 입력하세요"></textarea>
+			                            </div> 
+			                        </div>
+				                </div>
+				                <div class="modal-footer bg-light">
+					                <button class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+					                <button type="submit" class="btn btn-outline-primary">보내기</button>
+				                </div>
+				            </div>
+				        </form>
+			        </div>
+		    	</div>
             </div>
         </div>
     </section>
-    <%@ include file="footer.html" %>
+	<script src="js/scripts.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>

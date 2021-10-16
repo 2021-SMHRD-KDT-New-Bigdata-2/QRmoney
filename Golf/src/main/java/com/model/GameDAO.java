@@ -50,7 +50,7 @@ public class GameDAO  extends DAO{
 				String game_date = rs.getString(6);
 				String game_length = rs.getString(7);
 				int total_member = rs.getInt(8);
-				String location_name = rs.getString(10);
+				String location_name = rs.getString("name");
 				String location_address = rs.getString("address");
 				
 				GameVO vo = new GameVO(game_id, game_name, game_type, location, game_fee, game_date, game_length, total_member, location_name, location_address);
