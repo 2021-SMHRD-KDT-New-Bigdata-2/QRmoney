@@ -34,7 +34,7 @@ public class GameDAO  extends DAO{
 	public ArrayList<GameVO> searchGameList(String type, String address) {
 		getConn();
 		try {
-			String sql = "select * from games,"+type+" where games.location_id = "+type+"."+type+"_id and game_type = ? and address like ?";
+			String sql = "select * from games,"+type+" where games.location_id = "+type+"."+type+"_id and game_type = ? and address like ? and game_date > sysdate";
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, type);
 			psmt.setString(2, address+"%");
