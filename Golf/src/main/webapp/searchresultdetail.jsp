@@ -86,7 +86,19 @@
               <!-- Team Details-->
               <div class="single_advisor_details_info">
                 <h6> <%= vo.getNickname() %> </h6>
-                <p class="designation"> <%= vo.getAddress() %> &amp; <%= vo.getAge() %> </p>
+                <p class="designation">
+                	<% if(vo.getAddress() == null) { %>
+                		<%= "¼³Á¤¾ÈµÊ" %>
+                	<% } else { %>
+                		<%= vo.getAddress() %>
+                	<% } %>
+                	&amp;
+                	<% if(vo.getAge() == null) { %>
+                		<%= "¼³Á¤¾ÈµÊ" %>
+                	<% } else { %>
+                		<%= vo.getAge()+"¼¼" %>
+                	<% } %>
+                </p>
               </div>
             </div>
           </div>
