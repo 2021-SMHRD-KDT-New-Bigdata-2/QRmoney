@@ -86,12 +86,14 @@
                                                     <img src="assets/icon/golf.png">
                                                     <span>골프 스코어</span>
                                                 </th>
-                                                <td><%if(member.getGametype().equals("field")){
-                                                	%><%=member.getscore_field() %>
+                                                <td>
+                                                	<%if(member.getGametype() == null){
+                                                	%><%= "선호하는 게임을 설정해주세요." %>
                                                 	<%}else if(member.getGametype().equals("screen")){%>                                             
                                                 	<%=member.getscore_screen()%>
                                                 	<%}else{%>
-                                                		0<%} %>
+                                                		<%= member.getscore_field() %>
+                                                	<% } %>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -99,26 +101,40 @@
                                                     <img src="assets/icon/favorite.png">
                                                     <span>선호하는 게임타입</span>
                                                 </th>
-                                                <td><%if(member.getGametype().equals("field")){
-                                                	%>Field
+                                                <td>
+                                                	<%if(member.getGametype() == null){
+                                                	%> <%= "선호하는 게임을 설정해주세요" %>
                                                 	<%}else if(member.getGametype().equals("screen")){%>                                             
                                                 		Screen
                                                 	<%}else{%>
-                                                		선호하는 게임이 없습니다.<%} %></td>
+                                                		Field<%} %>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <img src="assets/icon/date_range.png">
                                                     <span>나이</span>
                                                 </th>
-                                                <td><%=member.getAge() %></td>
+                                                <td>
+                                                	<% if(member.getAge() == null) { %>
+                                                		<%= "나이를 설정해주세요." %>
+                                                	<% } else { %>
+                                                		<%= member.getAge() %>
+                                                	<% } %>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <img src="assets/icon/room.png">
                                                     <span>주소</span>
                                                 </th>
-                                                <td><%=member.getAddress() %></td>
+                                                <td>
+                                                	<% if(member.getAddress() == null) { %>
+                                                		<%= "주소를 설정해주세요." %>
+                                                	<% } else { %>
+                                                		<%= member.getAddress() %>
+                                                	<% } %>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
