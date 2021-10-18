@@ -1,5 +1,7 @@
 package com.model;
 
+import java.util.ArrayList;
+
 public class MemberDAO extends DAO{
 	int result =0;
 	MemberVO vo = new MemberVO();
@@ -233,27 +235,104 @@ public class MemberDAO extends DAO{
 		return vo;
 	}
 	
+	// 마이페이지 나의 그룹 목록가져오기
 	
+	// 현재 진행중 그룹
+	public ArrayList<GameVO> getMyGroupList(String member_id) {
+		ArrayList<GameVO> GroupList = new ArrayList<GameVO>();
+		getConn();
+		try {
+			String sql = "select * from groups, members, games where groups.member_id = members.member_id and groups.game_id = games.game_id and members.member_id = ? and games.game_date > sysdate";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, member_id);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				int game_id = rs.getInt("game_id");
+				String game_name = rs.getString("game_name");
+				String game_type = rs.getString(20);
+				int location = rs.getInt("location_id");
+				int game_fee = rs.getInt("game_fee");
+				String game_date = rs.getString("game_date");
+				String game_length = rs.getString("game_length");
+				int total_member = rs.getInt("total_member");
+				
+				GameVO vo = new GameVO(game_id, game_name, game_type, location, game_fee, game_date, game_length, total_member);
+				GroupList.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return GroupList;
+	}
 	
+	// 게임이 끝난 그룹
+	public ArrayList<GameVO> getMyGroupHistory(String member_id) {
+		ArrayList<GameVO> GroupHistory = new ArrayList<GameVO>();
+		getConn();
+		try {
+			String sql = "select * from groups, members, games where groups.member_id = members.member_id and groups.game_id = games.game_id and members.member_id = ? and games.game_date < sysdate";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, member_id);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				int game_id = rs.getInt("game_id");
+				String game_name = rs.getString("game_name");
+				String game_type = rs.getString(20);
+				int location = rs.getInt("location_id");
+				int game_fee = rs.getInt("game_fee");
+				String game_date = rs.getString("game_date");
+				String game_length = rs.getString("game_length");
+				int total_member = rs.getInt("total_member");
+				
+				GameVO vo = new GameVO(game_id, game_name, game_type, location, game_fee, game_date, game_length, total_member);
+				GroupHistory.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return GroupHistory;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public GameVO getGroupDetail(String type, int game_id) {
+		GameVO vo = new GameVO();
+		getConn();
+		try {
+			String sql = "select * from games,"+type+" where games.location_id = "+type+"."+type+"_id and game_type = ? and game_id = ?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, type);
+			psmt.setInt(2, game_id);
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				int game_idVO = rs.getInt(1);
+				String game_name = rs.getString(2);
+				String game_type = rs.getString(3);
+				int location = rs.getInt(4);
+				int game_fee = rs.getInt(5);
+				String game_date = rs.getString(6);
+				String game_length = rs.getString(7);
+				int total_member = rs.getInt(8);
+				String location_name = rs.getString("name");
+				String location_address = rs.getString("address");
+				
+				
+			vo = new GameVO(game_idVO, game_name, game_type, location, game_fee, game_date, game_length, total_member, location_name, location_address);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return vo;
+	}
 }

@@ -1,3 +1,6 @@
+<%@page import="com.model.GroupDAO"%>
+<%@page import="com.model.MemberDAO"%>
+<%@page import="com.model.GameVO"%>
 <%@page import="com.model.FollowDAO2"%>
 <%@page import="com.model.MessageVO"%>
 <%@page import="com.model.FollowDAO"%>
@@ -35,6 +38,9 @@
 		ArrayList<String> followList = follow.followList(member.getMember_id());
 		ArrayList<String> followingList = follow.followingList(member.getMember_id());
 		
+		// 게임 기록 출력용 DAO
+		MemberDAO memberDAO = new MemberDAO();
+		GroupDAO groupDAO = new GroupDAO();
 	%>
 	<!-- My page-->
     <section class="bg-section" id="mypage">
@@ -61,7 +67,7 @@
                             <h2 class="accordion-header" id="headingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     <img src="assets/icon/account_circle.png">
-                                    <h4>My Profile</h4>
+                                    <h4>나의 프로필</h4>
                                 </button>
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionMypage">
@@ -71,12 +77,14 @@
                                             <tr>
                                                 <th scope="row">
                                                     <img src="assets/icon/grade.png">
+                                                    <span>평점</span>
                                                 </th>
                                                 <td><%= avg1/10 %></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <img src="assets/icon/golf.png">
+                                                    <span>골프 스코어</span>
                                                 </th>
                                                 <td><%if(member.getGametype().equals("field")){
                                                 	%><%=member.getscore_field() %>
@@ -89,6 +97,7 @@
                                             <tr>
                                                 <th scope="row">
                                                     <img src="assets/icon/favorite.png">
+                                                    <span>선호하는 게임타입</span>
                                                 </th>
                                                 <td><%if(member.getGametype().equals("field")){
                                                 	%>Field
@@ -100,12 +109,14 @@
                                             <tr>
                                                 <th scope="row">
                                                     <img src="assets/icon/date_range.png">
+                                                    <span>나이</span>
                                                 </th>
                                                 <td><%=member.getAge() %></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <img src="assets/icon/room.png">
+                                                    <span>주소</span>
                                                 </th>
                                                 <td><%=member.getAddress() %></td>
                                             </tr>
@@ -118,7 +129,7 @@
                             <h2 class="accordion-header" id="headingTwo">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     <img src="assets/icon/message.png">
-                                        <h4>Recieved Message</h4>
+                                        <h4>받은 메세지</h4>
                                 </button>
                             </h2>
                             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionMypage">
@@ -152,12 +163,38 @@
                             <h2 class="accordion-header" id="headingThree">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                     <img src="assets/icon/list.png">
-                                        <h4>My Games in Progress</h4>
+                                        <h4>나의 그룹</h4>
                                 </button>
                             </h2>
                             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionMypage">
                                 <div class="accordion-body">
-                                    insert Sample Trump's golf groups in here
+                                    <% 
+                                    	ArrayList<GameVO> groupList = new ArrayList<GameVO>();
+                                    	groupList = memberDAO.getMyGroupList(member.getMember_id());
+                                    %>
+                                    <div class="row">
+                                    	<% if(groupList.size() == 0) { %>
+                                    		<span>현재 참여중인 그룹이 없습니다.</span>
+                                    	<% } else { %>
+	                                    	<% for(GameVO group : groupList) { %>
+	                                    		<%
+	                                    			int memberCnt = groupDAO.getGroupMemberCnt(group.getGame_id());
+	                                    			int totalMembers = group.getTotal_member();
+	                                    		%>
+	                                    		<div class="profile-wrapper my-3 mx-auto">      
+												    <div class="profile">
+												      <div class="profile-image">
+												        <a href="#group-detail-modal" data-bs-toggle="modal" onclick="groupDetail('<%= group.getGame_id() %>', '<%= group.getGame_type() %>')"><img src="<%= groupDAO.getGroupPic(group.getGame_id()) %>" alt="assets/profile_pic/default.jpg"></a>
+												      </div>
+												      <div class="profile-details">
+												        <p><%= group.getGame_name() %></p>
+												        <p><%= memberCnt %>/<%= totalMembers %></p>
+												      </div>
+												    </div>
+												</div>
+	                                    	<% } %>
+                                    	<% } %>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -165,12 +202,38 @@
                             <h2 class="accordion-header" id="headingFour">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                     <img src="assets/icon/history.png">
-                                        <h4>My Games History</h4>
+                                        <h4>나의 그룹 참여기록</h4>
                                 </button>
                             </h2>
                             <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionMypage">
                                 <div class="accordion-body">
-                                    insert Sample Trump's group history here
+                                    <% 
+                                    	ArrayList<GameVO> groupHistory = new ArrayList<GameVO>();
+                                    	groupHistory = memberDAO.getMyGroupHistory(member.getMember_id());
+                                    %>
+                                    <div class="row">
+                                    	<% if(groupHistory.size() == 0) { %>
+                                    		<span>참여한 그룹 기록이 없습니다.</span>
+                                    	<% } else { %>
+	                                    	<% for(GameVO group : groupHistory) { %>
+	                                    		<%
+	                                    			int memberCnt = groupDAO.getGroupMemberCnt(group.getGame_id());
+	                                    			int totalMembers = group.getTotal_member();
+	                                    		%>
+	                                    		<div class="profile-wrapper my-3 mx-auto">      
+												    <div class="profile">
+												      <div class="profile-image">
+												        <a href="#group-detail-modal" data-bs-toggle="modal" onclick="groupDetail('<%= group.getGame_id() %>', '<%= group.getGame_type() %>')"><img src="<%= groupDAO.getGroupPic(group.getGame_id()) %>" alt="assets/profile_pic/default.jpg"></a>
+												      </div>
+												      <div class="profile-details">
+												        <p><%= group.getGame_name() %></p>
+												        <p><%= memberCnt %>/<%= totalMembers %></p>
+												      </div>
+												    </div>
+												</div>
+	                                    	<% } %>
+                                    	<% } %>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -178,8 +241,7 @@
                             <h2 class="accordion-header" id="headingFive">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" >
                                     <img src="assets/icon/grade.png">
-                                        <h4>Follow</h4>
-                                        
+                                        <h4>팔로우</h4>           
                                 </button>
                             </h2>
                             <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionMypage">
@@ -201,6 +263,15 @@
 									      <td><a data-bs-toggle="modal" href="#sendMsg" onclick="changeValue('<%= followList.get(i) %>')"><img src="assets/img/message.png"></a></td>									      
 									    </tr>									    
 									    <%} %>
+									    <% if(followList.size() == 0) { %>
+									    <tr>
+									    	<th scope="row">#</th>
+									    	<td>
+									    		<span>팔로워가 없습니다.</span>
+									    	</td>
+									    	<td></td>
+									    </tr>
+									    <% } %>
 									    </tbody>
 									</table>        
 									<h4>팔로잉 리스트</h4>
@@ -220,6 +291,15 @@
 									      <td><a data-bs-toggle="modal" href="#sendMsg" onclick="changeValue('<%= followingList.get(i) %>')"><img src="assets/img/message.png"></a></td>									      
 									    </tr>									    
 									    <%} %>
+									    <% if(followingList.size() == 0) { %>
+									    <tr>
+									    	<th scope="row">#</th>
+									    	<td>
+									    		<span>팔로우하는 회원이 없습니다.</span>
+									    	</td>
+									    	<td></td>
+									    </tr>
+									    <% } %>
 									  </tbody>
 									</table>
 									<div class="modal fade" id="sendMsg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -238,7 +318,7 @@
 			                        					</div>
 				                					</div>
 				                					<div class="modal-footer bg-light">
-					               				 		<button class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+					               				 		<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
 					                					<button type="submit" class="btn btn-outline-primary">보내기</button>
 				                					</div>
 				            					</div>
@@ -252,12 +332,32 @@
                 </div>
             </div>
         </div>
+     <div id="group-detail-modal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-xl modal-dialog-centered">
+	    <div class="modal-content">
+	    	<div class="modal-header">
+	    		<h5 class="modal-title">상세정보</h5>
+	        	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	        </div>
+	        <div class="modal-body iframe-detail">
+	        	<iframe id="iframe-group" src="" class="iframe-detail" style="border="0" frameborder="0" allowTransparency="true"></iframe>
+	        </div>
+	    	<div class="modal-footer">
+       		</div>
+	    </div>
+	  </div>
+	</div>
     </section>
     <%@ include file="footer.html" %>
     <script type="text/javascript">
 	    function changeValue(nick) {
 	 	   document.getElementById("receiverNick").setAttribute('value', nick);
 	 	}
+	    
+        function groupDetail(id,type) {
+    	   document.getElementById("iframe-group").src = "mypageGroup.jsp?id="+id+"&type="+type;
+    	}
+	   
     </script>
 </body>
 </html>
