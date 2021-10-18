@@ -20,9 +20,12 @@
                     <div>
 	                    <% if(member == null) { %>
 							<a href="#LoginModal" data-bs-toggle="modal"><img class="btn-main" src="assets/img/search.png"></a>
+							<a href="#LoginModal" data-bs-toggle="modal"><img class="btn-main" src="assets/img/search.png"></a>
 		                    <a href="#LoginModal" data-bs-toggle="modal"><img class="btn-main" src="assets/img/field.png"></a>
 		                    <a href="#LoginModal" data-bs-toggle="modal"><img class="btn-main" src="assets/img/screen.png"></a>
+		                    
 						<% } else { %>
+							<a href="javascript:void(0);" data-bs-toggle="modal" onclick="findlocation()"><img class="btn-main" src="assets/img/search.png"></a>
 							<a href="#search" data-bs-toggle="modal"><img class="btn-main" src="assets/img/search.png"></a>
 		                    <a href="#field-form" data-bs-toggle="modal"><img class="btn-main" src="assets/img/field.png"></a>
 		                    <a href="#screen-form" data-bs-toggle="modal"><img class="btn-main" src="assets/img/screen.png"></a>
@@ -92,4 +95,29 @@
       </section>
       <%@ include file="footer.html" %>
 </body>
+<script>
+    function moveloctaion(latitude,longitude){
+        location.href = "FastGameService?Latiude="+latitude+"&longitude="+longitude;
+    }
+    
+    function findlocation(){	
+    	if('geolocation' in navigator) {
+    		navigator.geolocation.getCurrentPosition((position) => {
+                moveloctaion(position.coords.latitude, position.coords.longitude)
+    			});
+    	} else {
+    		function error() {
+                status.textContent = '현재위치를 찾을수 없습니다.';
+                }
+
+                if(!navigator.geolocation) {
+                status.textContent = '당신의 브라우져에서는 위치검색기능이 안됩니다. 브라우져를 바꾸세요.';
+                } else {
+                status.textContent = '찾고잇음.…';
+                navigator.geolocation.getCurrentPosition(success, error);
+            }
+    	}	
+    }
+		
+</script>
 </html>

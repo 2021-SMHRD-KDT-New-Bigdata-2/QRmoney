@@ -95,7 +95,7 @@
                         <div class="inputProfileUpload">
                             <label for="inputProfile">프로필 사진</label>
                             <div class="input-group">
-                                <a href="#profileupload" data-bs-toggle="modal" class="inputProfile"><img class="btn-main" src="assets/profile_pic/default.jpg"></a>
+                                <a href="#profileupload" data-bs-toggle="modal" class="inputProfile"><img class="btn-main" id="img button"src="assets/profile_pic/default.jpg"></a>
                         	</div>
                        	</div>
                        </div><br>
@@ -116,7 +116,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <form action="SignUpService">
+        
         <div class="photo_box">
             <div class="upload_btn">
                 <div class="upload">
@@ -133,7 +133,7 @@
             </div>
             <a href="javascript:void(0);" id="complete" data-bs-dismiss="modal">업로드</a>
         </div>
-    </form>
+    
       </div>
      </div>
   </div>
@@ -200,7 +200,7 @@
             canvas.toBlob(function (blob) {
                 var formData = new FormData();
 
-                $.ajax('url주소', {
+                $.ajax('/SignUpService', {
                     method: 'POST',
                     data: formData,
                     processData: false,
