@@ -46,9 +46,9 @@ public class FastGameService extends HttpServlet {
 		ArrayList<Integer> FastGameList = dao.FastGameMatching5KM(Latiude, Longitude, member_id);
 		System.out.println("게임리스트사이즈 :"+FastGameList.size());
 		int cnt1= 0;
-		if(FastGameList!=null) {
-			while(true) {
-				int game_id=FastGameList.get(cnt1);
+		if(FastGameList.size()!=0) {
+			for(int i =0;i<FastGameList.size();i++){
+				int game_id=FastGameList.get(i);
 				System.out.println("게임아이디 : "+game_id);
 				int GameAvg=gdao.GameGroupsAvg(game_id);
 				System.out.println("게임평균 : "+GameAvg);
@@ -70,13 +70,14 @@ public class FastGameService extends HttpServlet {
 						break;
 					}						
 				 }
-				cnt1++;
+				
 			 	}
 			}else {
-				ArrayList<Integer> FastGameList10KM = dao.FastGameMatching10KM(Latiude, Longitude, member_id);
-				cnt1=0;
-				while(true) {
-					int game_id=FastGameList10KM.get(cnt1);
+			ArrayList<Integer> FastGameList10KM = dao.FastGameMatching10KM(Latiude, Longitude, member_id);
+			cnt1=0;
+			if(FastGameList10KM.size()!=0){
+				for(int i =0;i<FastGameList10KM.size();i++) {
+					int game_id=FastGameList10KM.get(i);
 					System.out.println("게임아이디 : "+game_id);
 					int GameAvg=gdao.GameGroupsAvg(game_id);
 					System.out.println("게임평균 : "+GameAvg);
@@ -96,17 +97,23 @@ public class FastGameService extends HttpServlet {
 									+"</script>");
 							System.out.println("무슨문제잇음");
 							break;
-						}						
-					 }
-					cnt1++;
+							}						
 				 	}
+					cnt1++;
+			 	}
+			}else {
+				out.print("<script>"
+						+"alert('빠른대전을 할수있는 방이 없습니다..');"
+						+"location.href = 'main.jsp';"
+						+"</script>");
 			}
-		
+		}
+		out.print("<script>"
+				+"alert('빠른대전을 할수있는 방이 없습니다..');"
+				+"location.href = 'main.jsp';"
+				+"</script>");
 //		
-//		out.print("<script>"
-//				+"alert('빠른대전을 할수있는 방이 없습니다..');"
-//				+"location.href = 'main.jsp';"
-//				+"</script>");
+//		
 //		response.sendRedirect("main.jsp");
 	}
 	
