@@ -158,6 +158,7 @@
 									      <th scope="col">메세지</th>
 									      <th scope="col">받은날짜</th>
 									      <th scope="col">삭제</th>
+									      <th scope="col"> 전체 삭제<a href="MessageDeleteAll"><img src="assets/icon/trash.png"></a></th>
 									    </tr>
 									  </thead>
 									  <tbody>

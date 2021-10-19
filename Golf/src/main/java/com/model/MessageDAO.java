@@ -83,7 +83,7 @@ public class MessageDAO extends DAO {
 	}
 	
 	// 메세지 전체 삭제하기
-	public int deleteAll(int senderId){
+	public int deleteAll(int receiver_id){
 		
 		getConn();
 		
@@ -91,7 +91,7 @@ public class MessageDAO extends DAO {
 			String sql = "delete from messages where receiver_id=?";
 			
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, senderId);
+			psmt.setInt(1, receiver_id);
 			
 			cnt = psmt.executeUpdate();
 			
