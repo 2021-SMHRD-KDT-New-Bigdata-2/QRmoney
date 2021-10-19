@@ -23,6 +23,7 @@ public class UpdateService extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("euc-kr");
+		response.setCharacterEncoding("euc-kr");
 		
 		HttpSession session = request.getSession();
 		MemberVO vo = (MemberVO)session.getAttribute("member");
