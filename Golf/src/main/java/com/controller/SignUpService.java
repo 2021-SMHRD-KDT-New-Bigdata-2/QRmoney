@@ -30,7 +30,7 @@ public class SignUpService extends HttpServlet {
 		String email = multi.getParameter("emailFront")+multi.getParameter("emailBack");
 		String password = multi.getParameter("password");
 		String nickname = multi.getParameter("nickname");
-		String profilePic = multi.getFilesystemName("profilePic");
+		String profilePic = multi.getFilesystemName("photoBtn");
 		
 		if(profilePic != null){
 			File oldFile = new File(profile_folder+"/"+profilePic);

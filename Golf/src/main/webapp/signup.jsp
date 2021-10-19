@@ -9,12 +9,15 @@
 	<%@ include file= "navbar_non_member.jsp" %>
 	
 	<section class="container-fluid bg-section">
+	
+	<form role="form" action="SignUpService" novalidate enctype="multipart/form-data" method="POST">
+	
             <div class="row justify-content-center signup-form container-sm">
                 <div>
                     <div class="text-center my-5">
                         <h3>회원가입</h3>
                     </div>
-                    <form role="form" action="SignUpService" novalidate enctype="multipart/form-data" method="POST">
+                    
                         <div>
                         <div class="inputbarbar">
                         	<div>
@@ -92,10 +95,11 @@
                         	</div>
                         </div>
                         </div>
+                       
                         <div class="inputProfileUpload">
                             <label for="inputProfile">프로필 사진</label>
-                            <div class="input-group">
-                                <a href="#profileupload" data-bs-toggle="modal" class="inputProfile"><img class="btn-main" id="img button"src="assets/profile_pic/default.jpg"></a>
+                            <div class="justify-content-center">
+                                <a href="#profileupload" data-bs-toggle="modal" class="inputProfile" ><img class="btn-profile"  src="assets/profile_pic/default.jpg"></a>
                         	</div>
                        	</div>
                        </div><br>
@@ -107,7 +111,7 @@
                             	가입취소<i class="fa fa-times spaceLeft"></i>
                             </a>  
                         </div>
-                    </form>
+                     
                 </div> 
             </div>
 	</section>
@@ -138,6 +142,8 @@
      </div>
   </div>
 </div>
+
+</form>
 	
 	<%@ include file="footer.html" %>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -157,7 +163,9 @@
                 reader.onload = function(event) { 
                     image.attr("src", event.target.result);
                     cropper = image.cropper( {
-                    	dragMode: 'crop',                        
+                    	dragMode: 'crop',  
+                    	width:300,
+                        height:600,
                         viewMode:0,
 						minCropBoxHeight:200, 
                         minCropBoxWidth:100,
@@ -200,13 +208,15 @@
             canvas.toBlob(function (blob) {
                 var formData = new FormData();
 
-                $.ajax('/SignUpService', {
+                $.ajax({
+                	
                     method: 'POST',
                     data: formData,
                     processData: false,
                     contentType: false,
                     success: function () {
                         alert('업로드 성공');
+                        $(".btn-profile").attr("src", canvas.toDataURL("image/jpg"));
                     },
                     error: function () {
                         alert('업로드 실패');
@@ -225,8 +235,10 @@
 
 </body>
 <style>
-	.inputProfileUpload{width:20%;float: right; margin-bottom: 120px}
-	.inputbarbar{width: 80%;float: left; margin-bottom: 20px}
+	.btn-profile{float:center; margin-left: 50px; margin-top: 20px;}
+	.#profileupload{float:center}
+	.inputProfileUpload{width:40%; height: 650px; float: left; margin-bottom: 20px;}
+	.inputbarbar{width: 60%;float: left; margin-bottom: 20px;}
     .photo_box{margin:0 auto; max-width: 500px;}
     .upload_btn{overflow:hidden;width: 100%;}    
     .upload_btn #photoBtn{display: none;}
