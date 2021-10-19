@@ -124,11 +124,11 @@
         <div class="photo_box">
             <div class="upload_btn">
                 <div class="upload">
-                    <input type="file" name="photoBtn" accept="image/jpeg, imape/png" capture="camera" id='photoBtn'><label for="photoBtn">사진 첨부할래?</label>
+                    <input type="file" name="photoBtn" accept="image/jpeg, imape/png" capture="camera" id='photoBtn'><label for="photoBtn">사진 업로드</label>
                 </div>
             </div>
             <div class="reupload_btn">
-                <a href="javascript:void(0);" id="resetPhoto">다시 할래?</a>
+                <a href="javascript:void(0);" id="resetPhoto">다시 업로드하기</a>
             </div>
             <div class="photo_them">
                 <div class="them_img">

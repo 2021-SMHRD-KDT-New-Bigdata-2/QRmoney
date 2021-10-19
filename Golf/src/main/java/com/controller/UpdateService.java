@@ -35,7 +35,7 @@ public class UpdateService extends HttpServlet {
 		
 		MultipartRequest multi = new MultipartRequest(request, profile_folder, 10*300*600, "euc-kr", new DefaultFileRenamePolicy());
 		String password = multi.getParameter("password");  
-		String profile_pic = multi.getFilesystemName("profilePic"); 
+		String profile_pic = multi.getFilesystemName("photoBtn"); 
 		String gender = multi.getParameter("gender"); 
 		String contact = multi.getParameter("contact"); 
 		String game_type = multi.getParameter("gameType"); 
