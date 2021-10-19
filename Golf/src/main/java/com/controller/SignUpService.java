@@ -22,7 +22,8 @@ public class SignUpService extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("euc-kr");	
+		request.setCharacterEncoding("euc-kr");
+		response.setCharacterEncoding("euc-kr");
 		
 		@SuppressWarnings("deprecation")
 		String profile_folder = request.getRealPath("assets/profile_pic");
@@ -58,13 +59,14 @@ public class SignUpService extends HttpServlet {
 		MemberVO vo = new MemberVO(email, password, nickname, gender, contact, age, gameType, Screen_Score, Field_Scoree, address, profilePic);
 		MemberDAO dao = new MemberDAO();
 		int result = dao.SignUp(vo);
+		
 		PrintWriter out = response.getWriter(); 
 		if(result>0) {
 			System.out.println("입력성공");
 			out.print("<script>"
 		               +"alert('회원가입에 성공했습니다.');"
 		               +"location.href = 'main.jsp';"
-		               +"</script>")
+		               +"</script>");
 		}else {
 			System.err.println("입력실패");
 			out.print("<script>"
