@@ -466,9 +466,10 @@
 
             canvas.toBlob(function (blob) {
                 var formData = new FormData();
+                formData.append("cutimage", blob, 'cuting.png')
 
                 $.ajax({
-                	
+                	url:"Cutimage",
                     method: 'POST',
                     data: formData,
                     processData: false,
