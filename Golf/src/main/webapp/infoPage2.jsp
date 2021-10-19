@@ -9,6 +9,33 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ include file= "head.html" %>
+<style>
+     	#MemberRate fieldset{
+		    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+		    direction: rtl;
+		    border: 0; /* 필드셋 테두리 제거 */
+		}
+		#MemberRate fieldset legend{
+		    text-align: left;
+		}
+		#MemberRate input[type=radio]{
+		    display: none; /* 라디오박스 감춤 */
+		}
+		#MemberRate label{
+		    font-size: 3em; /* 이모지 크기 */
+		    color: transparent; /* 기존 이모지 컬러 제거 */
+		    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+		}
+		#MemberRate label:hover{
+		    text-shadow: 0 0 0 #ffd400; /* 마우스 호버 */
+		}
+		#MemberRate label:hover ~ label{
+		    text-shadow: 0 0 0 #ffd400; /* 마우스 호버 뒤에오는 이모지들 */
+		}
+		#MemberRate input[type=radio]:checked ~ label{
+    		text-shadow: 0 0 0 #ffd400; /* 마우스 클릭 체크 */
+		}
+</style>
 <body>  
 	<%  
 	
@@ -134,6 +161,7 @@
 	                </tbody>
                 </table>
                 <div class="my-4 float-end">
+                	<a class="btn btn-primary" data-bs-toggle="modal" href="#ratingModal">평가하기</a>
 	                <a class="btn btn-primary" data-bs-toggle="modal" href="#sendMsg">메세지보내기</a>
 	                <% if(chk) { %>
 	                	<a class="btn btn-primary" href="UnfollowService?nickName=<%=profile.getNickname()%>">언팔로우</a>
@@ -166,9 +194,38 @@
 				        </form>
 			        </div>
 		    	</div>
+		    	<div class="modal fade" id="ratingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				    <div class="modal-dialog">
+				    	<form name="MemberRate" id="MemberRate" method="post" action="RatingService">
+					      <div class="modal-content row">
+					        <div class="modal-header bg-light">
+					            <div class="col-md-9">
+					                <h6 class="modal-title2"> <%= profile.getNickname() %>님의 경기 매너는 어땠나요?</h6>
+					            </div>        
+					       	</div>
+					       	<input type="hidden" value="<%= profile.getNickname() %>" name="nickname">
+					        <div class="modal-body">
+					       			<fieldset>			    
+								        <legend>게임 메너를 평가해주세요</legend>
+								        <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">★</label>
+								        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">★</label>
+								        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">★</label>
+								        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">★</label>
+								        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">★</label>
+							    	</fieldset>
+					        </div>
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">나가기</button>
+					          <button type="submit" class="btn btn-primary" >제출하기</button>
+					      	</div>   
+					      </div>
+				      	</form>
+				    </div>
+				  </div>
             </div>
         </div>
     </section>
+    
 	<script src="js/scripts.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>

@@ -129,9 +129,9 @@ public class MemberVO {
 		this.profilePic = profilePic;
 	}
 	// Rating Service
-	public MemberVO(String email, int rating) {
+	public MemberVO(String nickname, int rating) {
 		super();
-		Email = email;		
+		Nickname = nickname;		
 		Rating = rating;
 	}
 	

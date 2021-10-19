@@ -22,19 +22,19 @@ public class RatingService extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberVO vo = (MemberVO)session.getAttribute("member");
 		
-		String email = "gudan@gmail.com";
+		String nickname = request.getParameter("nickname");
 		String String_rating =request.getParameter("rating");
 		int rating = Integer.parseInt(String_rating);
-		MemberVO vo1= new MemberVO(email, rating);
+		MemberVO vo1= new MemberVO(nickname, rating);
 		
 		MemberDAO dao =new MemberDAO();
 		int result = dao.RatingEstimation(vo1);
 		if (result>0) {
 			System.out.println("레이팅 시스템 성공 "+rating);
-			
-			
+			response.sendRedirect(request.getHeader("Referer"));	
 		} else {
 			System.out.println("레이팅 시스템 실패 ");
+			response.sendRedirect(request.getHeader("Referer"));
 		}
 	
 	}

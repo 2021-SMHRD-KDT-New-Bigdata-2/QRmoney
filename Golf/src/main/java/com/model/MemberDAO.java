@@ -161,28 +161,32 @@ public class MemberDAO extends DAO{
 	public int RatingEstimation(MemberVO vo) {
 		getConn();
 		try {
-			String sql="select email, ratings_total from members where email=?";
+			String sql="select nickname, ratings_cnt, ratings_total from members where nickname=?";
 			psmt =conn.prepareStatement(sql);
-			psmt.setString(1, vo.getEmail());
+			psmt.setString(1, vo.getNickname());
 			
 			rs=psmt.executeQuery();
 			String get_email=null;
+			int get_rating_cnt=0;
 			int get_rating_total=0;
 			if(rs.next()){
-				get_email = rs.getString("email");
+				get_email = rs.getString("nickname");
+				get_rating_cnt = rs.getInt("ratings_cnt");
 				get_rating_total = rs.getInt("ratings_total");
 				System.out.println("레이팅시스템 검색성공");
 			}else {
 				System.out.println("레이팅시스템 검색실패");
 			}
 			
-			sql= "update members set ratings_total =?, ratings_cnt= RATING_SEQ.nextval where email =?" ;
+			sql= "update members set ratings_total =?, ratings_cnt= ? where nickname =?" ;
 			
+			int Rating_cnt = get_rating_cnt + 1;
 			int Rating_total =get_rating_total +vo.getRating(); 
 			
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, Rating_total);			
-			psmt.setString(2, vo.getEmail());
+			psmt.setInt(1, Rating_total);
+			psmt.setInt(2, Rating_cnt);
+			psmt.setString(3, vo.getNickname());
 			
 			
 			result=psmt.executeUpdate();
