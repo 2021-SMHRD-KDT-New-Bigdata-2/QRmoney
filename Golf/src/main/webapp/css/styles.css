@@ -11772,6 +11772,10 @@ body {
   margin-right: 30px;
 }
 
+.fastOrSearchModal {
+	text-align: center;
+}
+
 .profile-wrapper {
   width: 300px;
   height: 400px;

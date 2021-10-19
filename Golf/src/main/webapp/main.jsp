@@ -20,13 +20,11 @@
                     <div>
 	                    <% if(member == null) { %>
 							<a href="#LoginModal" data-bs-toggle="modal"><img class="btn-main" src="assets/img/search.png"></a>
-							<a href="#LoginModal" data-bs-toggle="modal"><img class="btn-main" src="assets/img/search.png"></a>
 		                    <a href="#LoginModal" data-bs-toggle="modal"><img class="btn-main" src="assets/img/field.png"></a>
 		                    <a href="#LoginModal" data-bs-toggle="modal"><img class="btn-main" src="assets/img/screen.png"></a>
 		                    
 						<% } else { %>
-							<a href="javascript:void(0);" data-bs-toggle="modal" onclick="findlocation()"><img class="btn-main" src="assets/img/search.png"></a>
-							<a href="#search" data-bs-toggle="modal"><img class="btn-main" src="assets/img/search.png"></a>
+							<a href="#fastOrSearch" data-bs-toggle="modal"><img class="btn-main" src="assets/img/search.png"></a>
 		                    <a href="#field-form" data-bs-toggle="modal"><img class="btn-main" src="assets/img/field.png"></a>
 		                    <a href="#screen-form" data-bs-toggle="modal"><img class="btn-main" src="assets/img/screen.png"></a>
 						<% } %>

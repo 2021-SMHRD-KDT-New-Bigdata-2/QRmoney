@@ -25,71 +25,76 @@
     </div>
 </nav>
 <!-- Search -->
-	<div id="search" class="modal fade" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-	          <form action="SearchGameService">
-	            <div class="modal-header bg-light">
-	              <h5 class="modal-title">검색 조건</h5>
-	              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	            </div>
-	            <div class="modal-body">
-	               <table class="table">
-	                   <tbody>
-	                     <tr>
-	                       <th scope="row">검색 타입</th>
-	                       <td>
-	                           <div>
-	                               <input class="form-check-input " type="radio" name="search_type" value="fast" required>
-	                               빠른 매칭
-	                               <input class="form-check-input" type="radio" name="search_type" value="search" checked>
-	                               직접 선택
-	                           </div>
-	                       </td>
-	                     </tr>
-	                     <tr>
-	                       <th scope="row">게임 타입</th>
-	                       <td>
-	                           <div>
-	                               <input class="form-check-input " type="radio" name="game_type" value="field" required>
-	                               필드
-	                               <input class="form-check-input" type="radio" name="game_type" value="screen">
-	                               스크린 골프
-	                           </div>
-	                       </td>
-	                     </tr>
-	                     <tr>
-	                       <th scope="row">지역</th>
-	                       <td>
-	                           <div class="row">
-	                             <div class="col-7">
-	                               <select class="form-select" name="sido1" id="sido1"></select> 
-	                             </div>
-	                             <div class="col-5">
-	                               <select class="form-select" name="gugun1" id="gugun1"></select>
-	                             </div>
-	                           </div>
-	                       </td>
-	                     </tr>
-	                     <tr>
-	                         <th> 골프 스코어<br>
-	                         </th>
-	                         <td>
-	                         	<output>70</output>
-	                           <input type="range" class="form-range" value="70" min="0" max="140" id="customRange2" name="score" oninput="this.previousElementSibling.value = this.value">
-	                         </td>
-	                     </tr>
-	                   </tbody>
-	               </table>
-	            </div>
-	            <div class="modal-footer bg-light">
-	              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-	              <button type="submit" class="btn btn-primary">검색</button>
-	            </div>
-	            </form>
-        	</div>
-        </div>
-    </div>
+	<div class="modal fade" id="fastOrSearch" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalToggleLabel">그룹 찾기</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="fastOrSearchModal">
+      			<a href="javascript:void(0);" onclick="findlocation()" class="btn btn-secondary">빠른 매칭</a>
+      			<button class="btn btn-primary" data-bs-target="#search" data-bs-toggle="modal" data-bs-dismiss="modal">직접 검색</button>
+	      	</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="modal fade" id="search" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <form action="SearchGameService">
+            <div class="modal-header bg-light">
+              <h5 class="modal-title">검색 조건</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <table class="table">
+                   <tbody>
+                     <tr>
+                       <th scope="row">게임 타입</th>
+                       <td>
+                           <div>
+                               <input class="form-check-input " type="radio" name="game_type" value="field" required>
+                               필드
+                               <input class="form-check-input" type="radio" name="game_type" value="screen">
+                               스크린 골프
+                           </div>
+                       </td>
+                     </tr>
+                     <tr>
+                       <th scope="row">지역</th>
+                       <td>
+                           <div class="row">
+                             <div class="col-7">
+                               <select class="form-select" name="sido1" id="sido1"></select> 
+                             </div>
+                             <div class="col-5">
+                               <select class="form-select" name="gugun1" id="gugun1"></select>
+                             </div>
+                           </div>
+                       </td>
+                     </tr>
+                     <tr>
+                         <th> 골프 스코어<br>
+                         </th>
+                         <td>
+                         	<output>70</output>
+                           <input type="range" class="form-range" value="70" min="0" max="140" id="customRange2" name="score" oninput="this.previousElementSibling.value = this.value">
+                         </td>
+                     </tr>
+                   </tbody>
+               </table>
+            </div>
+            <div class="modal-footer bg-light">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+              <button type="submit" class="btn btn-primary">검색</button>
+            </div>
+            </form>
+	    </div>
+	  </div>
+	</div>
 <!-- field -->
   <div id="field-form" class="modal fade" tabindex="-1">
     <div class="modal-dialog" >
