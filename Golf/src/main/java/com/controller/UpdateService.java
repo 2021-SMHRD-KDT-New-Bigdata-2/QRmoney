@@ -46,9 +46,14 @@ public class UpdateService extends HttpServlet {
 		
 		if(profile_pic != null){
 			File oldFile = new File(profile_folder+"/"+profile_pic);
+			System.out.println("oldfile"+oldFile);
 			File newFile = new File(profile_folder+"/"+email+".jpg");
-			oldFile.renameTo(newFile);
-			profile_pic = "email.jpg";
+			newFile.delete();
+			File newnewFile = new File(profile_folder+"/"+email+".jpg");
+			System.out.println("newfile"+newnewFile);
+			oldFile.renameTo(newnewFile);
+			profile_pic = email+".jpg";
+			oldFile.delete();
 		} else {
 			profile_pic = "default.jpg";
 		}

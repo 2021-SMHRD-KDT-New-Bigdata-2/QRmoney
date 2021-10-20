@@ -19,7 +19,7 @@ import com.model.MemberVO;
 
 @WebServlet("/FastGameService")
 public class FastGameService extends HttpServlet {
-	
+	int SrccenScore;
 
 
 	@SuppressWarnings("unused")
@@ -29,12 +29,21 @@ public class FastGameService extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberVO vo = (MemberVO)session.getAttribute("member");
 		
+		
 		response.setCharacterEncoding("UTF-8"); response.
 		setContentType("text/html; charset=UTF-8");
 				
 		PrintWriter out = response.getWriter();
-		
-		int SrccenScore = Integer.parseInt(vo.getscore_screen());
+		try {
+		SrccenScore = Integer.parseInt(vo.getscore_screen());
+		}catch(java.lang.NumberFormatException e) {
+			e.printStackTrace();
+			out.print("<script>"
+					+"alert('스크린스코어가 필요합니다. 회원정보를 수정해주세요.');"
+					+"location.href = 'main.jsp';"
+					+"</script>");
+			System.out.println("게임매칭성공");
+		}
 		int member_id = Integer.parseInt(vo.getMember_id());
 		
 		

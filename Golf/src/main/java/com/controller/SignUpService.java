@@ -43,6 +43,7 @@ public class SignUpService extends HttpServlet {
 			File newFile = new File(profile_folder+"/"+email+".jpg");
 			oldFile.renameTo(newFile);
 			profilePic = email+".jpg";
+			oldFile.delete();
 		} else {
 			profilePic = "default.jpg";
 		}
