@@ -37,19 +37,8 @@ public class followService2 extends HttpServlet {
 		
 		int cnt = dao.follow(vo.getMember_id(), nickName);
 		
-		String ref =request.getHeader("Referer");
 		if(cnt>0) {
-			out.print("<script>"
-					+"alert('팔로우 성공!!');"
-					+"location.href = '"+ref+"';"
-					+"</script>");
-			
-		}else {
-			out.print("<script>"
-					+"alert('언팔로우 성공!!');"
-					+"location.href = '"+ref+"';"
-					+"</script>");
-			
+			response.sendRedirect(request.getHeader("Referer"));
 		}
 			
 	}
