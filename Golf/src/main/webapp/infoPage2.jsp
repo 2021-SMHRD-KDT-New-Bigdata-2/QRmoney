@@ -206,7 +206,7 @@
 					       	<input type="hidden" value="<%= profile.getNickname() %>" name="nickname">
 					        <div class="modal-body">
 					       			<fieldset>			    
-								        <legend>게임 메너를 평가해주세요</legend>
+								        <legend>게임 매너를 평가해주세요</legend>
 								        <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">★</label>
 								        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">★</label>
 								        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">★</label>
