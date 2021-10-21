@@ -55,12 +55,12 @@ public class MakeGameField extends HttpServlet {
 			groupDAO.joinGroup(game_id, memberDAO.getMemberIdbyEmail(member.getEmail()));
 			out.print("<script>"
 					+"alert('그룹이 등록되었습니다.');"
-					+"location.href = 'main.jsp';"
+					+"location.href = '"+ref+"';"
 					+"</script>");
 		} else {
 			out.print("<script>"
 					+"alert('그룹 등록에 실패했습니다.');"
-					+"location.href = 'main.jsp';"
+					+"location.href = '"+ref+"';"
 					+"</script>");
 		}
 	}
