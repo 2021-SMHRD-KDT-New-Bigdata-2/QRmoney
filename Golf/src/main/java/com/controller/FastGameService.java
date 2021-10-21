@@ -55,6 +55,7 @@ public class FastGameService extends HttpServlet {
 		ArrayList<Integer> FastGameList = dao.FastGameMatching5KM(Latiude, Longitude, member_id);
 		System.out.println("게임리스트사이즈 :"+FastGameList.size());
 		int cnt1= 0;
+		String ref = request.getHeader("Referer");
 		if(FastGameList.size()!=0) {
 			for(int i =0;i<FastGameList.size();i++){
 				int game_id=FastGameList.get(i);
@@ -66,14 +67,14 @@ public class FastGameService extends HttpServlet {
 					if(cnt>0) {
 						out.print("<script>"
 								+"alert('게임메칭성공.');"
-								+"location.href = 'main.jsp';"
+								+"location.href = '"+ref+"';"
 								+"</script>");
 						System.out.println("게임매칭성공");
 						break;
 					}else {
 						out.print("<script>"
 								+"alert('조인이안됨..');"
-								+"location.href = 'main.jsp';"
+								+"location.href = '"+ref+"';"
 								+"</script>");
 						System.out.println("무슨문제잇음");
 						break;
@@ -95,14 +96,14 @@ public class FastGameService extends HttpServlet {
 						if(cnt>0) {
 							out.print("<script>"
 									+"alert('게임메칭성공.');"
-									+"location.href = 'main.jsp';"
+									+"location.href = '"+ref+"';"
 									+"</script>");
 							System.out.println("게임매칭성공");
 							break;
 						}else {
 							out.print("<script>"
 									+"alert('조인이안됨..');"
-									+"location.href = 'main.jsp';"
+									+"location.href = '"+ref+"';"
 									+"</script>");
 							System.out.println("무슨문제잇음");
 							break;
@@ -113,13 +114,13 @@ public class FastGameService extends HttpServlet {
 			}else {
 				out.print("<script>"
 						+"alert('빠른대전을 할수있는 방이 없습니다..');"
-						+"location.href = 'main.jsp';"
+						+"location.href = '"+ref+"';"
 						+"</script>");
 			}
 		}
 		out.print("<script>"
 				+"alert('빠른대전을 할수있는 방이 없습니다..');"
-				+"location.href = 'main.jsp';"
+				+"location.href = '"+ref+"';"
 				+"</script>");
 //		
 //		

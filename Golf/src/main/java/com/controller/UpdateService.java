@@ -65,12 +65,13 @@ public class UpdateService extends HttpServlet {
 		int cnt = dao.update(vo1);
 		
 		PrintWriter out = response.getWriter();
+		String ref = request.getHeader("Referer");
 		
 		if(cnt>0) {
 			System.out.println("수정 성공");
 	        out.print("<script>"
 	               +"alert('회원정보가 수정되었습니다.');"
-	               +"location.href = 'main.jsp';"
+	               +"location.href = '"+ref+"';"
 	               +"</script>");
 	        
 	        // 세션 수정 
@@ -90,7 +91,7 @@ public class UpdateService extends HttpServlet {
 			System.out.println("수정 실패 ");
 			out.print("<script>"
 		               +"alert('회원정보 수정에 실패했습니다.');"
-		               +"location.href = 'main.jsp';"
+		               +"location.href = '"+ref+"';"
 		               +"</script>");
 		}
 		

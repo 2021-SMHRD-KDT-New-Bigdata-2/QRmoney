@@ -45,6 +45,7 @@ public class MakeGameField extends HttpServlet {
 		int result = gameDAO.makeGame(game_name, game_type, location, game_date, game_fee, game_length, total_member);
 		
 		PrintWriter out = response.getWriter();
+		String ref = request.getHeader("Referer");
 		
 		if(result>0) {
 			int game_id = gameDAO.getGameIDbyName(game_name);

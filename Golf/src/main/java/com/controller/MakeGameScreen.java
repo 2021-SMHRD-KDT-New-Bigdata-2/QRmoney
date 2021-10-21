@@ -45,6 +45,7 @@ public class MakeGameScreen extends HttpServlet {
 		int result = gameDAO.makeGame(game_name, game_type, location, game_date, game_fee, game_length, total_member);
 		
 		PrintWriter out = response.getWriter();
+		String ref = request.getHeader("Referer");
 		
 		if(result>0) {
 			int game_id = gameDAO.getGameIDbyName(game_name);
@@ -54,12 +55,12 @@ public class MakeGameScreen extends HttpServlet {
 			groupDAO.joinGroup(game_id, memberDAO.getMemberIdbyEmail(member.getEmail()));
 			out.print("<script>"
 					+"alert('그룹이 등록되었습니다.');"
-					+"location.href = 'main.jsp';"
+					+"location.href = '"+ref+"';"
 					+"</script>");
 		} else {
 			out.print("<script>"
 					+"alert('그룹 등록에 실패했습니다.');"
-					+"location.href = 'main.jsp';"
+					+"location.href = '"+ref+"';"
 					+"</script>");
 		}
 	}
